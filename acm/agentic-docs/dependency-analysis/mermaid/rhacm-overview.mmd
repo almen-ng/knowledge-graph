@@ -1,0 +1,420 @@
+graph TB
+    %% RHACM High-Level Subsystem Dependencies
+    %% Foundation Infrastructure
+    OCP[OpenShift Container Platform]
+    K8S[Kubernetes API Server]
+    ETCD[etcd Cluster]
+    
+    %% Central RHACM System
+    ACM[Red Hat Advanced Cluster Management]
+    
+    %% Core OCM Foundation (Enhanced)
+    OCM[Open Cluster Management]
+    HUB[ACM Hub Cluster]
+    SPOKE[Managed Clusters]
+    
+    %% Enhanced OCM API Foundation
+    OCM_API[Open Cluster Management API]
+    CLUSTER_LIFECYCLE_API[cluster-lifecycle-api]
+    
+    %% Multicluster Engine Foundation Layer (Level 1.5)
+    MCE[Multicluster Engine]
+    BACKPLANE_OPERATOR[Backplane Operator]
+    CLUSTER_MANAGER[Cluster Manager]
+    KLUSTERLET[Klusterlet]
+    REGISTRATION_WEBHOOK[Registration Webhook]
+    
+    %% Major ACM Subsystems (Level 2)
+    GRC[Governance Risk & Compliance]
+    APP[Application Lifecycle]
+    OBS[Observability]
+    CLUSTER[Cluster Lifecycle]
+    SEARCH[Search & Discovery]
+    CONSOLE[Web Console]
+    SERVER_FOUNDATION[Server Foundation]
+    
+    %% Enterprise Extensions (Level 2)
+    GLOBAL_HUB[Multicluster Global Hub]
+    SUBMARINER[Submariner Network Connectivity]
+    BACKUP_RESTORE[Backup & Disaster Recovery]
+    
+    %% Enhanced Foundation Controllers
+    FOUNDATION[multicloud-operators-foundation]
+    REGISTRATION[Cluster Registration]
+    WORK[Work Management]
+    ADDON[Addon Framework]
+    
+    %% Enhanced Import and Management
+    MANAGEDCLUSTER_IMPORT_CTRL[managedcluster-import-controller]
+    KLUSTERLET_ADDON_CTRL[klusterlet-addon-controller]
+    
+    %% Enhanced Metrics and Monitoring
+    CLUSTERLIFECYCLE_STATE_METRICS[clusterlifecycle-state-metrics]
+    
+    %% Enhanced Security and Access
+    MANAGED_SERVICEACCOUNT[managed-serviceaccount]
+    CLUSTER_PROXY[cluster-proxy]
+    CLUSTER_PROXY_ADDON[cluster-proxy-addon]
+    
+    %% External Dependencies
+    HIVE[Hive Operator]
+    ARGO[ArgoCD]
+    PROMETHEUS[Prometheus Stack]
+    
+    %% OpenShift Platform Operator Integrations
+    AWX_OPERATOR[AWX Operator]
+    AWX_RESOURCE_OPERATOR[AWX Resource Operator]
+    
+    %% AWX Operator Internal Components
+    AWX_INSTANCE_CONTROLLER[AWX Instance Controller]
+    AWX_MESHINGRESS_CONTROLLER[AWXMeshIngress Controller]
+    ANSIBLE_JOB_CONTROLLER[AnsibleJob Controller]
+    JOB_TEMPLATE_CONTROLLER[JobTemplate Controller]
+    
+    %% AWX CRDs (referenced from cluster subsystem)
+    ANSIBLE_JOB_CRD[AnsibleJob CRD]
+    JOB_TEMPLATE_CRD[JobTemplate CRD]
+    
+    %% Multicluster Global Hub Internal Components
+    GLOBAL_HUB_OPERATOR[Global Hub Operator]
+    GLOBAL_HUB_MANAGER[Global Hub Manager]
+    GLOBAL_HUB_AGENT[Global Hub Agent]
+    TRANSPORT_BRIDGE[Transport Bridge]
+    KAFKA_TRANSPORT[Kafka Transport]
+    POSTGRES_STORAGE[PostgreSQL Storage Backend]
+    GLOBAL_HUB_GRAFANA[Global Hub Grafana]
+    
+    %% Submariner Network Components
+    SUBMARINER_OPERATOR[Submariner Operator]
+    SUBMARINER_GATEWAY[Submariner Gateway]
+    SUBMARINER_ROUTE_AGENT[Submariner Route Agent]
+    LIGHTHOUSE_AGENT[Lighthouse Agent]
+    LIGHTHOUSE_COREDNS[Lighthouse CoreDNS]
+    GLOBALNET_CONTROLLER[Globalnet Controller]
+    SUBCTL_CLI[Subctl CLI]
+    
+    %% Backup & Disaster Recovery Components
+    OADP_OPERATOR[OADP Operator]
+    VELERO_BACKUP_CONTROLLER[Velero Backup Controller]
+    VOLUME_SNAPSHOT_CONTROLLER[Volume Snapshot Controller]
+    CLUSTER_BACKUP_SCHEDULE[Cluster Backup Schedule]
+    BACKUP_STORAGE_LOCATION[Backup Storage Location]
+    
+    %% Cluster API (CAPI) Integration Components (ACM-Relevant Only)
+    CAPI_PROVIDER_INTEGRATION[Cluster API Provider Integration]
+    INFRASTRUCTURE_PROVIDER_MANAGER[Infrastructure Provider Manager]
+    CLUSTER_PROVISIONING_ENGINE[Cluster Provisioning Engine]
+    BOOTSTRAP_CONFIG_MANAGER[Bootstrap Configuration Manager]
+    CONTROL_PLANE_MANAGER[Control Plane Manager]
+    
+    %% Red Hat Insights Integration Components (ACM-Relevant Only)
+    INSIGHTS_OPERATOR_INTEGRATION[Insights Operator Integration]
+    CLUSTER_HEALTH_COLLECTOR[Cluster Health Collector]
+    COMPLIANCE_INSIGHTS_ENGINE[Compliance Insights Engine]
+    CLUSTER_ADVISOR_INTEGRATION[Cluster Advisor Integration]
+    INSIGHTS_REMEDIATION_ENGINE[Insights Remediation Engine]
+    
+    %% Infrastructure Dependencies
+    ETCD --> K8S
+    K8S --> OCP
+    OCP --> HUB
+    OCP --> SPOKE
+    
+    %% Central ACM System Architecture - Hierarchical Structure
+    HUB --> ACM
+    ACM --> OCM
+    
+    %% MCE Foundation Layer Dependencies
+    HUB --> MCE
+    MCE --> BACKPLANE_OPERATOR
+    MCE --> CLUSTER_MANAGER
+    MCE --> KLUSTERLET
+    MCE --> REGISTRATION_WEBHOOK
+    
+    %% ACM builds upon MCE Foundation
+    MCE --> ACM
+    
+    %% ACM Subsystems Branch Out
+    ACM --> GRC
+    ACM --> APP
+    ACM --> OBS
+    ACM --> CLUSTER
+    ACM --> SEARCH
+    ACM --> CONSOLE
+    ACM --> SERVER_FOUNDATION
+    
+    %% Enterprise Extensions Branch from ACM
+    ACM --> GLOBAL_HUB
+    ACM --> SUBMARINER
+    ACM --> BACKUP_RESTORE
+    
+    %% CAPI and Insights Integration Extensions
+    CLUSTER --> CAPI_PROVIDER_INTEGRATION
+    CLUSTER --> INSIGHTS_OPERATOR_INTEGRATION
+    
+    %% OCM Infrastructure Layer with Component Enablement
+    OCM_API --> OCM
+    CLUSTER_LIFECYCLE_API --> OCM_API
+    
+    %% OCM enables key subsystem operators
+    OCM --> SEARCH_V2_OPERATOR
+    OCM --> MCO_OPERATOR
+    OCM --> CLUSTER_CURATOR_CTRL
+    
+    %% Server Foundation Components Branch from SERVER_FOUNDATION
+    SERVER_FOUNDATION --> FOUNDATION
+    SERVER_FOUNDATION --> REGISTRATION
+    SERVER_FOUNDATION --> WORK
+    SERVER_FOUNDATION --> ADDON
+    SERVER_FOUNDATION --> MANAGEDCLUSTER_IMPORT_CTRL
+    SERVER_FOUNDATION --> KLUSTERLET_ADDON_CTRL
+    SERVER_FOUNDATION --> CLUSTERLIFECYCLE_STATE_METRICS
+    SERVER_FOUNDATION --> MANAGED_SERVICEACCOUNT
+    SERVER_FOUNDATION --> CLUSTER_PROXY
+    SERVER_FOUNDATION --> CLUSTER_PROXY_ADDON
+    SERVER_FOUNDATION --> REGISTRATION_OPERATOR
+    SERVER_FOUNDATION --> PLACEMENT
+    SERVER_FOUNDATION --> WORK_FRAMEWORK
+    SERVER_FOUNDATION --> ADDON_FRAMEWORK
+    
+    %% Core Application Lifecycle Components (for subsystem connectivity)
+    MULTICLOUD_OPS_SUBSCRIPTION[multicloud-operators-subscription]
+    MULTICLOUD_INTEGRATIONS[multicloud-integrations]
+    ARGOCD_PULL_INTEGRATION[argocd-pull-integration]
+    GITOPS_OPERATOR[OpenShift GitOps Operator]
+    
+    %% Core Governance Components (for subsystem hierarchy)
+    GOV_POLICY_PROP[governance-policy-propagator]
+    CONFIG_POLICY_CTRL[config-policy-controller]
+    GATEKEEPER_OP[gatekeeper-operator]
+    GOV_POLICY_FRAMEWORK[governance-policy-framework]
+    CERT_POLICY_CTRL[cert-policy-controller]
+    IAM_POLICY_CTRL[iam-policy-controller]
+    POLICY_GEN[policy-generator-plugin]
+    GOV_POLICY_ADDON_CTRL[governance-policy-addon-controller]
+    
+    %% Core Cluster Components (for subsystem hierarchy)  
+    CLUSTER_CURATOR_CTRL[cluster-curator-controller]
+    CLUSTER_PERMISSION[cluster-permission]
+    PROVIDER_CREDENTIAL_CTRL[provider-credential-controller]
+    CLUSTER_IMAGESET_CTRL[cluster-image-set-controller]
+    CLUSTERCLAIMS_CTRL[clusterclaims-controller]
+    HYPERSHIFT_ADDON_OP[hypershift-addon-operator]
+    
+    %% Core Observability Components (for subsystem hierarchy)
+    MCO_OPERATOR[multicluster-observability-operator]
+    PROMETHEUS_OP[prometheus-operator]
+    GRAFANA[grafana]
+    
+    %% Core Search Components (for subsystem hierarchy)
+    SEARCH_V2_OPERATOR[search-v2-operator]
+    SEARCH_INDEXER[search-indexer]
+    SEARCH_COLLECTOR[search-collector]
+    SEARCH_V2_API[search-v2-api]
+    
+    %% Core Console Components (for subsystem hierarchy)
+    CONSOLE_COMPONENT[console]
+    CONSOLE_API[console-api]
+    
+    %% Enhanced Observability Components
+    OBSERVATORIUM_OP[observatorium-operator]
+    OBSERVATORIUM[observatorium]
+    THANOS[thanos]
+    KUBE_THANOS[kube-thanos]
+    
+    %% Additional Critical Foundation Components
+    REGISTRATION_OPERATOR[registration-operator]
+    PLACEMENT[placement]
+    WORK_FRAMEWORK[work]
+    ADDON_FRAMEWORK[addon-framework]
+    
+    %% Hierarchical Subsystem Structure - Components Branch from Subsystems
+    %% Application Lifecycle Components
+    APP --> MULTICLOUD_OPS_SUBSCRIPTION
+    APP --> MULTICLOUD_INTEGRATIONS
+    APP --> ARGOCD_PULL_INTEGRATION
+    APP --> GITOPS_OPERATOR
+    
+    %% Governance Components
+    GRC --> GOV_POLICY_PROP
+    GRC --> CONFIG_POLICY_CTRL
+    GRC --> GATEKEEPER_OP
+    GRC --> GOV_POLICY_FRAMEWORK
+    GRC --> CERT_POLICY_CTRL
+    GRC --> IAM_POLICY_CTRL
+    GRC --> POLICY_GEN
+    GRC --> GOV_POLICY_ADDON_CTRL
+    
+    %% Cluster Lifecycle Components
+    CLUSTER --> CLUSTER_CURATOR_CTRL
+    CLUSTER --> CLUSTER_PERMISSION
+    CLUSTER --> PROVIDER_CREDENTIAL_CTRL
+    CLUSTER --> CLUSTER_IMAGESET_CTRL
+    CLUSTER --> CLUSTERCLAIMS_CTRL
+    CLUSTER --> HYPERSHIFT_ADDON_OP
+    
+    %% Observability Components
+    OBS --> MCO_OPERATOR
+    OBS --> OBSERVATORIUM_OP
+    OBS --> PROMETHEUS_OP
+    OBS --> GRAFANA
+    OBS --> THANOS
+    OBS --> KUBE_THANOS
+    
+    %% Search Components
+    SEARCH --> SEARCH_V2_OPERATOR
+    SEARCH --> SEARCH_INDEXER
+    SEARCH --> SEARCH_COLLECTOR
+    SEARCH --> SEARCH_V2_API
+    
+    %% Console Components
+    CONSOLE --> CONSOLE_COMPONENT
+    CONSOLE --> CONSOLE_API
+    
+    %% External Dependencies (properly connected)
+    CLUSTER --> HIVE
+    OBS --> PROMETHEUS
+    
+    %% FIXED: ArgoCD properly connected to GitOps Operator (not generic APP subsystem)
+    ARGO -->|PROVIDES_RUNTIME_FOR| GITOPS_OPERATOR
+    
+    %% Cross-Subsystem Integration (Data Collection & Display)
+    %% Observability collects metrics from all subsystems
+    OBS --> GRC
+    OBS --> APP
+    OBS --> CLUSTER
+    OBS --> SEARCH
+    
+    %% Search indexes resources from all subsystems
+    SEARCH --> GRC
+    SEARCH --> APP
+    
+    %% OpenShift Platform Operator Connections
+    OCP -->|PROVIDES_PLATFORM_FOR| GATEKEEPER_OP
+    OCP -->|PROVIDES_PLATFORM_FOR| GITOPS_OPERATOR
+    OCP -->|PROVIDES_PLATFORM_FOR| AWX_OPERATOR
+    OCP -->|PROVIDES_PLATFORM_FOR| AWX_RESOURCE_OPERATOR
+    
+    %% AWX Operator Internal Architecture
+    AWX_OPERATOR -->|CONTAINS| AWX_INSTANCE_CONTROLLER
+    AWX_OPERATOR -->|CONTAINS| AWX_MESHINGRESS_CONTROLLER
+    AWX_RESOURCE_OPERATOR -->|CONTAINS| ANSIBLE_JOB_CONTROLLER
+    AWX_RESOURCE_OPERATOR -->|CONTAINS| JOB_TEMPLATE_CONTROLLER
+    
+    %% AWX Integration with Cluster Management
+    ANSIBLE_JOB_CONTROLLER -->|MANAGES| ANSIBLE_JOB_CRD
+    JOB_TEMPLATE_CONTROLLER -->|MANAGES| JOB_TEMPLATE_CRD
+    
+    %% Multicluster Global Hub Internal Architecture
+    GLOBAL_HUB -->|CONTAINS| GLOBAL_HUB_OPERATOR
+    GLOBAL_HUB -->|CONTAINS| GLOBAL_HUB_MANAGER
+    GLOBAL_HUB -->|CONTAINS| GLOBAL_HUB_AGENT
+    GLOBAL_HUB_OPERATOR -->|DEPLOYS| KAFKA_TRANSPORT
+    GLOBAL_HUB_OPERATOR -->|DEPLOYS| POSTGRES_STORAGE
+    GLOBAL_HUB_MANAGER -->|USES| KAFKA_TRANSPORT
+    GLOBAL_HUB_MANAGER -->|PERSISTS_TO| POSTGRES_STORAGE
+    GLOBAL_HUB_MANAGER -->|MANAGES| GLOBAL_HUB_GRAFANA
+    GLOBAL_HUB_AGENT -->|COMMUNICATES_VIA| TRANSPORT_BRIDGE
+    
+    %% Submariner Network Architecture
+    SUBMARINER -->|CONTAINS| SUBMARINER_OPERATOR
+    SUBMARINER -->|CONTAINS| SUBMARINER_GATEWAY
+    SUBMARINER -->|CONTAINS| SUBMARINER_ROUTE_AGENT
+    SUBMARINER -->|CONTAINS| LIGHTHOUSE_AGENT
+    SUBMARINER -->|CONTAINS| LIGHTHOUSE_COREDNS
+    SUBMARINER_OPERATOR -->|MANAGES| GLOBALNET_CONTROLLER
+    SUBMARINER_OPERATOR -->|PROVIDES| SUBCTL_CLI
+    LIGHTHOUSE_AGENT -->|INTEGRATES_WITH| LIGHTHOUSE_COREDNS
+    
+    %% Backup & Disaster Recovery Architecture
+    BACKUP_RESTORE -->|CONTAINS| OADP_OPERATOR
+    BACKUP_RESTORE -->|CONTAINS| VELERO_BACKUP_CONTROLLER
+    BACKUP_RESTORE -->|CONTAINS| VOLUME_SNAPSHOT_CONTROLLER
+    OADP_OPERATOR -->|MANAGES| CLUSTER_BACKUP_SCHEDULE
+    OADP_OPERATOR -->|CONFIGURES| BACKUP_STORAGE_LOCATION
+    VELERO_BACKUP_CONTROLLER -->|USES| BACKUP_STORAGE_LOCATION
+    
+    %% Cluster API (CAPI) Integration Architecture
+    CAPI_PROVIDER_INTEGRATION -->|CONTAINS| INFRASTRUCTURE_PROVIDER_MANAGER
+    CAPI_PROVIDER_INTEGRATION -->|CONTAINS| CLUSTER_PROVISIONING_ENGINE
+    CAPI_PROVIDER_INTEGRATION -->|CONTAINS| BOOTSTRAP_CONFIG_MANAGER
+    CAPI_PROVIDER_INTEGRATION -->|CONTAINS| CONTROL_PLANE_MANAGER
+    INFRASTRUCTURE_PROVIDER_MANAGER -->|PROVISIONS_CLUSTERS_VIA| HIVE
+    CLUSTER_PROVISIONING_ENGINE -->|INTEGRATES_WITH| CLUSTER_CURATOR_CTRL
+    BOOTSTRAP_CONFIG_MANAGER -->|CONFIGURES_CLUSTERS_FOR| MCE
+    
+    %% Red Hat Insights Integration Architecture
+    INSIGHTS_OPERATOR_INTEGRATION -->|CONTAINS| CLUSTER_HEALTH_COLLECTOR
+    INSIGHTS_OPERATOR_INTEGRATION -->|CONTAINS| COMPLIANCE_INSIGHTS_ENGINE
+    INSIGHTS_OPERATOR_INTEGRATION -->|CONTAINS| CLUSTER_ADVISOR_INTEGRATION
+    INSIGHTS_OPERATOR_INTEGRATION -->|CONTAINS| INSIGHTS_REMEDIATION_ENGINE
+    CLUSTER_HEALTH_COLLECTOR -->|FEEDS_DATA_TO| OBS
+    COMPLIANCE_INSIGHTS_ENGINE -->|PROVIDES_INSIGHTS_TO| GRC
+    CLUSTER_ADVISOR_INTEGRATION -->|RECOMMENDS_ACTIONS_TO| CLUSTER
+    INSIGHTS_REMEDIATION_ENGINE -->|TRIGGERS_REMEDIATION_VIA| GOV_POLICY_PROP
+    
+    SEARCH --> CLUSTER
+    
+    %% Console displays data from all subsystems
+    CONSOLE --> GRC
+    CONSOLE --> APP
+    CONSOLE --> OBS
+    CONSOLE --> CLUSTER
+    CONSOLE --> SEARCH
+    
+    %% Console Integration with Red Hat Insights (cross-subsystem)
+    INSIGHTS_INTEGRATION -->|CONNECTS_TO| INSIGHTS_OPERATOR_INTEGRATION
+    
+    %% Hub-Spoke Communication Patterns
+    HUB --> SPOKE
+    
+    %% Cross-cluster subsystem communication (dotted lines for hub-to-spoke)
+    SERVER_FOUNDATION -.-> SPOKE
+    GRC -.-> SPOKE
+    OBS -.-> SPOKE
+    SEARCH -.-> SPOKE
+    
+    %% Standardized Styling
+    classDef infrastructure fill:#e1f5fe
+    classDef central fill:#ff6b6b
+    classDef subsystem fill:#e8f5e8
+    classDef controller fill:#e3f2fd
+    classDef external fill:#fff3e0
+    classDef foundation fill:#f3e5f5
+    classDef mce_foundation fill:#e8f5e8
+    classDef enterprise fill:#fce4ec
+    classDef global_hub fill:#f1f8e9
+    classDef networking fill:#e0f2f1
+    classDef backup fill:#fff8e1
+    classDef capi fill:#e8f5e8
+    classDef insights fill:#f3e5f5
+    classDef openshift_operators fill:#e8eaf6
+    classDef awx_controllers fill:#f1f8e9
+    classDef awx_crds fill:#fce4ec
+    
+    class ETCD,K8S,OCP,HUB,SPOKE infrastructure
+    class ACM central
+    class GRC,APP,OBS,CLUSTER,SEARCH,CONSOLE,SERVER_FOUNDATION subsystem
+    class HIVE,ARGO,PROMETHEUS external
+    class MCE,BACKPLANE_OPERATOR,CLUSTER_MANAGER,KLUSTERLET,REGISTRATION_WEBHOOK mce_foundation
+    class GLOBAL_HUB,SUBMARINER,BACKUP_RESTORE enterprise
+    class GLOBAL_HUB_OPERATOR,GLOBAL_HUB_MANAGER,GLOBAL_HUB_AGENT,TRANSPORT_BRIDGE,KAFKA_TRANSPORT,POSTGRES_STORAGE,GLOBAL_HUB_GRAFANA global_hub
+    class SUBMARINER_OPERATOR,SUBMARINER_GATEWAY,SUBMARINER_ROUTE_AGENT,LIGHTHOUSE_AGENT,LIGHTHOUSE_COREDNS,GLOBALNET_CONTROLLER,SUBCTL_CLI networking
+    class OADP_OPERATOR,VELERO_BACKUP_CONTROLLER,VOLUME_SNAPSHOT_CONTROLLER,CLUSTER_BACKUP_SCHEDULE,BACKUP_STORAGE_LOCATION backup
+    class CAPI_PROVIDER_INTEGRATION,INFRASTRUCTURE_PROVIDER_MANAGER,CLUSTER_PROVISIONING_ENGINE,BOOTSTRAP_CONFIG_MANAGER,CONTROL_PLANE_MANAGER capi
+    class INSIGHTS_OPERATOR_INTEGRATION,CLUSTER_HEALTH_COLLECTOR,COMPLIANCE_INSIGHTS_ENGINE,CLUSTER_ADVISOR_INTEGRATION,INSIGHTS_REMEDIATION_ENGINE insights
+    class GATEKEEPER_OP,GITOPS_OPERATOR,AWX_OPERATOR,AWX_RESOURCE_OPERATOR openshift_operators
+    class AWX_INSTANCE_CONTROLLER,AWX_MESHINGRESS_CONTROLLER,ANSIBLE_JOB_CONTROLLER,JOB_TEMPLATE_CONTROLLER awx_controllers
+    class ANSIBLE_JOB_CRD,JOB_TEMPLATE_CRD awx_crds
+    class OCM,OCM_API,CLUSTER_LIFECYCLE_API foundation
+    
+    %% All controllers/operators
+    class MULTICLOUD_OPS_SUBSCRIPTION,MULTICLOUD_INTEGRATIONS,ARGOCD_PULL_INTEGRATION,GITOPS_OPERATOR controller
+    class GOV_POLICY_PROP,CONFIG_POLICY_CTRL,GATEKEEPER_OP,GOV_POLICY_FRAMEWORK,CERT_POLICY_CTRL,IAM_POLICY_CTRL,POLICY_GEN,GOV_POLICY_ADDON_CTRL controller
+    class CLUSTER_CURATOR_CTRL,CLUSTER_PERMISSION,PROVIDER_CREDENTIAL_CTRL,CLUSTER_IMAGESET_CTRL,CLUSTERCLAIMS_CTRL,HYPERSHIFT_ADDON_OP controller
+    class MCO_OPERATOR,OBSERVATORIUM_OP,PROMETHEUS_OP,GRAFANA,THANOS,KUBE_THANOS controller
+    class SEARCH_V2_OPERATOR,SEARCH_INDEXER,SEARCH_COLLECTOR,SEARCH_V2_API controller
+    class CONSOLE_COMPONENT,CONSOLE_API controller
+    class FOUNDATION,REGISTRATION,WORK,ADDON,MANAGEDCLUSTER_IMPORT_CTRL,KLUSTERLET_ADDON_CTRL controller
+    class CLUSTERLIFECYCLE_STATE_METRICS,MANAGED_SERVICEACCOUNT,CLUSTER_PROXY,CLUSTER_PROXY_ADDON controller
+    class REGISTRATION_OPERATOR,PLACEMENT,WORK_FRAMEWORK,ADDON_FRAMEWORK controller

@@ -1,0 +1,109 @@
+graph TB
+    %% RHACM Cluster Management - Real Components Only
+    
+    %% Cluster Lifecycle API
+    CLUSTER_LIFECYCLE_API[cluster-lifecycle-api]
+    
+    %% Cluster Import & Management
+    MANAGEDCLUSTER_IMPORT_CTRL[managedcluster-import-controller]
+    KLUSTERLET_ADDON_CTRL[klusterlet-addon-controller]
+    
+    %% Cluster Permissions & Security (Enhanced)
+    CLUSTER_PERMISSION[cluster-permission]
+    MANAGED_SERVICEACCOUNT[managed-serviceaccount]
+    CLUSTER_PROXY[cluster-proxy]
+    CLUSTER_PROXY_ADDON[cluster-proxy-addon]
+    MANIFESTWORK[ManifestWork]
+    RBAC_RESOURCES[RBAC Resources]
+    
+    %% Cluster State & Metrics
+    CLUSTERLIFECYCLE_STATE_METRICS[clusterlifecycle-state-metrics]
+    
+    %% Infrastructure Controllers (Enhanced)
+    CLUSTER_CURATOR_CTRL[cluster-curator-controller]
+    CURATOR_JOBS[Curator Jobs]
+    ANSIBLE_JOB_CRD[AnsibleJob CRD]
+    JOB_TEMPLATE_CRD[JobTemplate CRD]
+    CLUSTER_IMAGESET_CTRL[cluster-image-set-controller]
+    IMAGESET_REPO[ImageSet Git Repository]
+    PROVIDER_CREDENTIAL_CTRL[provider-credential-controller]
+    CLOUD_CREDENTIALS[Cloud Provider Secrets]
+    CLUSTERCLAIMS_CTRL[clusterclaims-controller]
+    CLUSTER_POOLS[Cluster Pools]
+    CLUSTER_CLAIMS[ClusterClaim Resources]
+    
+    %% HyperShift Integration (Enhanced)
+    HYPERSHIFT_ADDON_OP[hypershift-addon-operator]
+    HYPERSHIFT_ADDON_MANAGER[hypershift-addon-manager]
+    HYPERSHIFT_ADDON_AGENT[hypershift-addon-agent]
+    MANAGEDCLUSTER_ADDON[ManagedClusterAddOn]
+    HYPERSHIFT_OIDC_CREDENTIALS[hypershift-operator-oidc-provider-s3-credentials]
+    
+    %% External Dependencies
+    HIVE[hive]
+    
+    %% Foundation
+    MULTICLOUD_OPS_FOUNDATION[multicloud-operators-foundation]
+    
+    %% Core Cluster Management Flow
+    CLUSTER_LIFECYCLE_API -->|PROVIDES_API| MANAGEDCLUSTER_IMPORT_CTRL
+    MULTICLOUD_OPS_FOUNDATION -->|MANAGES| MANAGEDCLUSTER_IMPORT_CTRL
+    MULTICLOUD_OPS_FOUNDATION -->|MANAGES| KLUSTERLET_ADDON_CTRL
+    
+    %% Enhanced Cluster Provisioning Flow
+    HIVE -->|PROVISIONS_CLUSTERS| CLUSTER_CURATOR_CTRL
+    CLUSTER_CURATOR_CTRL -->|CREATES_JOBS| CURATOR_JOBS
+    CURATOR_JOBS -->|CREATES| ANSIBLE_JOB_CRD
+    CURATOR_JOBS -->|USES| JOB_TEMPLATE_CRD
+    CLUSTER_IMAGESET_CTRL -->|SYNCS_FROM| IMAGESET_REPO
+    CLUSTER_IMAGESET_CTRL -->|PROVIDES_IMAGES_TO| HIVE
+    PROVIDER_CREDENTIAL_CTRL -->|MANAGES| CLOUD_CREDENTIALS
+    CLOUD_CREDENTIALS -->|AUTHENTICATES| HIVE
+    
+    %% Cluster Claims Flow
+    CLUSTER_CLAIMS -->|PROCESSED_BY| CLUSTERCLAIMS_CTRL
+    CLUSTERCLAIMS_CTRL -->|ASSIGNS_FROM| CLUSTER_POOLS
+    CLUSTER_POOLS -->|PROVIDES_CLUSTERS_TO| HIVE
+    
+    %% Enhanced Security & RBAC Management
+    CLUSTER_PERMISSION -->|GENERATES| RBAC_RESOURCES
+    RBAC_RESOURCES -->|DISTRIBUTED_VIA| MANIFESTWORK
+    MANIFESTWORK -->|DEPLOYS_TO| MANAGED_SERVICEACCOUNT
+    MANAGED_SERVICEACCOUNT -->|AUTHENTICATES_VIA| CLUSTER_PROXY
+    CLUSTER_PROXY -->|EXTENDS_VIA| CLUSTER_PROXY_ADDON
+    
+    %% Cluster State Monitoring
+    MANAGEDCLUSTER_IMPORT_CTRL -->|REPORTS_TO| CLUSTERLIFECYCLE_STATE_METRICS
+    KLUSTERLET_ADDON_CTRL -->|REPORTS_TO| CLUSTERLIFECYCLE_STATE_METRICS
+    
+    %% Enhanced HyperShift Integration
+    HYPERSHIFT_ADDON_OP -->|MANAGES| HYPERSHIFT_ADDON_MANAGER
+    HYPERSHIFT_ADDON_MANAGER -->|MONITORS| MANAGEDCLUSTER_ADDON
+    HYPERSHIFT_ADDON_MANAGER -.->|DEPLOYS_AGENT| HYPERSHIFT_ADDON_AGENT
+    MANAGEDCLUSTER_ADDON -->|CONFIGURES| HYPERSHIFT_ADDON_AGENT
+    HYPERSHIFT_OIDC_CREDENTIALS -->|AUTHENTICATES| HYPERSHIFT_ADDON_MANAGER
+    HYPERSHIFT_ADDON_OP -->|INTEGRATES_WITH| HIVE
+    HYPERSHIFT_ADDON_MANAGER -->|ENABLES_HYPERSHIFT| HIVE
+    
+    %% Styling
+    classDef api fill:#e3f2fd
+    classDef provisioning fill:#f1f8e9
+    classDef import fill:#fff8e1
+    classDef management fill:#fce4ec
+    classDef security fill:#f3e5f5
+    classDef jobs fill:#e8eaf6
+    classDef credentials fill:#e0f2f1
+    classDef pools fill:#fff3e0
+    classDef monitoring fill:#fafafa
+    classDef hypershift fill:#f9fbe7
+    
+    class CLUSTER_LIFECYCLE_API api
+    class HIVE,CLUSTER_CURATOR_CTRL,CLUSTER_IMAGESET_CTRL,IMAGESET_REPO provisioning
+    class MANAGEDCLUSTER_IMPORT_CTRL,KLUSTERLET_ADDON_CTRL import
+    class MULTICLOUD_OPS_FOUNDATION management
+    class CLUSTER_PERMISSION,MANAGED_SERVICEACCOUNT,CLUSTER_PROXY,CLUSTER_PROXY_ADDON,MANIFESTWORK,RBAC_RESOURCES security
+    class CURATOR_JOBS,ANSIBLE_JOB_CRD,JOB_TEMPLATE_CRD jobs
+    class PROVIDER_CREDENTIAL_CTRL,CLOUD_CREDENTIALS credentials
+    class CLUSTERCLAIMS_CTRL,CLUSTER_POOLS,CLUSTER_CLAIMS pools
+    class CLUSTERLIFECYCLE_STATE_METRICS monitoring
+    class HYPERSHIFT_ADDON_OP,HYPERSHIFT_ADDON_MANAGER,HYPERSHIFT_ADDON_AGENT,MANAGEDCLUSTER_ADDON,HYPERSHIFT_OIDC_CREDENTIALS hypershift

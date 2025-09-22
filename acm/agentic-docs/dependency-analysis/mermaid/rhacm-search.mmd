@@ -1,0 +1,99 @@
+graph TB
+    %% RHACM Search & Discovery - Enhanced Internal Architecture
+    
+    %% Foundation Components
+    OCM[ocm]
+    
+    %% Search Infrastructure (Real Components)
+    SEARCH_V2_OPERATOR[search-v2-operator]
+    SEARCH_V2_API[search-v2-api]
+    SEARCH_INDEXER[search-indexer]
+    SEARCH_COLLECTOR[search-collector]
+    
+    %% Search V2 Operator Internal Components
+    SEARCH_OPERATOR_CTRL[Search Operator Controller]
+    INDEX_MANAGER[Index Manager]
+    COLLECTOR_MANAGER[Collector Manager]
+    API_GATEWAY_CTRL[API Gateway Controller]
+    
+    %% Search Indexer Internal Components
+    RESOURCE_INDEXER[Resource Indexer]
+    SCHEMA_REGISTRY[Schema Registry]
+    ELASTICSEARCH_INTEGRATION[ElasticSearch Integration]
+    QUERY_PROCESSOR[Query Processor]
+    
+    %% Search Collector Internal Components
+    RESOURCE_MONITOR[Resource Monitor]
+    EVENT_COLLECTOR[Event Collector]
+    DATA_TRANSFORMER[Data Transformer]
+    COLLECTION_AGENT[Collection Agent]
+    
+    %% Search API Internal Components
+    GRAPHQL_API_SERVER[GraphQL API Server]
+    REST_API_GATEWAY[REST API Gateway]
+    QUERY_OPTIMIZER[Query Optimizer]
+    RBAC_INTEGRATION[RBAC Integration]
+    
+    %% OCM Connection (Search as addon/operator enabled by OCM)
+    OCM -->|ENABLES| SEARCH_V2_OPERATOR
+    
+    %% Search V2 Operator Internal Architecture
+    SEARCH_V2_OPERATOR -->|CONTAINS| SEARCH_OPERATOR_CTRL
+    SEARCH_V2_OPERATOR -->|CONTAINS| INDEX_MANAGER
+    SEARCH_V2_OPERATOR -->|CONTAINS| COLLECTOR_MANAGER
+    SEARCH_V2_OPERATOR -->|CONTAINS| API_GATEWAY_CTRL
+    
+    %% Search Infrastructure Management
+    SEARCH_V2_OPERATOR -->|MANAGES| SEARCH_V2_API
+    SEARCH_V2_OPERATOR -->|MANAGES| SEARCH_INDEXER
+    SEARCH_V2_OPERATOR -->|MANAGES| SEARCH_COLLECTOR
+    
+    %% Search Indexer Internal Architecture
+    SEARCH_INDEXER -->|CONTAINS| RESOURCE_INDEXER
+    SEARCH_INDEXER -->|CONTAINS| SCHEMA_REGISTRY
+    SEARCH_INDEXER -->|CONTAINS| ELASTICSEARCH_INTEGRATION
+    SEARCH_INDEXER -->|CONTAINS| QUERY_PROCESSOR
+    
+    %% Search Collector Internal Architecture
+    SEARCH_COLLECTOR -->|CONTAINS| RESOURCE_MONITOR
+    SEARCH_COLLECTOR -->|CONTAINS| EVENT_COLLECTOR
+    SEARCH_COLLECTOR -->|CONTAINS| DATA_TRANSFORMER
+    SEARCH_COLLECTOR -->|CONTAINS| COLLECTION_AGENT
+    
+    %% Search API Internal Architecture
+    SEARCH_V2_API -->|CONTAINS| GRAPHQL_API_SERVER
+    SEARCH_V2_API -->|CONTAINS| REST_API_GATEWAY
+    SEARCH_V2_API -->|CONTAINS| QUERY_OPTIMIZER
+    SEARCH_V2_API -->|CONTAINS| RBAC_INTEGRATION
+    
+    %% Data Flow with Internal Components
+    COLLECTION_AGENT -.->|FEEDS_RAW_DATA| DATA_TRANSFORMER
+    DATA_TRANSFORMER -->|PROCESSES_DATA| RESOURCE_INDEXER
+    RESOURCE_INDEXER -->|INDEXES_VIA| ELASTICSEARCH_INTEGRATION
+    QUERY_PROCESSOR -->|SERVES_VIA| GRAPHQL_API_SERVER
+    QUERY_PROCESSOR -->|SERVES_VIA| REST_API_GATEWAY
+    
+    %% Cross-cluster data collection (conceptual spoke clusters)
+    %% Note: Actual spoke cluster resources are managed through foundation
+    
+    %% Styling
+    classDef operator fill:#e3f2fd
+    classDef collection fill:#f1f8e9
+    classDef index fill:#fff8e1
+    classDef query fill:#fce4ec
+    classDef api fill:#f3e5f5
+    classDef spoke fill:#e8eaf6
+    classDef resources fill:#e0f2f1
+    classDef security fill:#fff3e0
+    classDef analytics fill:#fafafa
+    classDef sync fill:#f9fbe7
+    classDef filters fill:#e1f5fe
+    classDef internal fill:#e8f5e8
+    
+    class OCM operator
+    class SEARCH_V2_OPERATOR operator
+    class SEARCH_COLLECTOR,RESOURCE_MONITOR,EVENT_COLLECTOR,DATA_TRANSFORMER,COLLECTION_AGENT collection
+    class SEARCH_INDEXER,RESOURCE_INDEXER,ELASTICSEARCH_INTEGRATION,SCHEMA_REGISTRY index
+    class QUERY_PROCESSOR,QUERY_OPTIMIZER,RBAC_INTEGRATION query
+    class SEARCH_V2_API,GRAPHQL_API_SERVER,REST_API_GATEWAY api
+    class SEARCH_OPERATOR_CTRL,INDEX_MANAGER,COLLECTOR_MANAGER,API_GATEWAY_CTRL internal

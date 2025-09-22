@@ -1,0 +1,154 @@
+graph TB
+    %% RHACM Console - Enhanced Internal Architecture
+    
+    %% Core Console Components (Real)
+    CONSOLE[console]
+    CONSOLE_API[console-api]
+    
+    %% Console Backend Internal Components
+    CONSOLE_BACKEND_API[Console Backend API]
+    RBAC_MIDDLEWARE[RBAC Middleware]
+    MULTI_CLUSTER_NAV[Multi-cluster Navigation]
+    RESOURCE_PROXY[Resource Proxy]
+    
+    %% Console API Internal Components
+    REST_API_CONTROLLERS[REST API Controllers]
+    AUTHENTICATION_HANDLER[Authentication Handler]
+    WEBSOCKET_MANAGER[WebSocket Manager]
+    SESSION_MANAGER[Session Manager]
+    
+    %% Console Frontend Components
+    REACT_COMPONENTS[Frontend React Components]
+    DASHBOARD_RENDERER[Dashboard Renderer]
+    CLUSTER_OVERVIEW[Cluster Overview]
+    RESOURCE_BROWSER[Resource Browser]
+    
+    %% Integration Components
+    OAUTH_INTEGRATION[OAuth Integration]
+    CLUSTER_SELECTOR[Cluster Selector]
+    PLUGIN_FRAMEWORK[Plugin Framework]
+    THEME_MANAGER[Theme Manager]
+    
+    %% Console Internal Architecture
+    CONSOLE -->|CONTAINS| CONSOLE_BACKEND_API
+    CONSOLE -->|CONTAINS| RBAC_MIDDLEWARE
+    CONSOLE -->|CONTAINS| MULTI_CLUSTER_NAV
+    CONSOLE -->|CONTAINS| REACT_COMPONENTS
+    CONSOLE -->|CONTAINS| DASHBOARD_RENDERER
+    CONSOLE -->|CONTAINS| CLUSTER_OVERVIEW
+    
+    %% Console API Internal Architecture
+    CONSOLE_API -->|CONTAINS| REST_API_CONTROLLERS
+    CONSOLE_API -->|CONTAINS| RESOURCE_PROXY
+    CONSOLE_API -->|CONTAINS| AUTHENTICATION_HANDLER
+    CONSOLE_API -->|CONTAINS| WEBSOCKET_MANAGER
+    CONSOLE_API -->|CONTAINS| SESSION_MANAGER
+    
+    %% Console Integration Flow
+    CONSOLE -->|PROVIDES_UI_FOR| CONSOLE_API
+    CONSOLE_BACKEND_API -->|AUTHENTICATES_VIA| OAUTH_INTEGRATION
+    RBAC_MIDDLEWARE -->|AUTHORIZES| REST_API_CONTROLLERS
+    MULTI_CLUSTER_NAV -->|USES| CLUSTER_SELECTOR
+    
+    %% Frontend-Backend Communication
+    REACT_COMPONENTS -->|COMMUNICATES_VIA| REST_API_CONTROLLERS
+    DASHBOARD_RENDERER -->|STREAMS_VIA| WEBSOCKET_MANAGER
+    RESOURCE_BROWSER -->|PROXIES_VIA| RESOURCE_PROXY
+    
+    %% Session and Authentication Management
+    AUTHENTICATION_HANDLER -->|MANAGES_SESSIONS| SESSION_MANAGER
+    SESSION_MANAGER -->|VALIDATES_VIA| OAUTH_INTEGRATION
+    
+    %% Console Plugin Architecture (New Components)
+    MCE_PLUGIN[MCE Plugin]
+    PLUGIN_REGISTRY[Plugin Registry]
+    PLUGIN_MANAGEMENT[Plugin Management System]
+    
+    %% External System Integration (New Components)
+    GITHUB_INTEGRATION[GitHub Integration]
+    INSIGHTS_INTEGRATION[Red Hat Insights Integration]
+    
+    %% Advanced Console Components (New Components)
+    CONSOLE_ROUTE_HANDLER[Console Route Handler]
+    OPENSHIFT_CONSOLE_BRIDGE[OpenShift Console Bridge]
+    
+    %% Console Plugin Architecture
+    CONSOLE -->|CONTAINS| PLUGIN_REGISTRY
+    CONSOLE -->|CONTAINS| PLUGIN_MANAGEMENT
+    PLUGIN_MANAGEMENT -->|MANAGES| MCE_PLUGIN
+    MCE_PLUGIN -->|FETCHES_CONFIG| CONSOLE_API
+    
+    %% External System Integration (Reusing Existing Components)
+    CONSOLE -->|INTEGRATES_WITH| GITHUB_INTEGRATION
+    CONSOLE -->|INTEGRATES_WITH| INSIGHTS_INTEGRATION
+    
+    %% Cross-Subsystem Component References (Existing Components)
+    AWX_OPERATOR[AWX Operator]
+    JOB_TEMPLATE_CONTROLLER[JobTemplate Controller]  
+    ANSIBLE_JOB_CRD[AnsibleJob CRD]
+    ACM_CLI[acm-cli]
+    CONSOLE_CLI_DOWNLOAD[ConsoleCLIDownload Integration]
+    
+    %% Console Integration with Existing AWX/Ansible Components
+    CONSOLE -->|CONNECTS_TO| AWX_OPERATOR
+    CONSOLE -->|CONNECTS_TO| JOB_TEMPLATE_CONTROLLER
+    CONSOLE -->|DISPLAYS_DATA_FROM| ANSIBLE_JOB_CRD
+    
+    %% Console Integration with Existing CLI Components  
+    CONSOLE -->|HOSTS_DOWNLOAD_FOR| ACM_CLI
+    CONSOLE -->|INTEGRATES_WITH| CONSOLE_CLI_DOWNLOAD
+    
+    %% Advanced Console Components
+    CONSOLE -->|CONTAINS| CONSOLE_ROUTE_HANDLER
+    CONSOLE -->|CONTAINS| OPENSHIFT_CONSOLE_BRIDGE
+    
+    %% External System Data Flows
+    GITHUB_INTEGRATION -->|FETCHES_BRANCHES| GITHUB_INTEGRATION
+    CONSOLE -->|QUERIES_JOB_TEMPLATES| JOB_TEMPLATE_CONTROLLER
+    INSIGHTS_INTEGRATION -->|QUERIES_CLUSTER_INSIGHTS| CLUSTER_OVERVIEW
+    
+    %% Console Integration with RHACM Subsystems
+    CONSOLE -->|PROVIDES_UI_FOR| GRC_RESOURCES[GRC Resources]
+    CONSOLE -->|PROVIDES_UI_FOR| APP_RESOURCES[Application Resources]
+    CONSOLE -->|PROVIDES_UI_FOR| OBS_DASHBOARDS[Observability Dashboards]
+    CONSOLE -->|PROVIDES_UI_FOR| CLUSTER_RESOURCES[Cluster Resources]
+    CONSOLE -->|PROVIDES_UI_FOR| SEARCH_INTERFACE[Search Interface]
+    
+    %% Resource Proxy Integration
+    RESOURCE_PROXY -->|PROXIES_REQUESTS| GRC_RESOURCES
+    RESOURCE_PROXY -->|PROXIES_REQUESTS| APP_RESOURCES
+    RESOURCE_PROXY -->|PROXIES_REQUESTS| OBS_DASHBOARDS
+    RESOURCE_PROXY -->|PROXIES_REQUESTS| CLUSTER_RESOURCES
+    RESOURCE_PROXY -->|PROXIES_REQUESTS| SEARCH_INTERFACE
+    
+    %% Multi-cluster Management
+    CLUSTER_SELECTOR -->|SELECTS_TARGET| CLUSTER_RESOURCES
+    MULTI_CLUSTER_NAV -->|NAVIGATES_BETWEEN| CLUSTER_RESOURCES
+    
+    %% Plugin and Theme System
+    PLUGIN_FRAMEWORK -->|EXTENDS| REACT_COMPONENTS
+    THEME_MANAGER -->|STYLES| DASHBOARD_RENDERER
+    
+    %% Styling
+    classDef console fill:#e3f2fd
+    classDef backend fill:#f1f8e9
+    classDef frontend fill:#fff8e1
+    classDef api fill:#fce4ec
+    classDef auth fill:#f3e5f5
+    classDef integration fill:#e8eaf6
+    classDef resources fill:#e0f2f1
+    classDef internal fill:#e8f5e8
+    classDef plugins fill:#f3e5f5
+    classDef external fill:#fff3e0
+    classDef advanced fill:#e1f5fe
+    
+    class CONSOLE,CONSOLE_API console
+    class CONSOLE_BACKEND_API,RBAC_MIDDLEWARE,MULTI_CLUSTER_NAV backend
+    class REACT_COMPONENTS,DASHBOARD_RENDERER,CLUSTER_OVERVIEW,RESOURCE_BROWSER frontend
+    class REST_API_CONTROLLERS,RESOURCE_PROXY,WEBSOCKET_MANAGER api
+    class AUTHENTICATION_HANDLER,SESSION_MANAGER,OAUTH_INTEGRATION auth
+    class CLUSTER_SELECTOR,PLUGIN_FRAMEWORK,THEME_MANAGER integration
+    class GRC_RESOURCES,APP_RESOURCES,OBS_DASHBOARDS,CLUSTER_RESOURCES,SEARCH_INTERFACE resources
+    class MCE_PLUGIN,PLUGIN_REGISTRY,PLUGIN_MANAGEMENT plugins
+    class GITHUB_INTEGRATION,INSIGHTS_INTEGRATION external
+    class CONSOLE_ROUTE_HANDLER,OPENSHIFT_CONSOLE_BRIDGE advanced

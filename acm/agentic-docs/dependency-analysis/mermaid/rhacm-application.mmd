@@ -1,0 +1,138 @@
+graph TB
+    %% RHACM Application Lifecycle - Comprehensive Architecture
+    
+    %% Foundation Components (for connection only)
+    OCM_API[api]
+    OCM[ocm]
+    
+    %% Model 1: Subscription Model (RHACM Native) - ARCHIVED but still used in some deployments
+    MULTICLOUD_OPS_SUBSCRIPTION[multicloud-operators-subscription]
+    MULTICLOUD_OPS_CHANNEL[multicloud-operators-channel]
+    APPLICATION_MANAGER[Application Manager Addon]
+    
+    %% Channel Types (from multicloud-operators-channel)
+    GIT_CHANNEL[Git Channel]
+    HELM_CHANNEL[Helm Channel]
+    OBJECTSTORAGE_CHANNEL[Object Storage Channel]
+    
+    %% Model 2: ArgoCD Push Model (from multicloud-integrations - Real Controllers & CRDs)
+    MULTICLOUD_INTEGRATIONS[multicloud-integrations]
+    GITOPS_CLUSTER_CTRL[GitOps Cluster Controller]
+    GITOPS_SYNC_RESOURCE_CTRL[GitOps Sync Resource Controller]
+    STATUS_AGGREGATION_CTRL[Status Aggregation Controller]
+    PROPAGATION_CTRL[Propagation Controller]
+    GITOPS_ADDON_CTRL[GitOps Addon Controller]
+    GITOPS_OPERATOR[OpenShift GitOps Operator]
+    
+    %% ArgoCD Push Model CRDs
+    GITOPS_CLUSTER_CRD[GitOpsCluster CRD]
+    MULTICLUSTER_APPSET_REPORT_CRD[MulticlusterApplicationSetReport CRD]
+    CLUSTER_PERMISSION_CRD[ClusterPermission CRD]
+    
+    %% Model 3: ArgoCD Pull Model (from argocd-pull-integration - Real Controllers & CRDs)
+    ARGOCD_PULL_INTEGRATION[argocd-pull-integration]
+    APPLICATION_CTRL[Application Controller]
+    APPLICATION_STATUS_CTRL[Application Status Controller]
+    CLUSTER_CTRL[Cluster Controller]
+    
+    %% ArgoCD Pull Model CRDs (ArgoCD & OCM)
+    ARGOCD_APPLICATION_CRD[Application CRD]
+    ARGOCD_APPLICATIONSET_CRD[ApplicationSet CRD]
+    MANIFESTWORK_CRD[ManifestWork CRD]
+    MANAGEDCLUSTER_CRD[ManagedCluster CRD]
+    
+    %% Backend Services
+    APPLIFECYCLE_BACKEND_E2E[applifecycle-backend-e2e]
+    
+    %% Webhooks & Validation
+    APP_WEBHOOKS[Application Webhooks]
+    SUBSCRIPTION_WEBHOOKS[Subscription Webhooks]
+    
+    %% Foundation Layer
+    OCM_API -->|PROVIDES_API| OCM
+    
+    %% Model 1: Subscription Model Flow (Connected to OCM)
+    OCM -->|ENABLES| MULTICLOUD_OPS_SUBSCRIPTION
+    OCM -->|ENABLES| MULTICLOUD_OPS_CHANNEL
+    
+    %% Channel Types Integration
+    MULTICLOUD_OPS_CHANNEL -->|PROVIDES_CHANNELS| GIT_CHANNEL
+    MULTICLOUD_OPS_CHANNEL -->|PROVIDES_CHANNELS| HELM_CHANNEL
+    MULTICLOUD_OPS_CHANNEL -->|PROVIDES_CHANNELS| OBJECTSTORAGE_CHANNEL
+    
+    %% Subscription Flow
+    GIT_CHANNEL -->|FEEDS_CONTENT| MULTICLOUD_OPS_SUBSCRIPTION
+    HELM_CHANNEL -->|FEEDS_CONTENT| MULTICLOUD_OPS_SUBSCRIPTION
+    OBJECTSTORAGE_CHANNEL -->|FEEDS_CONTENT| MULTICLOUD_OPS_SUBSCRIPTION
+    MULTICLOUD_OPS_SUBSCRIPTION -->|DEPLOYS_VIA| APPLICATION_MANAGER
+    
+    %% Hub to Spoke - Subscription Model (remove duplicate)
+    
+    %% Model 2: ArgoCD Push Model Flow (Connected to ALC - Real Controllers & CRDs)
+    OCM -->|ENABLES| MULTICLOUD_INTEGRATIONS
+    MULTICLOUD_INTEGRATIONS -->|CONTAINS| GITOPS_CLUSTER_CTRL
+    MULTICLOUD_INTEGRATIONS -->|CONTAINS| GITOPS_SYNC_RESOURCE_CTRL
+    MULTICLOUD_INTEGRATIONS -->|CONTAINS| STATUS_AGGREGATION_CTRL
+    MULTICLOUD_INTEGRATIONS -->|CONTAINS| PROPAGATION_CTRL
+    MULTICLOUD_INTEGRATIONS -->|CONTAINS| GITOPS_ADDON_CTRL
+    
+    %% ArgoCD Push Model CRD Relationships
+    GITOPS_CLUSTER_CTRL -->|RECONCILES| GITOPS_CLUSTER_CRD
+    STATUS_AGGREGATION_CTRL -->|CREATES| MULTICLUSTER_APPSET_REPORT_CRD
+    GITOPS_ADDON_CTRL -->|USES| CLUSTER_PERMISSION_CRD
+    GITOPS_CLUSTER_CRD -->|IMPORTS_CLUSTERS_TO| GITOPS_OPERATOR
+    GITOPS_ADDON_CTRL -->|MANAGES| GITOPS_OPERATOR
+    PROPAGATION_CTRL -.->|DEPLOYS_VIA| GITOPS_OPERATOR
+    STATUS_AGGREGATION_CTRL -.->|COLLECTS_FROM| GITOPS_OPERATOR
+    
+    %% Model 3: ArgoCD Pull Model Flow (Connected to ALC - Real Controllers & CRDs)
+    OCM -->|ENABLES| ARGOCD_PULL_INTEGRATION
+    ARGOCD_PULL_INTEGRATION -->|CONTAINS| APPLICATION_CTRL
+    ARGOCD_PULL_INTEGRATION -->|CONTAINS| APPLICATION_STATUS_CTRL
+    ARGOCD_PULL_INTEGRATION -->|CONTAINS| CLUSTER_CTRL
+    
+    %% ArgoCD Pull Model CRD Relationships
+    APPLICATION_CTRL -->|WATCHES| ARGOCD_APPLICATION_CRD
+    APPLICATION_CTRL -->|CREATES| MANIFESTWORK_CRD
+    APPLICATION_STATUS_CTRL -->|SYNCS_STATUS_TO| ARGOCD_APPLICATION_CRD
+    CLUSTER_CTRL -->|MANAGES| MANAGEDCLUSTER_CRD
+    GITOPS_SYNC_RESOURCE_CTRL -->|PROCESSES| ARGOCD_APPLICATIONSET_CRD
+    MANIFESTWORK_CRD -.->|DISTRIBUTES| ARGOCD_APPLICATION_CRD
+    
+    %% CRITICAL: Pull Model Connection to GitOps Operator
+    ARGOCD_APPLICATION_CRD -.->|DEPLOYED_BY| GITOPS_OPERATOR
+    
+    %% UNIFIED ARGOCD OPERATOR ARCHITECTURE:
+    %% GitOps Operator serves BOTH models:
+    %% - Push Model: Hub GitOps Operator receives applications from hub controllers
+    %% - Pull Model: Managed cluster GitOps Operators receive applications via ManifestWork
+    %% This creates a unified ArgoCD-based deployment architecture across both models
+    
+    %% Webhook Integration
+    MULTICLOUD_OPS_SUBSCRIPTION -->|VALIDATES_VIA| SUBSCRIPTION_WEBHOOKS
+    APPLICATION_MANAGER -->|VALIDATES_VIA| APP_WEBHOOKS
+    
+    %% Backend Integration  
+    APPLIFECYCLE_BACKEND_E2E -->|INTEGRATES_WITH| MULTICLOUD_INTEGRATIONS
+    
+    %% Styling
+    classDef foundation fill:#e3f2fd
+    classDef subscription fill:#f1f8e9
+    classDef channels fill:#fff8e1
+    classDef argocd_push fill:#fce4ec
+    classDef argocd_pull fill:#f3e5f5
+    classDef backend fill:#e8eaf6
+    classDef webhooks fill:#e0f2f1
+    classDef spoke fill:#fff3e0
+    
+    class OCM_API,OCM foundation
+    class MULTICLOUD_OPS_SUBSCRIPTION,MULTICLOUD_OPS_CHANNEL,APPLICATION_MANAGER subscription
+    class GIT_CHANNEL,HELM_CHANNEL,OBJECTSTORAGE_CHANNEL channels
+    %% Styling with CRDs
+    classDef crd fill:#e8f5e8
+    
+    class MULTICLOUD_INTEGRATIONS,GITOPS_CLUSTER_CTRL,GITOPS_SYNC_RESOURCE_CTRL,STATUS_AGGREGATION_CTRL,PROPAGATION_CTRL,GITOPS_ADDON_CTRL,GITOPS_OPERATOR argocd_push
+    class ARGOCD_PULL_INTEGRATION,APPLICATION_CTRL,APPLICATION_STATUS_CTRL,CLUSTER_CTRL argocd_pull
+    class APPLIFECYCLE_BACKEND_E2E backend
+    class APP_WEBHOOKS,SUBSCRIPTION_WEBHOOKS webhooks
+    class GITOPS_CLUSTER_CRD,MULTICLUSTER_APPSET_REPORT_CRD,CLUSTER_PERMISSION_CRD,ARGOCD_APPLICATION_CRD,ARGOCD_APPLICATIONSET_CRD,MANIFESTWORK_CRD,MANAGEDCLUSTER_CRD crd

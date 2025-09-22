@@ -1,0 +1,123 @@
+graph TB
+    %% RHACM Observability - Enhanced Internal Architecture
+    
+    %% Observability Hub Components (Real)
+    MCO_OPERATOR[multicluster-observability-operator]
+    OBSERVATORIUM_OP[observatorium-operator]
+    OBSERVATORIUM[observatorium]
+    
+    %% Multicluster Observability Operator Internal Components
+    OBSERVABILITY_CONTROLLER[Observability Controller]
+    METRICS_COLLECTION_MANAGER[Metrics Collection Manager]
+    ADDON_DEPLOYMENT_CONTROLLER[Addon Deployment Controller]
+    CONFIGURATION_RECONCILER[Configuration Reconciler]
+    
+    %% Observatorium Operator Internal Components
+    OBSERVATORIUM_DEPLOYMENT_CTRL[Observatorium Deployment Controller]
+    THANOS_INTEGRATION_MANAGER[Thanos Integration Manager]
+    STORAGE_CONFIGURATION_CTRL[Storage Configuration Controller]
+    
+    %% Observatorium Internal Components
+    QUERY_GATEWAY[Query Gateway]
+    RULER_ENGINE[Ruler Engine]
+    COMPACTOR_SERVICE[Compactor Service]
+    STORE_GATEWAY[Store Gateway]
+    
+    %% Prometheus Stack (Real Components)
+    PROMETHEUS[prometheus]
+    PROMETHEUS_OP[prometheus-operator]
+    PROMETHEUS_ALERTMANAGER[prometheus-alertmanager]
+    
+    %% Thanos Stack (Real Components)
+    THANOS[thanos]
+    KUBE_THANOS[kube-thanos]
+    
+    %% Thanos/Grafana Internal Components
+    METRICS_STORAGE[Metrics Storage]
+    QUERY_ENGINE[Query Engine]
+    DASHBOARD_CONTROLLER[Dashboard Controller]
+    ALERT_MANAGER_INTEGRATION[Alert Manager Integration]
+    
+    %% Grafana (Real Component)
+    GRAFANA[grafana]
+    
+    %% Metrics Collection (Real Components)
+    NODE_EXPORTER[node-exporter]
+    KUBE_STATE_METRICS[kube-state-metrics]
+    KUBE_RBAC_PROXY[kube-rbac-proxy]
+    
+    %% Multicluster Observability Operator Internal Architecture
+    MCO_OPERATOR -->|CONTAINS| OBSERVABILITY_CONTROLLER
+    MCO_OPERATOR -->|CONTAINS| METRICS_COLLECTION_MANAGER
+    MCO_OPERATOR -->|CONTAINS| ADDON_DEPLOYMENT_CONTROLLER
+    MCO_OPERATOR -->|CONTAINS| CONFIGURATION_RECONCILER
+    
+    %% Hub Observability Management
+    MCO_OPERATOR -->|ORCHESTRATES| OBSERVATORIUM_OP
+    MCO_OPERATOR -->|ORCHESTRATES| PROMETHEUS_OP
+    
+    %% Observatorium Operator Internal Architecture
+    OBSERVATORIUM_OP -->|CONTAINS| OBSERVATORIUM_DEPLOYMENT_CTRL
+    OBSERVATORIUM_OP -->|CONTAINS| THANOS_INTEGRATION_MANAGER
+    OBSERVATORIUM_OP -->|CONTAINS| STORAGE_CONFIGURATION_CTRL
+    
+    %% Observatorium Internal Architecture
+    OBSERVATORIUM_OP -->|DEPLOYS| OBSERVATORIUM
+    OBSERVATORIUM -->|CONTAINS| QUERY_GATEWAY
+    OBSERVATORIUM -->|CONTAINS| RULER_ENGINE
+    OBSERVATORIUM -->|CONTAINS| COMPACTOR_SERVICE
+    OBSERVATORIUM -->|CONTAINS| STORE_GATEWAY
+    
+    %% Prometheus Stack Deployment
+    PROMETHEUS_OP -->|DEPLOYS| PROMETHEUS
+    PROMETHEUS_OP -->|DEPLOYS| PROMETHEUS_ALERTMANAGER
+    
+    %% Thanos/Grafana Internal Architecture
+    THANOS -->|CONTAINS| METRICS_STORAGE
+    THANOS -->|CONTAINS| QUERY_ENGINE
+    GRAFANA -->|CONTAINS| DASHBOARD_CONTROLLER
+    GRAFANA -->|CONTAINS| ALERT_MANAGER_INTEGRATION
+    
+    %% Thanos Integration with Observatorium
+    OBSERVATORIUM -->|AGGREGATES_VIA| THANOS
+    KUBE_THANOS -->|PROVIDES_STORAGE| THANOS
+    KUBE_THANOS -->|SIDECARS_WITH| PROMETHEUS
+    
+    %% Grafana Visualization
+    PROMETHEUS -->|FEEDS_METRICS| GRAFANA
+    THANOS -->|PROVIDES_LONGTERM_DATA| GRAFANA
+    
+    %% Metrics Collection Infrastructure
+    PROMETHEUS -->|SCRAPES_METRICS| NODE_EXPORTER
+    PROMETHEUS -->|SCRAPES_METRICS| KUBE_STATE_METRICS
+    PROMETHEUS -->|PROXIES_VIA| KUBE_RBAC_PROXY
+    
+    %% Alert Management
+    PROMETHEUS -->|TRIGGERS_ALERTS| PROMETHEUS_ALERTMANAGER
+    
+    %% Internal Data Flow
+    METRICS_COLLECTION_MANAGER -->|CONFIGURES| PROMETHEUS
+    QUERY_GATEWAY -->|QUERIES| QUERY_ENGINE
+    RULER_ENGINE -->|TRIGGERS| ALERT_MANAGER_INTEGRATION
+    COMPACTOR_SERVICE -->|COMPACTS| METRICS_STORAGE
+    
+    %% Styling
+    classDef operator fill:#e3f2fd
+    classDef hub_infra fill:#f1f8e9
+    classDef storage fill:#fff8e1
+    classDef visualization fill:#fce4ec
+    classDef spoke fill:#e8eaf6
+    classDef collection fill:#f3e5f5
+    classDef thanos fill:#e0f2f1
+    classDef alerts fill:#fff3e0
+    classDef internal fill:#e8f5e8
+    
+    class MCO_OPERATOR,OBSERVATORIUM_OP,PROMETHEUS_OP operator
+    class OBSERVABILITY_CONTROLLER,METRICS_COLLECTION_MANAGER,ADDON_DEPLOYMENT_CONTROLLER,CONFIGURATION_RECONCILER internal
+    class OBSERVATORIUM_DEPLOYMENT_CTRL,THANOS_INTEGRATION_MANAGER,STORAGE_CONFIGURATION_CTRL internal
+    class QUERY_GATEWAY,RULER_ENGINE,COMPACTOR_SERVICE,STORE_GATEWAY internal
+    class PROMETHEUS,OBSERVATORIUM,PROMETHEUS_ALERTMANAGER hub_infra
+    class METRICS_STORAGE,THANOS,KUBE_THANOS storage
+    class GRAFANA,DASHBOARD_CONTROLLER,ALERT_MANAGER_INTEGRATION visualization
+    class NODE_EXPORTER,KUBE_STATE_METRICS,KUBE_RBAC_PROXY collection
+    class QUERY_ENGINE thanos
