@@ -52,6 +52,7 @@ ORDER BY ComponentCount DESC;
 ├── rhacm_architecture_implementation_guide.md          # 📖 Step-by-step implementation
 ├── rhacm_architecture_research_methodology.md          # 🔬 Research-based discovery approach
 ├── rhacm_architecture_comprehensive_reference.md       # 📚 Complete unformatted reference
+├── mcp_sample_questions.md                             # 🤖 MCP server sample questions
 └── mermaid_to_cypher.py                                # 🔧 Conversion tool
 ```
 
@@ -65,6 +66,7 @@ ORDER BY ComponentCount DESC;
 - **`rhacm_architecture_implementation_guide.md`** - Ready-to-use Mermaid code with step-by-step instructions
 - **`rhacm_architecture_research_methodology.md`** - Alternative discovery approach via systematic repository analysis
 - **`rhacm_architecture_comprehensive_reference.md`** - Complete chronological reference
+- **`mcp_sample_questions.md`** - Sample questions for MCP server integration with Claude
 
 ### Development Tools
 - **`mermaid_to_cypher.py`** - Python tool for converting Mermaid diagrams to Neo4j Cypher
@@ -194,6 +196,16 @@ This architecture graph is based on systematic analysis of official RHACM reposi
 ## 📄 License
 
 This project documents the architecture of Red Hat Advanced Cluster Management, which is Red Hat's commercial product. The dependency graph and documentation are provided for architectural analysis and educational purposes.
+
+## 🤖 MCP Server Integration
+
+This knowledge graph is designed for use with Claude via MCP (Model Context Protocol) servers. The `mcp_sample_questions.md` file contains comprehensive sample questions to showcase the graph capabilities:
+
+- **Architecture Discovery**: Component relationships and dependencies
+- **Integration Analysis**: Cross-subsystem communication patterns  
+- **Troubleshooting**: Impact analysis and failure scenarios
+- **Enterprise Features**: Global Hub, Submariner, backup/recovery
+- **Operational Insights**: Performance, security, and scalability analysis
 
 ## 🔍 Related Projects
 
