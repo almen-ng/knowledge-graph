@@ -1723,13 +1723,13 @@ grep -c "MATCH.*CREATE.*-\[" rhacm_architecture_enhanced.cypher      # Expected:
 
 ### Step 3: Console Architecture Enhancement
 
-**Objective**: Add missing console components identified through threat model analysis while avoiding duplicates.
+**Objective**: Add missing console components identified through repository analysis while avoiding duplicates.
 
 **Required Resource**: 
-- **diagrams/rhacm_console_threat_model.png**: Console threat model diagram that shows security boundaries, data flows, and trust boundaries within the RHACM console architecture. This image should be analyzed to identify missing console components from a security perspective.
+- Console repository analysis to understand internal architecture and component structure
 
 **Critical Process**:
-1. **Analyze diagrams/rhacm_console_threat_model.png threat model** to identify missing components from security architecture perspective
+1. **Analyze console repository structure** to identify missing components from architecture perspective
 2. **Add new unique components**: Plugin architecture, external integrations
 3. **AVOID DUPLICATES**: Reuse existing components from other subsystems instead of creating new ones
 4. **Add cross-subsystem relationships**: Connect console to existing AWX, CLI, and Insights components

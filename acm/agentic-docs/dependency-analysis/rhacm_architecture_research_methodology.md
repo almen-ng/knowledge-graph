@@ -424,7 +424,7 @@ search-v2-api contains:
 └── RBAC Integration (security)
 ```
 
-**Console Integration (Repository analysis + diagrams/rhacm_console_threat_model.png threat model)**
+**Console Integration (Repository analysis)**
 ```bash
 https://github.com/stolostron/console
 https://github.com/stolostron/console-api
