@@ -39,7 +39,7 @@ graph TB
     BACKUP_RESTORE[Backup & Disaster Recovery]
     
     %% Enhanced Foundation Controllers
-    FOUNDATION[multicloud-operators-foundation]
+    FOUNDATION[multicloud-operators-foundation (Foundation)]
     REGISTRATION[Cluster Registration]
     WORK[Work Management]
     ADDON[Addon Framework]
@@ -119,6 +119,31 @@ graph TB
     K8S --> OCP
     OCP --> HUB
     OCP --> SPOKE
+    
+    %% === KUBERNETES CORE COMPONENT CONNECTIONS ===
+    %% Kubernetes API Server connects to foundational RHACM components
+    K8S --> FOUNDATION
+    K8S --> REGISTRATION
+    K8S --> WORK_FRAMEWORK
+    K8S --> ADDON_FRAMEWORK
+    K8S --> MCE
+    K8S --> CLUSTER_MANAGER
+    K8S --> REGISTRATION_OPERATOR
+    K8S --> PLACEMENT
+    K8S --> CONSOLE_API
+    K8S --> SEARCH_V2_API
+    
+    %% etcd stores state for hub-centric RHACM components
+    ETCD --> MCE
+    ETCD --> FOUNDATION
+    ETCD --> REGISTRATION
+    ETCD --> CLUSTER_MANAGER
+    ETCD --> GLOBAL_HUB_MANAGER
+    ETCD --> GLOBAL_HUB_OPERATOR
+    ETCD --> WORK_FRAMEWORK
+    ETCD --> ADDON_FRAMEWORK
+    ETCD --> PLACEMENT
+    ETCD --> GOV_POLICY_PROP
     
     %% Central ACM System Architecture - Hierarchical Structure
     HUB --> ACM

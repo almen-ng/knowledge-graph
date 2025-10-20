@@ -1,38 +1,88 @@
 graph TB
-    %% RHACM Observability - Enhanced Internal Architecture
+    %% RHACM Observability - Enhanced Architecture Based on Real Diagrams
     
-    %% Observability Hub Components (Real)
-    MCO_OPERATOR[multicluster-observability-operator]
+    %% Hub Observability Infrastructure (Core Components)
+    MCO_OPERATOR[MultiCluster Observability Operator]
+    MCO_RES[MCO res]
+    MCO_CONTROLLER[mco controller]
     OBSERVATORIUM_OP[observatorium-operator]
+    OBSERVATORIUM_API[Observatorium API]
     OBSERVATORIUM[observatorium]
+    OBSERVATORIUM_API_GATEWAY[Observatorium API Gateway]
     
-    %% Multicluster Observability Operator Internal Components
-    OBSERVABILITY_CONTROLLER[Observability Controller]
-    METRICS_COLLECTION_MANAGER[Metrics Collection Manager]
-    ADDON_DEPLOYMENT_CONTROLLER[Addon Deployment Controller]
-    CONFIGURATION_RECONCILER[Configuration Reconciler]
+    %% Placement and Global Work Components
+    PLACEMENT_CONTROLLER[Placement Controller]
+    GLOBAL_WORK_RES[global work res]
     
-    %% Observatorium Operator Internal Components
-    OBSERVATORIUM_DEPLOYMENT_CTRL[Observatorium Deployment Controller]
-    THANOS_INTEGRATION_MANAGER[Thanos Integration Manager]
-    STORAGE_CONFIGURATION_CTRL[Storage Configuration Controller]
+    %% Hub Observability Addon Management
+    OBSERVABILITY_ADDON_HUB[observability addon res(hub)]
+    MANIFESTWORK_RES_CLUSTER_NS[manifestwork res (in cluster ns)]
+    MANIFESTWORK_RES_REPLICATED[manifestwork res (replicated)]
     
-    %% Observatorium Internal Components
-    QUERY_GATEWAY[Query Gateway]
-    RULER_ENGINE[Ruler Engine]
-    COMPACTOR_SERVICE[Compactor Service]
-    STORE_GATEWAY[Store Gateway]
+    %% Hub Endpoint and Metrics Infrastructure
+    HUB_ENDPOINT_OPERATOR[Hub endpoint operator]
+    HUB_METRICS_COLLECTOR[Hub metrics-collector]
+    METRICS_COLLECTOR_SEPARATE[Metrics-Collector]
+    ENDPOINT_METRICS_OPERATOR[Endpoint Metrics operator]
+    
+    %% Thanos Stack Components (Enhanced from diagrams)
+    THANOS[Thanos]
+    THANOS_RECEIVE[Thanos Receive]
+    THANOS_QUERY[Thanos Query]
+    THANOS_STORE_GATEWAY[Thanos Store Gateway]
+    THANOS_COMPACTOR[Thanos Compactor]
+    THANOS_RULER[Thanos Ruler]
+    OBJECT_STORAGE[Object Storage]
+    
+    %% RBAC and Security
+    RBAC_QUERY_PROXY[RBAC Query Proxy]
+    
+    %% Managed Cluster Components (from diagrams)
+    MANAGED_CLUSTER_ADDON[managed cluster addon res]
+    WORK_AGENT[work agent]
+    ENDPOINT_OPERATOR[endpoint operator]
+    OBSERVABILITY_ADDON_MANAGED[observability addon res(managed)]
+    METRICS_COLLECTOR_MANAGED[metrics collector]
+    UWL_METRICS_COLLECTOR[uwl metrics collector]
+    PROMETHEUS_MANAGED[prometheus]
+    UWL_PROMETHEUS[uwl prometheus]
+    PROMETHEUS_OPERATOR_MANAGED[prometheus operator]
+    PROMETHEUS_STACK_KS[prometheus stack(*KS only)]
+    
+    %% Configuration and Monitoring
+    CLUSTER_MONITORING_CONFIG[cluster monitoring config (configmap)]
+    CMO_OPERATOR[cmo operator]
+    
+    %% External Integration Components
+    EXTERNAL_METRICS_ENDPOINT[external metrics endpoint (optional)]
+    EXTERNAL_METRICS_ENDPOINT_VICTORIAMETRICS[external metrics endpoint (e.g., victoriametrics)]
+    VICTORIA_METRICS[Victoria Metrics]
+    KAFKA[Kafka]
+    
+    %% Route and API Components (from architecture diagram)
+    OCP_ROUTE[OCP Route (General)]
+    OCP_ROUTE_CONFIG[OCP Route (Config)]
+    API_SERVER[API Server]
+    REGISTER[Register]
+    GET_CHANGES[Get Changes]
+    
+    %% Alert Management (Enhanced from diagrams)
+    HUB_ALERTMANAGER[hub alertmanager]
+    ALERT_MANAGER[AlertManager]
+    ALERTMANAGER_UWL_PROMETHEUS[alertmanager/uwl prometheus]
     
     %% Prometheus Stack (Real Components)
     PROMETHEUS[prometheus]
     PROMETHEUS_OP[prometheus-operator]
     PROMETHEUS_ALERTMANAGER[prometheus-alertmanager]
     
-    %% Thanos Stack (Real Components)
-    THANOS[thanos]
+    %% Managed Cluster Metrics Collection (from diagrams)
+    EXPORTERS[Exporters]
+    
+    %% Additional Thanos Components
     KUBE_THANOS[kube-thanos]
     
-    %% Thanos/Grafana Internal Components
+    %% Thanos/Grafana Internal Components  
     METRICS_STORAGE[Metrics Storage]
     QUERY_ENGINE[Query Engine]
     DASHBOARD_CONTROLLER[Dashboard Controller]
@@ -46,78 +96,203 @@ graph TB
     KUBE_STATE_METRICS[kube-state-metrics]
     KUBE_RBAC_PROXY[kube-rbac-proxy]
     
-    %% Multicluster Observability Operator Internal Architecture
-    MCO_OPERATOR -->|CONTAINS| OBSERVABILITY_CONTROLLER
-    MCO_OPERATOR -->|CONTAINS| METRICS_COLLECTION_MANAGER
-    MCO_OPERATOR -->|CONTAINS| ADDON_DEPLOYMENT_CONTROLLER
-    MCO_OPERATOR -->|CONTAINS| CONFIGURATION_RECONCILER
+    %% === HUB BOOTSTRAP SEQUENCE (from diagrams) ===
     
-    %% Hub Observability Management
-    MCO_OPERATOR -->|ORCHESTRATES| OBSERVATORIUM_OP
-    MCO_OPERATOR -->|ORCHESTRATES| PROMETHEUS_OP
+    %% Bootstrap Flow (Hub) - Exact sequence from diagram
+    MCO_OPERATOR -->|create| MCO_RES
+    MCO_RES -->|watches| MCO_CONTROLLER
+    MCO_CONTROLLER -->|create| OBSERVATORIUM_OP
+    MCO_CONTROLLER -->|create| OBSERVATORIUM_API
+    MCO_CONTROLLER -->|create| THANOS
+    MCO_CONTROLLER -->|start| PLACEMENT_CONTROLLER
     
-    %% Observatorium Operator Internal Architecture
-    OBSERVATORIUM_OP -->|CONTAINS| OBSERVATORIUM_DEPLOYMENT_CTRL
-    OBSERVATORIUM_OP -->|CONTAINS| THANOS_INTEGRATION_MANAGER
-    OBSERVATORIUM_OP -->|CONTAINS| STORAGE_CONFIGURATION_CTRL
+    %% Placement and Addon Deployment
+    PLACEMENT_CONTROLLER -->|reconcile| GLOBAL_WORK_RES
+    PLACEMENT_CONTROLLER -->|create_for_managed_clusters| OBSERVABILITY_ADDON_HUB
+    PLACEMENT_CONTROLLER -->|create| MANIFESTWORK_RES_CLUSTER_NS
+    PLACEMENT_CONTROLLER -->|create| HUB_ENDPOINT_OPERATOR
+    PLACEMENT_CONTROLLER -->|create| HUB_METRICS_COLLECTOR
     
-    %% Observatorium Internal Architecture
-    OBSERVATORIUM_OP -->|DEPLOYS| OBSERVATORIUM
-    OBSERVATORIUM -->|CONTAINS| QUERY_GATEWAY
-    OBSERVATORIUM -->|CONTAINS| RULER_ENGINE
-    OBSERVATORIUM -->|CONTAINS| COMPACTOR_SERVICE
-    OBSERVATORIUM -->|CONTAINS| STORE_GATEWAY
+    %% Hub Infrastructure Setup
+    HUB_ENDPOINT_OPERATOR -->|watches| HUB_METRICS_COLLECTOR
     
-    %% Prometheus Stack Deployment
-    PROMETHEUS_OP -->|DEPLOYS| PROMETHEUS
-    PROMETHEUS_OP -->|DEPLOYS| PROMETHEUS_ALERTMANAGER
+    %% === MANAGED CLUSTER BOOTSTRAP SEQUENCE ===
     
-    %% Thanos/Grafana Internal Architecture
-    THANOS -->|CONTAINS| METRICS_STORAGE
-    THANOS -->|CONTAINS| QUERY_ENGINE
-    GRAFANA -->|CONTAINS| DASHBOARD_CONTROLLER
-    GRAFANA -->|CONTAINS| ALERT_MANAGER_INTEGRATION
+    %% Managed Cluster Bootstrap Flow - Exact sequence from diagram
+    MANIFESTWORK_RES_REPLICATED -->|watches| WORK_AGENT
+    WORK_AGENT -->|creates| ENDPOINT_OPERATOR
+    ENDPOINT_OPERATOR -->|creates| OBSERVABILITY_ADDON_MANAGED
+    OBSERVABILITY_ADDON_MANAGED -->|creates| METRICS_COLLECTOR_MANAGED
+    OBSERVABILITY_ADDON_MANAGED -->|creates| UWL_METRICS_COLLECTOR
+    METRICS_COLLECTOR_MANAGED -->|creates| PROMETHEUS_MANAGED
+    UWL_METRICS_COLLECTOR -->|creates| UWL_PROMETHEUS
+    PROMETHEUS_MANAGED -->|creates_for_KS_only| PROMETHEUS_OPERATOR_MANAGED
+    UWL_PROMETHEUS -->|creates_for_KS_only| PROMETHEUS_STACK_KS
     
-    %% Thanos Integration with Observatorium
-    OBSERVATORIUM -->|AGGREGATES_VIA| THANOS
-    KUBE_THANOS -->|PROVIDES_STORAGE| THANOS
-    KUBE_THANOS -->|SIDECARS_WITH| PROMETHEUS
+    %% === OBSERVATORIUM AND THANOS ARCHITECTURE ===
     
-    %% Grafana Visualization
-    PROMETHEUS -->|FEEDS_METRICS| GRAFANA
-    THANOS -->|PROVIDES_LONGTERM_DATA| GRAFANA
+    %% Observatorium Internal Components
+    OBSERVATORIUM_OP -->|deploys| OBSERVATORIUM
+    OBSERVATORIUM_API -->|contains| OBSERVATORIUM_API_GATEWAY
+    OBSERVATORIUM -->|contains| RBAC_QUERY_PROXY
+    OBSERVATORIUM_API -->|integrates_with| THANOS
     
-    %% Metrics Collection Infrastructure
-    PROMETHEUS -->|SCRAPES_METRICS| NODE_EXPORTER
-    PROMETHEUS -->|SCRAPES_METRICS| KUBE_STATE_METRICS
-    PROMETHEUS -->|PROXIES_VIA| KUBE_RBAC_PROXY
+    %% Thanos Components and Data Flow
+    THANOS -->|contains| THANOS_RECEIVE
+    THANOS -->|contains| THANOS_QUERY
+    THANOS -->|contains| THANOS_STORE_GATEWAY
+    THANOS -->|contains| THANOS_COMPACTOR
+    THANOS -->|contains| THANOS_RULER
     
-    %% Alert Management
-    PROMETHEUS -->|TRIGGERS_ALERTS| PROMETHEUS_ALERTMANAGER
+    %% Thanos Storage and Long-term Persistence
+    THANOS_RECEIVE -->|stores_to| OBJECT_STORAGE
+    THANOS_STORE_GATEWAY -->|reads_from| OBJECT_STORAGE
+    THANOS_COMPACTOR -->|compacts_data_in| OBJECT_STORAGE
+    THANOS_QUERY -->|queries| THANOS_STORE_GATEWAY
+    THANOS_QUERY -->|queries| THANOS_RECEIVE
     
-    %% Internal Data Flow
-    METRICS_COLLECTION_MANAGER -->|CONFIGURES| PROMETHEUS
-    QUERY_GATEWAY -->|QUERIES| QUERY_ENGINE
-    RULER_ENGINE -->|TRIGGERS| ALERT_MANAGER_INTEGRATION
-    COMPACTOR_SERVICE -->|COMPACTS| METRICS_STORAGE
+    %% === METRICS COLLECTION AND ALERT FORWARDING ===
     
-    %% Styling
-    classDef operator fill:#e3f2fd
+    %% Metrics Collection Flow (exact from architecture diagram)
+    EXPORTERS -->|scrape_metrics| PROMETHEUS
+    PROMETHEUS -->|feeds| METRICS_COLLECTOR_SEPARATE
+    METRICS_COLLECTOR_SEPARATE -->|config| ENDPOINT_METRICS_OPERATOR
+    ENDPOINT_METRICS_OPERATOR -->|send_metrics_remote_write| OBSERVATORIUM_API_GATEWAY
+    OBSERVATORIUM_API_GATEWAY -->|forward_metrics| THANOS_RECEIVE
+    
+    %% Managed Cluster Collection Flow (from bootstrap diagram)
+    EXPORTERS -->|scrape_metrics| UWL_PROMETHEUS
+    EXPORTERS -->|scrape_metrics| PROMETHEUS_MANAGED
+    UWL_PROMETHEUS -->|scrapes_metrics| UWL_METRICS_COLLECTOR
+    PROMETHEUS_MANAGED -->|scrapes_metrics| METRICS_COLLECTOR_MANAGED
+    UWL_METRICS_COLLECTOR -->|send_metrics_remote_write| OBSERVATORIUM_API_GATEWAY
+    METRICS_COLLECTOR_MANAGED -->|send_metrics_remote_write| OBSERVATORIUM_API_GATEWAY
+    
+    %% External Metrics Integration (from diagrams)
+    EXTERNAL_METRICS_ENDPOINT -->|forward_metrics_if_configured| THANOS_RECEIVE
+    VICTORIA_METRICS -->|export_metrics_to_3rd_party_tools| EXTERNAL_METRICS_ENDPOINT
+    THANOS_RECEIVE -->|forward_metrics_if_configured| EXTERNAL_METRICS_ENDPOINT
+    
+    %% Additional Export Path (from architecture diagram)
+    OBSERVATORIUM_API_GATEWAY -->|export_metrics_to_3rd_party_tools| VICTORIA_METRICS
+    OBSERVATORIUM_API_GATEWAY -->|export_metrics_to_3rd_party_tools| KAFKA
+    
+    %% Configuration Management
+    ENDPOINT_OPERATOR -->|inject_alertmanager_config| CLUSTER_MONITORING_CONFIG
+    CLUSTER_MONITORING_CONFIG -->|watches| UWL_PROMETHEUS
+    CLUSTER_MONITORING_CONFIG -->|watches| PROMETHEUS_MANAGED
+    UWL_PROMETHEUS -->|updates| CMO_OPERATOR
+    PROMETHEUS_MANAGED -->|updates| CMO_OPERATOR
+    CMO_OPERATOR -->|watches| UWL_PROMETHEUS
+    CMO_OPERATOR -->|watches| PROMETHEUS_MANAGED
+    
+    %% === ALERTING AND NOTIFICATION ===
+    
+    %% Alert Processing and Forwarding (from diagrams)
+    THANOS_RULER -->|forward_alerts| OBSERVATORIUM_API_GATEWAY
+    OBSERVATORIUM_API_GATEWAY -->|forward_alerts| HUB_ALERTMANAGER
+    HUB_ALERTMANAGER -->|forward_metrics_if_configured| EXTERNAL_METRICS_ENDPOINT
+    ALERT_MANAGER -->|sends_alerts_to| EXTERNAL_SYSTEMS[External Systems]
+    
+    %% Route and API Integration (from architecture diagram)
+    OBSERVATORIUM_API_GATEWAY -->|exposes_via| OCP_ROUTE
+    API_SERVER -->|register| REGISTER
+    API_SERVER -->|get_changes| GET_CHANGES
+    ENDPOINT_OPERATOR -->|configures| API_SERVER
+    
+    %% === STATUS PROPAGATION (from Status Propagation diagram) ===
+    
+    %% Status Flow
+    ENDPOINT_OPERATOR -->|update_status| OBSERVABILITY_ADDON_MANAGED
+    UWL_METRICS_COLLECTOR -->|update_status| OBSERVABILITY_ADDON_MANAGED
+    METRICS_COLLECTOR_MANAGED -->|update_status| OBSERVABILITY_ADDON_MANAGED
+    OBSERVABILITY_ADDON_MANAGED -->|update_status| OBSERVATORIUM_API_GATEWAY
+    OBSERVATORIUM_API_GATEWAY -->|updates| OBSERVABILITY_ADDON_HUB
+    PLACEMENT_CONTROLLER -->|watches| OBSERVABILITY_ADDON_HUB
+    
+    %% === VISUALIZATION AND QUERYING ===
+    
+    %% Grafana Integration for Insights/Dashboarding
+    GRAFANA -->|queries_via| RBAC_QUERY_PROXY
+    RBAC_QUERY_PROXY -->|proxies_to| OBSERVATORIUM_API_GATEWAY
+    OBSERVATORIUM_API_GATEWAY -->|queries| THANOS_QUERY
+    
+    %% Centralized Data for Long-term History
+    THANOS_QUERY -->|provides_long_term_data| GRAFANA
+    
+    %% Legacy Prometheus Integration
+    PROMETHEUS -->|feeds_metrics| GRAFANA
+    PROMETHEUS -->|scrapes_metrics| NODE_EXPORTER
+    PROMETHEUS -->|scrapes_metrics| KUBE_STATE_METRICS
+    PROMETHEUS -->|proxies_via| KUBE_RBAC_PROXY
+    
+    %% === CROSS-CLUSTER COMMUNICATION PATTERNS ===
+    
+    %% Hub-Spoke Data Collection (Cross-cluster)
+    UWL_METRICS_COLLECTOR -.->|feeds_raw_data| OBSERVATORIUM_API_GATEWAY
+    METRICS_COLLECTOR_MANAGED -.->|feeds_raw_data| OBSERVATORIUM_API_GATEWAY
+    OBSERVABILITY_ADDON_MANAGED -.->|status_updates| OBSERVABILITY_ADDON_HUB
+    
+    %% External Integration Points
+    KAFKA -->|data_export| EXTERNAL_SYSTEMS[External Systems]
+    
+    %% === ISOLATED COMPONENT CONNECTIONS ===
+    
+    %% Alert Manager Integration
+    ALERT_MANAGER -->|integrates_with| ALERT_MANAGER_INTEGRATION
+    ALERT_MANAGER_INTEGRATION -->|manages| HUB_ALERTMANAGER
+    
+    %% Observability Infrastructure Components
+    OBSERVABILITY_ADDON_MANAGED -->|deploys_to| MANAGED_CLUSTER_ADDON
+    MANAGED_CLUSTER_ADDON -->|contains| ENDPOINT_OPERATOR
+    
+    %% Prometheus AlertManager Components
+    UWL_PROMETHEUS -->|contains| ALERTMANAGER_UWL_PROMETHEUS
+    PROMETHEUS -->|contains| PROMETHEUS_ALERTMANAGER
+    
+    %% External Metrics Integration
+    VICTORIA_METRICS -->|provides| EXTERNAL_METRICS_ENDPOINT_VICTORIAMETRICS
+    EXTERNAL_METRICS_ENDPOINT_VICTORIAMETRICS -->|feeds_to| EXTERNAL_METRICS_ENDPOINT
+    
+    %% Route Configuration
+    OCP_ROUTE -->|configures_via| OCP_ROUTE_CONFIG
+    
+    %% Storage and Query Components
+    THANOS -->|contains| METRICS_STORAGE
+    THANOS -->|contains| QUERY_ENGINE
+    GRAFANA -->|uses| DASHBOARD_CONTROLLER
+    QUERY_ENGINE -->|provides_data_to| DASHBOARD_CONTROLLER
+    
+    %% === FOUNDATION INTEGRATION ===
+    
+    %% OCM Integration (from overview)
+    OCM[Open Cluster Management] -->|enables| MCO_OPERATOR
+    
+    %% === STYLING ===
+    classDef hub_operator fill:#e3f2fd
     classDef hub_infra fill:#f1f8e9
+    classDef thanos_stack fill:#e0f2f1
     classDef storage fill:#fff8e1
     classDef visualization fill:#fce4ec
-    classDef spoke fill:#e8eaf6
+    classDef managed_addon fill:#e8eaf6
     classDef collection fill:#f3e5f5
-    classDef thanos fill:#e0f2f1
     classDef alerts fill:#fff3e0
-    classDef internal fill:#e8f5e8
+    classDef external fill:#f5f5f5
+    classDef cross_cluster fill:#e1f5fe
+    classDef bootstrap fill:#f9fbe7
+    classDef status fill:#fce4ec
+    classDef security fill:#f3e5f5
     
-    class MCO_OPERATOR,OBSERVATORIUM_OP,PROMETHEUS_OP operator
-    class OBSERVABILITY_CONTROLLER,METRICS_COLLECTION_MANAGER,ADDON_DEPLOYMENT_CONTROLLER,CONFIGURATION_RECONCILER internal
-    class OBSERVATORIUM_DEPLOYMENT_CTRL,THANOS_INTEGRATION_MANAGER,STORAGE_CONFIGURATION_CTRL internal
-    class QUERY_GATEWAY,RULER_ENGINE,COMPACTOR_SERVICE,STORE_GATEWAY internal
-    class PROMETHEUS,OBSERVATORIUM,PROMETHEUS_ALERTMANAGER hub_infra
-    class METRICS_STORAGE,THANOS,KUBE_THANOS storage
-    class GRAFANA,DASHBOARD_CONTROLLER,ALERT_MANAGER_INTEGRATION visualization
-    class NODE_EXPORTER,KUBE_STATE_METRICS,KUBE_RBAC_PROXY collection
-    class QUERY_ENGINE thanos
+    class MCO_OPERATOR,OBSERVATORIUM_OP,MCO_CONTROLLER hub_operator
+    class OBSERVATORIUM,OBSERVATORIUM_API,OBSERVATORIUM_API_GATEWAY,HUB_ENDPOINT_OPERATOR,HUB_METRICS_COLLECTOR,ENDPOINT_METRICS_OPERATOR hub_infra
+    class THANOS,THANOS_RECEIVE,THANOS_QUERY,THANOS_STORE_GATEWAY,THANOS_COMPACTOR,THANOS_RULER thanos_stack
+    class OBJECT_STORAGE storage
+    class GRAFANA visualization
+    class MANAGED_CLUSTER_ADDON,OBSERVABILITY_ADDON_MANAGED,WORK_AGENT,ENDPOINT_OPERATOR managed_addon
+    class METRICS_COLLECTOR_MANAGED,UWL_METRICS_COLLECTOR,PROMETHEUS_MANAGED,UWL_PROMETHEUS,PROMETHEUS_OPERATOR_MANAGED,PROMETHEUS_STACK_KS,NODE_EXPORTER,KUBE_STATE_METRICS,EXPORTERS,METRICS_COLLECTOR_SEPARATE collection
+    class HUB_ALERTMANAGER,ALERT_MANAGER,PROMETHEUS_ALERTMANAGER,ALERTMANAGER_UWL_PROMETHEUS alerts
+    class EXTERNAL_METRICS_ENDPOINT,EXTERNAL_METRICS_ENDPOINT_VICTORIAMETRICS,VICTORIA_METRICS,KAFKA,EXTERNAL_SYSTEMS external
+    class PLACEMENT_CONTROLLER,GLOBAL_WORK_RES,OBSERVABILITY_ADDON_HUB,MANIFESTWORK_RES_CLUSTER_NS,MANIFESTWORK_RES_REPLICATED,MCO_RES bootstrap
+    class CLUSTER_MONITORING_CONFIG,CMO_OPERATOR,API_SERVER,REGISTER,GET_CHANGES status
+    class RBAC_QUERY_PROXY,KUBE_RBAC_PROXY security
+    class OCP_ROUTE,OCP_ROUTE_CONFIG,PROMETHEUS,PROMETHEUS_OP hub_infra

@@ -2,24 +2,62 @@
 
 ## Executive Summary
 
-This guide produces the most comprehensive Red Hat Advanced Cluster Management (RHACM) dependency graph available, containing **291 verified components** with **419 semantic relationships** across 7 major subsystems. The architecture provides complete internal visibility for advanced analysis, troubleshooting, and AI-powered insights.
+This guide produces the most comprehensive Red Hat Advanced Cluster Management (RHACM) dependency graph available, containing **288 verified components** with **414 semantic relationships** across 7 major subsystems, enhanced with Application Lifecycle deployment model classification. The architecture provides complete internal visibility for advanced analysis, troubleshooting, and AI-powered insights.
 
 ### Final Deliverables
 - **7 Enhanced Mermaid Files**: Complete subsystem architecture with verified internal components
 - **1 Python Conversion Tool**: Automated Mermaid-to-Neo4j conversion with semantic relationship support
-- **1 Production-Ready Neo4j Graph**: Import script with constraints, indexes, and verification queries
+- **1 Production-Ready Neo4j Graph**: Import script with constraints, indexes, and 50+ analytics queries including Application Lifecycle model analysis
 - **Complete Documentation**: Reproducible process for consistent results across engineering teams
 
 ### Architecture Scale & Scope
-- **291 Components**: 100% GitHub-verified, zero fictional, zero duplicates
-- **419 Relationships**: Semantic labels (CONTAINS, MANAGES, CONFIGURES, etc.)
+- **288 Components**: 100% GitHub-verified, zero fictional, zero duplicates, enhanced with deployment model properties
+- **414 Relationships**: Semantic labels (CONTAINS, MANAGES, CONFIGURES, etc.)
 - **7 Major Subsystems**: Overview, Governance, Application, Observability, Cluster, Search, Console
 - **Enterprise Features**: MCE foundation, Global Hub, Submariner, Backup/Recovery, CAPI, Red Hat Insights
 - **Cross-Platform Integration**: AWX Automation Platform, OpenShift GitOps, Gatekeeper
+- **Application Lifecycle Models**: Subscription Model, ArgoCD Push Model, ArgoCD Pull Model with deployment pattern classification
 
 ---
 
 ## Part I: Architecture Foundation & Requirements
+
+### Observability Architecture Enhancement Process
+
+The observability subsystem has been enhanced using detailed architectural diagrams to capture precise component relationships and operational flows. This section documents the enhancement methodology for reproducibility.
+
+#### Source Diagram Requirements
+The enhanced observability architecture is based on five detailed PNG diagrams that must be available:
+
+1. **`observability-components-architecture.png`** - Complete component overview and integration points
+2. **`observability-bootstrapping-hub.png`** - Hub cluster bootstrap sequence 
+3. **`observability-bootstrapping-managed.png`** - Managed cluster bootstrap sequence
+4. **`observability-metrics-collection-alert-forwarding.png`** - Detailed metrics and alert flows
+5. **`observability-status-propagation.png`** - Cross-cluster status synchronization
+
+#### Enhancement Principles
+
+**Principle 1: Component Separation**
+- Split all combined components shown as "component1/component2" into separate components
+- Example: "metrics collector/uwl metrics collector" → separate "metrics collector" + "uwl metrics collector"
+- Example: "prometheus/uwl prometheus" → separate "prometheus" + "uwl prometheus"
+
+**Principle 2: Exact Naming Convention**
+- Match component names exactly from PNG diagrams including casing and spacing
+- Example: "MultiCluster Observability Operator" (not "multicluster-observability-operator")
+- Preserve special formatting like "prometheus stack(*KS only)"
+
+**Principle 3: Bootstrap Sequence Accuracy**
+- Map exact component creation and dependency sequences from bootstrap diagrams
+- Hub sequence: MCO Operator → MCO res → mco controller → (observatorium-operator + observatorium API + thanos)
+- Managed sequence: manifestwork res (replicated) → work agent → endpoint operator → observability addon
+
+**Principle 4: Flow Relationship Precision**
+- Capture all data flow relationships shown in metrics collection diagrams
+- Include bidirectional flows: metrics collection (up) and status propagation (down)
+- Map external integration points: Victoria Metrics, Kafka, third-party tools
+
+---
 
 ### RHACM Architecture Principles
 
@@ -209,6 +247,7 @@ Before finalizing any architecture changes:
 ✅ **Enterprise Completeness**: MCE, Global Hub, Submariner, Backup, CAPI, Insights included
 ✅ **Cross-Subsystem Integration**: Proper component reuse patterns implemented
 ✅ **Foundation Layers**: OCM and multicloud-operators-foundation properly distinguished
+✅ **Neo4j Syntax Compatibility**: All relationship labels compatible with Neo4j syntax requirements
 
 Following these warnings and findings ensures consistent, accurate, and comprehensive RHACM architecture graphs.
 
@@ -524,7 +563,7 @@ graph TB
     CLUSTER_LIFECYCLE_API[cluster-lifecycle-api]
     
     %% Foundation Controllers (Must include for complete architecture)
-    FOUNDATION[multicloud-operators-foundation]
+    FOUNDATION[multicloud-operators-foundation (Foundation)]
     REGISTRATION[Cluster Registration]
     WORK[Work Management]
     ADDON[Addon Framework]
@@ -1124,51 +1163,158 @@ graph TB
     KLUSTERLET_ADDON_CTRL -->|INSTALLS| GOV_POLICY_FRAMEWORK_ADDON
 ```
 
-**Complete Implementation - Observability Subsystem (`mermaid/rhacm-observability.mmd`)**:
+**Complete Implementation - Enhanced Observability Subsystem (`mermaid/rhacm-observability.mmd`)**:
+
+This implementation is based on detailed architectural diagrams and includes complete bootstrap sequences, metrics collection flows, and status propagation patterns.
+
 ```mermaid
 graph TB
-    %% Core Observability Infrastructure (Real Components)
-    MCO_OPERATOR[multicluster-observability-operator]
+    %% ENHANCED OBSERVABILITY ARCHITECTURE - Based on Detailed Diagrams
+    
+    %% Hub Observability Infrastructure (Core Components)
+    MCO_OPERATOR[MultiCluster Observability Operator]
+    MCO_RES[MCO res]
+    MCO_CONTROLLER[mco controller]
     OBSERVATORIUM_OP[observatorium-operator]
+    OBSERVATORIUM_API[Observatorium API]
     OBSERVATORIUM[observatorium]
-    PROMETHEUS_OP[prometheus-operator]
+    OBSERVATORIUM_API_GATEWAY[Observatorium API Gateway]
+    
+    %% Placement and Global Work Components
+    PLACEMENT_CONTROLLER[Placement Controller]
+    GLOBAL_WORK_RES[global work res]
+    
+    %% Hub Observability Addon Management  
+    OBSERVABILITY_ADDON_HUB[observability addon res(hub)]
+    MANIFESTWORK_RES_CLUSTER_NS[manifestwork res (in cluster ns)]
+    MANIFESTWORK_RES_REPLICATED[manifestwork res (replicated)]
+    
+    %% Hub Endpoint and Metrics Infrastructure
+    HUB_ENDPOINT_OPERATOR[Hub endpoint operator]
+    HUB_METRICS_COLLECTOR[Hub metrics-collector]
+    METRICS_COLLECTOR_SEPARATE[Metrics-Collector]
+    ENDPOINT_METRICS_OPERATOR[Endpoint Metrics operator]
+    
+    %% Thanos Stack Components (Enhanced from diagrams)
+    THANOS[Thanos]
+    THANOS_RECEIVE[Thanos Receive]
+    THANOS_QUERY[Thanos Query]
+    THANOS_STORE_GATEWAY[Thanos Store Gateway]
+    THANOS_COMPACTOR[Thanos Compactor]
+    THANOS_RULER[Thanos Ruler]
+    OBJECT_STORAGE[Object Storage]
+    
+    %% RBAC and Security
+    RBAC_QUERY_PROXY[RBAC Query Proxy]
+    
+    %% Managed Cluster Components (from diagrams)
+    MANAGED_CLUSTER_ADDON[managed cluster addon res]
+    WORK_AGENT[work agent]
+    ENDPOINT_OPERATOR[endpoint operator]
+    OBSERVABILITY_ADDON_MANAGED[observability addon res(managed)]
+    METRICS_COLLECTOR_MANAGED[metrics collector]
+    UWL_METRICS_COLLECTOR[uwl metrics collector]
+    PROMETHEUS_MANAGED[prometheus]
+    UWL_PROMETHEUS[uwl prometheus]
+    PROMETHEUS_OPERATOR_MANAGED[prometheus operator]
+    PROMETHEUS_STACK_KS[prometheus stack(*KS only)]
+    
+    %% External Integration Components
+    EXTERNAL_METRICS_ENDPOINT[external metrics endpoint (optional)]
+    EXTERNAL_METRICS_ENDPOINT_VICTORIAMETRICS[external metrics endpoint (e.g., victoriametrics)]
+    VICTORIA_METRICS[Victoria Metrics]
+    KAFKA[Kafka]
+    
+    %% Route and API Components (from architecture diagram)
+    OCP_ROUTE[OCP Route (General)]
+    OCP_ROUTE_CONFIG[OCP Route (Config)]
+    API_SERVER[API Server]
+    REGISTER[Register]
+    GET_CHANGES[Get Changes]
+    
+    %% Alert Management (Enhanced from diagrams)
+    HUB_ALERTMANAGER[hub alertmanager]
+    ALERT_MANAGER[AlertManager]
+    ALERTMANAGER_UWL_PROMETHEUS[alertmanager/uwl prometheus]
+    
+    %% Grafana and Visualization
     GRAFANA[grafana]
-    THANOS[thanos]
-    KUBE_THANOS[kube-thanos]
-    PROMETHEUS_ALERTMANAGER[prometheus-alertmanager]
     
-    %% MCO Operator Internal Components (Detailed)
-    OBSERVABILITY_CONTROLLER[Observability Controller]
-    METRICS_COLLECTION_MANAGER[Metrics Collection Manager]
-    ADDON_DEPLOYMENT_CONTROLLER[Addon Deployment Controller]
-    CONFIGURATION_RECONCILER[Configuration Reconciler]
+    %% Hub Bootstrap Sequence (exact from diagrams)
+    MCO_OPERATOR -->|create| MCO_RES
+    MCO_RES -->|watches| MCO_CONTROLLER  
+    MCO_CONTROLLER -->|create| OBSERVATORIUM_OP
+    MCO_CONTROLLER -->|create| OBSERVATORIUM_API
+    MCO_CONTROLLER -->|create| THANOS
+    MCO_CONTROLLER -->|start| PLACEMENT_CONTROLLER
     
-    %% Observatorium Operator Internal Components (Detailed)
-    OBSERVATORIUM_DEPLOYMENT_CTRL[Observatorium Deployment Controller]
-    THANOS_INTEGRATION_MANAGER[Thanos Integration Manager]
-    STORAGE_CONFIGURATION_CTRL[Storage Configuration Controller]
+    %% Managed Cluster Bootstrap Sequence (exact from diagrams)
+    MANIFESTWORK_RES_REPLICATED -->|watches| WORK_AGENT
+    WORK_AGENT -->|creates| ENDPOINT_OPERATOR
+    ENDPOINT_OPERATOR -->|creates| OBSERVABILITY_ADDON_MANAGED
+    OBSERVABILITY_ADDON_MANAGED -->|creates| METRICS_COLLECTOR_MANAGED
+    OBSERVABILITY_ADDON_MANAGED -->|creates| UWL_METRICS_COLLECTOR
     
-    %% Observatorium Internal Components (Detailed)
-    QUERY_GATEWAY[Query Gateway]
-    RULER_ENGINE[Ruler Engine]
-    COMPACTOR_SERVICE[Compactor Service]
-    STORE_GATEWAY[Store Gateway]
+    %% Metrics Collection Flow (exact from architecture diagram)  
+    EXPORTERS -->|scrape metrics| PROMETHEUS_MANAGED
+    PROMETHEUS_MANAGED -->|feeds| METRICS_COLLECTOR_SEPARATE
+    METRICS_COLLECTOR_SEPARATE -->|config| ENDPOINT_METRICS_OPERATOR
+    ENDPOINT_METRICS_OPERATOR -->|send metrics (remote write API)| OBSERVATORIUM_API_GATEWAY
+    OBSERVATORIUM_API_GATEWAY -->|forward metrics| THANOS_RECEIVE
     
-    %% Thanos Internal Components (Detailed)
-    METRICS_STORAGE[Metrics Storage]
-    QUERY_ENGINE[Query Engine]
-    
-    %% Grafana Internal Components (Detailed)
-    DASHBOARD_CONTROLLER[Dashboard Controller]
-    ALERT_MANAGER_INTEGRATION[Alert Manager Integration]
-    
-    %% Metrics Collection Components (Real Components)
-    NODE_EXPORTER[node-exporter]
-    KUBE_STATE_METRICS[kube-state-metrics]
-    KUBE_RBAC_PROXY[kube-rbac-proxy]
-    
-    %% MCO Operator Internal Architecture
-    MCO_OPERATOR -->|CONTAINS| OBSERVABILITY_CONTROLLER
+    %% External Integration Points
+    OBSERVATORIUM_API_GATEWAY -->|export metrics to 3rd party tools| VICTORIA_METRICS
+    OBSERVATORIUM_API_GATEWAY -->|export metrics to 3rd party tools| KAFKA
+```
+
+**Enhanced Observability Implementation Notes:**
+
+This enhanced implementation demonstrates the diagram-based enhancement methodology:
+
+1. **Complete Component Separation**: All "component1/component2" entries from diagrams are split into separate components for precise modeling
+2. **Bootstrap Sequence Mapping**: Exact component creation flows from hub and managed cluster bootstrap diagrams
+3. **Metrics Collection Accuracy**: Detailed data flows from exporters through Prometheus to Thanos with proper routing
+4. **Status Propagation**: Cross-cluster status synchronization patterns captured from status propagation diagrams
+5. **External Integration**: Complete mapping of Victoria Metrics, Kafka, and third-party export paths
+
+**Critical Success Factors for Replication:**
+- Must have all 5 observability PNG diagrams available
+- Component names must match exactly including casing ("MultiCluster Observability Operator")
+- No combined components - each element from diagrams becomes separate component
+- Bootstrap sequences must follow exact creation order from diagrams
+- All bidirectional flows (metrics up, status down) must be captured
+- **Duplicate Resolution**: Any duplicate labels must be disambiguated (e.g., "OCP Route (General)" vs "OCP Route (Config)")
+- **Neo4j Syntax Compatibility**: All relationship labels must be compatible with Neo4j import requirements
+
+#### Neo4j Syntax Requirements
+
+When converting mermaid diagrams to Neo4j cypher, ensure relationship labels follow Neo4j syntax requirements:
+
+**Prohibited Characters in Relationship Labels:**
+- Parentheses: `()` - Neo4j treats these as parameter placeholders
+- Spaces in operational phrases - Use underscores instead
+
+**Required Transformations:**
+```
+❌ PROBLEMATIC:                    ✅ CORRECTED:
+create (loop for all...)           create_for_managed_clusters
+send metrics (remote write API)    send_metrics_remote_write
+forward metrics (if configured)    forward_metrics_if_configured
+export metrics to 3rd party tools  export_metrics_to_3rd_party_tools
+inject additional alertmanager     inject_alertmanager_config
+scrape metrics                     scrape_metrics
+forward metrics                    forward_metrics
+scrapes metrics                    scrapes_metrics
+forward alerts                     forward_alerts
+update status                      update_status
+```
+
+**Syntax Validation Process:**
+1. Check all relationship labels for parentheses and problematic spaces
+2. Convert operational phrases to underscore-separated format
+3. Test cypher import in Neo4j before finalizing
+4. Document any syntax transformations for reproducibility
+
     MCO_OPERATOR -->|CONTAINS| METRICS_COLLECTION_MANAGER
     MCO_OPERATOR -->|CONTAINS| ADDON_DEPLOYMENT_CONTROLLER
     MCO_OPERATOR -->|CONTAINS| CONFIGURATION_RECONCILER
@@ -1241,7 +1387,7 @@ graph TB
     CLUSTER_IMAGESET_CTRL[cluster-image-set-controller]
     CLUSTERCLAIMS_CTRL[clusterclaims-controller]
     HYPERSHIFT_ADDON_OP[hypershift-addon-operator]
-    MULTICLOUD_OPS_FOUNDATION[multicloud-operators-foundation]
+    MULTICLOUD_OPS_FOUNDATION[multicloud-operators-foundation (Cluster)]
     
     %% Internal Resources & Workflows (Detailed)
     MANIFESTWORK[ManifestWork]
@@ -1814,8 +1960,8 @@ ORDER BY Dependencies DESC;
 
 ### Final Architecture Metrics
 
-- **Total Components**: 291 (comprehensive coverage with cross-subsystem integration)
-- **Total Relationships**: 419 (enhanced semantic cross-subsystem connections)
+- **Total Components**: 288 (comprehensive coverage with cross-subsystem integration and deployment model classification)
+- **Total Relationships**: 414 (enhanced semantic cross-subsystem connections)
 - **Zero Duplicates**: Component reuse strategy across subsystems
 - **Zero Fictional Components**: 100% GitHub repository verification
 
@@ -1876,4 +2022,4 @@ ORDER BY Dependencies DESC;
 - Cross-cluster deployment relationships with proper semantic labels
 - Addon framework integration with factory patterns and lifecycle management
 
-This comprehensive architecture graph provides complete visibility into RHACM's internal operations and is ready for advanced analysis, troubleshooting, and AI-powered insights through Neo4j graph database integration.
+This comprehensive architecture graph provides complete visibility into RHACM's internal operations, including Application Lifecycle deployment model intelligence, and is ready for advanced analysis, troubleshooting, and AI-powered insights through Neo4j graph database integration with MCP server support.

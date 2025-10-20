@@ -2,24 +2,80 @@
 
 ## Executive Summary
 
-This methodology generates the most comprehensive Red Hat Advanced Cluster Management (RHACM) dependency graph containing **291 verified components** with **419 semantic relationships** across 7 major subsystems. Unlike a template-based approach, this guide provides the research methodology, architectural principles, and systematic discovery process to build the complete graph from scratch.
+This methodology generates the most comprehensive Red Hat Advanced Cluster Management (RHACM) dependency graph containing **288 verified components** with **414 semantic relationships** across 7 major subsystems, enhanced with Application Lifecycle deployment model classification. Unlike a template-based approach, this guide provides the research methodology, architectural principles, and systematic discovery process to build the complete graph from scratch.
 
 ### Final Deliverables
 - **7 Research-Based Mermaid Files**: Discovered through systematic repository analysis
 - **1 Python Conversion Tool**: Automated Mermaid-to-Neo4j conversion with semantic relationship support
-- **1 Production-Ready Neo4j Graph**: Import script with constraints, indexes, and verification queries
+- **1 Production-Ready Neo4j Graph**: Import script with constraints, indexes, and 50+ analytics queries including Application Lifecycle model analysis
 - **Complete Research Documentation**: Reproducible discovery process for consistent results
 
 ### Architecture Scale & Target Metrics
-- **291 Components**: 100% GitHub-verified, zero fictional, zero duplicates
-- **419 Relationships**: Semantic labels (CONTAINS, MANAGES, CONFIGURES, etc.)
+- **288 Components**: 100% GitHub-verified, zero fictional, zero duplicates, enhanced with deployment model properties
+- **414 Relationships**: Semantic labels (CONTAINS, MANAGES, CONFIGURES, etc.)
 - **7 Major Subsystems**: Overview, Governance, Application, Observability, Cluster, Search, Console
 - **Enterprise Features**: MCE foundation, Global Hub, Submariner, Backup/Recovery, CAPI, Red Hat Insights
 - **Cross-Platform Integration**: AWX Automation Platform, OpenShift GitOps, Gatekeeper
+- **Application Lifecycle Models**: Subscription Model, ArgoCD Push Model, ArgoCD Pull Model with deployment pattern classification
 
 ---
 
 ## Part I: Architecture Discovery Methodology
+
+### Advanced Observability Enhancement Methodology
+
+Beyond basic repository analysis, the observability subsystem demonstrates an advanced enhancement approach using detailed architectural diagrams. This methodology can be applied to other subsystems when detailed diagrams are available.
+
+#### Diagram-Based Enhancement Process
+
+**Step 1: Diagram Collection and Validation**
+- Collect all available detailed architectural diagrams for the target subsystem
+- For observability, this included 5 key diagrams: components architecture, hub bootstrap, managed bootstrap, metrics collection, and status propagation
+- Validate diagrams are current and match the repository analysis findings
+
+**Step 2: Component Extraction and Separation**
+- Extract every component shown in diagrams, ensuring no combined components
+- Split any "component1/component2" entries into separate individual components
+- Example: "metrics collector/uwl metrics collector" becomes two separate components
+- Preserve exact naming including casing and special formatting from diagrams
+
+**Step 3: Workflow and Sequence Mapping**
+- Map exact bootstrap sequences from workflow diagrams
+- Capture precise component creation order and dependencies
+- Document bidirectional flows (e.g., metrics up, status down)
+- Include conditional flows and optional components
+
+**Step 4: Integration Point Discovery**
+- Identify all external integration points shown in diagrams
+- Map third-party tool integrations (Victoria Metrics, Kafka, etc.)
+- Document API endpoints and data export mechanisms
+- Capture security and RBAC integration patterns
+
+**Step 5: Cross-Reference and Validation**
+- Cross-reference diagram components against repository analysis
+- Ensure no fictional components are introduced
+- Validate that all relationships have operational meaning
+- Confirm bootstrap sequences match actual deployment patterns
+- **Resolve duplicate labels** by adding context-specific suffixes
+
+#### When to Apply Diagram Enhancement
+
+This enhanced methodology should be used when:
+- Detailed architectural diagrams are available for a subsystem
+- Repository analysis reveals complex internal workflows
+- Cross-cluster communication patterns need detailed modeling
+- Bootstrap and lifecycle sequences are critical for understanding
+
+#### Reproducibility Requirements
+
+For another engineer to reproduce the enhanced observability:
+1. Must have access to the 5 observability PNG diagrams
+2. Must follow exact component separation principles
+3. Must preserve component naming conventions from diagrams
+4. Must map all workflow sequences accurately
+5. Must validate against repository findings
+
+---
 
 ### RHACM Architecture Research Principles
 

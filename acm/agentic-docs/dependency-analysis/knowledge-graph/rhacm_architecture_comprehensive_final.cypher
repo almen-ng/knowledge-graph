@@ -27,115 +27,115 @@ CREATE INDEX rhacm_label_index IF NOT EXISTS
 FOR (n:RHACMComponent) ON (n.label);
 
 // Node Creation - RHACM Components
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'OCP', label: 'OpenShift Container Platform', subsystem: 'Overview', type: 'Component', description: 'Overview component: OpenShift Container Platform'});
-CREATE (:RHACMComponent:Overview:API:Foundation {id: 'K8S', label: 'Kubernetes API Server', subsystem: 'Overview', type: 'API', description: 'Overview component: Kubernetes API Server'});
-CREATE (:RHACMComponent:Overview:Cluster:Foundation {id: 'ETCD', label: 'etcd Cluster', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: etcd Cluster'});
-CREATE (:RHACMComponent:Overview:Cluster {id: 'ACM', label: 'Red Hat Advanced Cluster Management', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Red Hat Advanced Cluster Management'});
-CREATE (:RHACMComponent:Overview:Cluster {id: 'OCM', label: 'Open Cluster Management', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Open Cluster Management'});
-CREATE (:RHACMComponent:Overview:Cluster:Foundation {id: 'HUB', label: 'ACM Hub Cluster', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: ACM Hub Cluster'});
-CREATE (:RHACMComponent:Overview:Cluster {id: 'SPOKE', label: 'Managed Clusters', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Managed Clusters'});
-CREATE (:RHACMComponent:Overview:API:Channels {id: 'OCM_API', label: 'Open Cluster Management API', subsystem: 'Overview', type: 'API', description: 'Overview component: Open Cluster Management API'});
-CREATE (:RHACMComponent:Overview:API:Foundation {id: 'CLUSTER_LIFECYCLE_API', label: 'cluster-lifecycle-api', subsystem: 'Overview', type: 'API', description: 'Overview component: cluster-lifecycle-api'});
-CREATE (:RHACMComponent:Overview:Cluster {id: 'MCE', label: 'Multicluster Engine', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Multicluster Engine'});
-CREATE (:RHACMComponent:Overview:Operator:Foundation {id: 'BACKPLANE_OPERATOR', label: 'Backplane Operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: Backplane Operator'});
-CREATE (:RHACMComponent:Overview:Cluster:Foundation {id: 'CLUSTER_MANAGER', label: 'Cluster Manager', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Cluster Manager'});
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'KLUSTERLET', label: 'Klusterlet', subsystem: 'Overview', type: 'Component', description: 'Overview component: Klusterlet'});
-CREATE (:RHACMComponent:Overview:Component {id: 'REGISTRATION_WEBHOOK', label: 'Registration Webhook', subsystem: 'Overview', type: 'Component', description: 'Overview component: Registration Webhook'});
-CREATE (:RHACMComponent:Overview:Component {id: 'GRC', label: 'Governance Risk & Compliance', subsystem: 'Overview', type: 'Component', description: 'Overview component: Governance Risk & Compliance'});
-CREATE (:RHACMComponent:Overview:Application:Foundation {id: 'APP', label: 'Application Lifecycle', subsystem: 'Overview', type: 'Application', description: 'Overview component: Application Lifecycle'});
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'OBS', label: 'Observability', subsystem: 'Overview', type: 'Component', description: 'Overview component: Observability'});
-CREATE (:RHACMComponent:Overview:Cluster:Foundation {id: 'CLUSTER', label: 'Cluster Lifecycle', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Cluster Lifecycle'});
-CREATE (:RHACMComponent:Overview:Search:Foundation {id: 'SEARCH', label: 'Search & Discovery', subsystem: 'Overview', type: 'Search', description: 'Overview component: Search & Discovery'});
-CREATE (:RHACMComponent:Overview:Component:Advanced {id: 'CONSOLE', label: 'Web Console', subsystem: 'Overview', type: 'Component', description: 'Overview component: Web Console'});
-CREATE (:RHACMComponent:Overview:Component {id: 'SERVER_FOUNDATION', label: 'Server Foundation', subsystem: 'Overview', type: 'Component', description: 'Overview component: Server Foundation'});
-CREATE (:RHACMComponent:Overview:Cluster {id: 'GLOBAL_HUB', label: 'Multicluster Global Hub', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Multicluster Global Hub'});
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'SUBMARINER', label: 'Submariner Network Connectivity', subsystem: 'Overview', type: 'Component', description: 'Overview component: Submariner Network Connectivity'});
-CREATE (:RHACMComponent:Overview:Component {id: 'BACKUP_RESTORE', label: 'Backup & Disaster Recovery', subsystem: 'Overview', type: 'Component', description: 'Overview component: Backup & Disaster Recovery'});
-CREATE (:RHACMComponent:Overview:Operator {id: 'FOUNDATION', label: 'multicloud-operators-foundation', subsystem: 'Overview', type: 'Operator', description: 'Overview component: multicloud-operators-foundation'});
-CREATE (:RHACMComponent:Overview:Cluster:Controller {id: 'REGISTRATION', label: 'Cluster Registration', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Cluster Registration'});
-CREATE (:RHACMComponent:Overview:Component:Controller {id: 'WORK', label: 'Work Management', subsystem: 'Overview', type: 'Component', description: 'Overview component: Work Management'});
-CREATE (:RHACMComponent:Overview:Component:Controller {id: 'ADDON', label: 'Addon Framework', subsystem: 'Overview', type: 'Component', description: 'Overview component: Addon Framework'});
-CREATE (:RHACMComponent:Overview:Controller:Controller {id: 'MANAGEDCLUSTER_IMPORT_CTRL', label: 'managedcluster-import-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: managedcluster-import-controller'});
-CREATE (:RHACMComponent:Overview:Controller {id: 'KLUSTERLET_ADDON_CTRL', label: 'klusterlet-addon-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: klusterlet-addon-controller'});
-CREATE (:RHACMComponent:Overview:Cluster {id: 'CLUSTERLIFECYCLE_STATE_METRICS', label: 'clusterlifecycle-state-metrics', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: clusterlifecycle-state-metrics'});
-CREATE (:RHACMComponent:Overview:Component:Hypershift {id: 'MANAGED_SERVICEACCOUNT', label: 'managed-serviceaccount', subsystem: 'Overview', type: 'Component', description: 'Overview component: managed-serviceaccount'});
-CREATE (:RHACMComponent:Overview:Cluster:Hypershift {id: 'CLUSTER_PROXY', label: 'cluster-proxy', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: cluster-proxy'});
-CREATE (:RHACMComponent:Overview:Cluster:Hypershift {id: 'CLUSTER_PROXY_ADDON', label: 'cluster-proxy-addon', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: cluster-proxy-addon'});
-CREATE (:RHACMComponent:Overview:Operator {id: 'HIVE', label: 'Hive Operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: Hive Operator'});
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'ARGO', label: 'ArgoCD', subsystem: 'Overview', type: 'Component', description: 'Overview component: ArgoCD'});
-CREATE (:RHACMComponent:Overview:Observability {id: 'PROMETHEUS', label: 'Prometheus Stack', subsystem: 'Overview', type: 'Observability', description: 'Overview component: Prometheus Stack'});
-CREATE (:RHACMComponent:Overview:Operator:Foundation {id: 'AWX_OPERATOR', label: 'AWX Operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: AWX Operator'});
-CREATE (:RHACMComponent:Overview:Operator {id: 'AWX_RESOURCE_OPERATOR', label: 'AWX Resource Operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: AWX Resource Operator'});
-CREATE (:RHACMComponent:Overview:Controller {id: 'AWX_INSTANCE_CONTROLLER', label: 'AWX Instance Controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: AWX Instance Controller'});
-CREATE (:RHACMComponent:Overview:Controller:Foundation {id: 'AWX_MESHINGRESS_CONTROLLER', label: 'AWXMeshIngress Controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: AWXMeshIngress Controller'});
-CREATE (:RHACMComponent:Overview:Controller:Foundation {id: 'ANSIBLE_JOB_CONTROLLER', label: 'AnsibleJob Controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: AnsibleJob Controller'});
-CREATE (:RHACMComponent:Overview:Controller {id: 'JOB_TEMPLATE_CONTROLLER', label: 'JobTemplate Controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: JobTemplate Controller'});
-CREATE (:RHACMComponent:Overview:Component:Hypershift {id: 'ANSIBLE_JOB_CRD', label: 'AnsibleJob CRD', subsystem: 'Overview', type: 'Component', description: 'Overview component: AnsibleJob CRD'});
-CREATE (:RHACMComponent:Overview:Component {id: 'JOB_TEMPLATE_CRD', label: 'JobTemplate CRD', subsystem: 'Overview', type: 'Component', description: 'Overview component: JobTemplate CRD'});
-CREATE (:RHACMComponent:Overview:Operator {id: 'GLOBAL_HUB_OPERATOR', label: 'Global Hub Operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: Global Hub Operator'});
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'GLOBAL_HUB_MANAGER', label: 'Global Hub Manager', subsystem: 'Overview', type: 'Component', description: 'Overview component: Global Hub Manager'});
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'GLOBAL_HUB_AGENT', label: 'Global Hub Agent', subsystem: 'Overview', type: 'Component', description: 'Overview component: Global Hub Agent'});
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'TRANSPORT_BRIDGE', label: 'Transport Bridge', subsystem: 'Overview', type: 'Component', description: 'Overview component: Transport Bridge'});
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'KAFKA_TRANSPORT', label: 'Kafka Transport', subsystem: 'Overview', type: 'Component', description: 'Overview component: Kafka Transport'});
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'POSTGRES_STORAGE', label: 'PostgreSQL Storage Backend', subsystem: 'Overview', type: 'Component', description: 'Overview component: PostgreSQL Storage Backend'});
-CREATE (:RHACMComponent:Overview:Observability {id: 'GLOBAL_HUB_GRAFANA', label: 'Global Hub Grafana', subsystem: 'Overview', type: 'Observability', description: 'Overview component: Global Hub Grafana'});
-CREATE (:RHACMComponent:Overview:Operator {id: 'SUBMARINER_OPERATOR', label: 'Submariner Operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: Submariner Operator'});
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'SUBMARINER_GATEWAY', label: 'Submariner Gateway', subsystem: 'Overview', type: 'Component', description: 'Overview component: Submariner Gateway'});
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'SUBMARINER_ROUTE_AGENT', label: 'Submariner Route Agent', subsystem: 'Overview', type: 'Component', description: 'Overview component: Submariner Route Agent'});
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'LIGHTHOUSE_AGENT', label: 'Lighthouse Agent', subsystem: 'Overview', type: 'Component', description: 'Overview component: Lighthouse Agent'});
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'LIGHTHOUSE_COREDNS', label: 'Lighthouse CoreDNS', subsystem: 'Overview', type: 'Component', description: 'Overview component: Lighthouse CoreDNS'});
-CREATE (:RHACMComponent:Overview:Controller:Foundation {id: 'GLOBALNET_CONTROLLER', label: 'Globalnet Controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: Globalnet Controller'});
-CREATE (:RHACMComponent:Overview:Component {id: 'SUBCTL_CLI', label: 'Subctl CLI', subsystem: 'Overview', type: 'Component', description: 'Overview component: Subctl CLI'});
-CREATE (:RHACMComponent:Overview:Operator {id: 'OADP_OPERATOR', label: 'OADP Operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: OADP Operator'});
-CREATE (:RHACMComponent:Overview:Controller:Foundation {id: 'VELERO_BACKUP_CONTROLLER', label: 'Velero Backup Controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: Velero Backup Controller'});
-CREATE (:RHACMComponent:Overview:Controller:Foundation {id: 'VOLUME_SNAPSHOT_CONTROLLER', label: 'Volume Snapshot Controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: Volume Snapshot Controller'});
-CREATE (:RHACMComponent:Overview:Cluster:Foundation {id: 'CLUSTER_BACKUP_SCHEDULE', label: 'Cluster Backup Schedule', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Cluster Backup Schedule'});
-CREATE (:RHACMComponent:Overview:Component {id: 'BACKUP_STORAGE_LOCATION', label: 'Backup Storage Location', subsystem: 'Overview', type: 'Component', description: 'Overview component: Backup Storage Location'});
-CREATE (:RHACMComponent:Overview:API {id: 'CAPI_PROVIDER_INTEGRATION', label: 'Cluster API Provider Integration', subsystem: 'Overview', type: 'API', description: 'Overview component: Cluster API Provider Integration'});
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'INFRASTRUCTURE_PROVIDER_MANAGER', label: 'Infrastructure Provider Manager', subsystem: 'Overview', type: 'Component', description: 'Overview component: Infrastructure Provider Manager'});
-CREATE (:RHACMComponent:Overview:Cluster:Foundation {id: 'CLUSTER_PROVISIONING_ENGINE', label: 'Cluster Provisioning Engine', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Cluster Provisioning Engine'});
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'BOOTSTRAP_CONFIG_MANAGER', label: 'Bootstrap Configuration Manager', subsystem: 'Overview', type: 'Component', description: 'Overview component: Bootstrap Configuration Manager'});
-CREATE (:RHACMComponent:Overview:Component {id: 'CONTROL_PLANE_MANAGER', label: 'Control Plane Manager', subsystem: 'Overview', type: 'Component', description: 'Overview component: Control Plane Manager'});
-CREATE (:RHACMComponent:Overview:Operator {id: 'INSIGHTS_OPERATOR_INTEGRATION', label: 'Insights Operator Integration', subsystem: 'Overview', type: 'Operator', description: 'Overview component: Insights Operator Integration'});
-CREATE (:RHACMComponent:Overview:Cluster:Foundation {id: 'CLUSTER_HEALTH_COLLECTOR', label: 'Cluster Health Collector', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Cluster Health Collector'});
-CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'COMPLIANCE_INSIGHTS_ENGINE', label: 'Compliance Insights Engine', subsystem: 'Overview', type: 'Component', description: 'Overview component: Compliance Insights Engine'});
-CREATE (:RHACMComponent:Overview:Cluster:Foundation {id: 'CLUSTER_ADVISOR_INTEGRATION', label: 'Cluster Advisor Integration', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Cluster Advisor Integration'});
-CREATE (:RHACMComponent:Overview:Component {id: 'INSIGHTS_REMEDIATION_ENGINE', label: 'Insights Remediation Engine', subsystem: 'Overview', type: 'Component', description: 'Overview component: Insights Remediation Engine'});
-CREATE (:RHACMComponent:Overview:Operator:Controller {id: 'MULTICLOUD_OPS_SUBSCRIPTION', label: 'multicloud-operators-subscription', subsystem: 'Overview', type: 'Operator', description: 'Overview component: multicloud-operators-subscription'});
-CREATE (:RHACMComponent:Overview:Component:Crd {id: 'MULTICLOUD_INTEGRATIONS', label: 'multicloud-integrations', subsystem: 'Overview', type: 'Component', description: 'Overview component: multicloud-integrations'});
-CREATE (:RHACMComponent:Overview:Component:Controller {id: 'ARGOCD_PULL_INTEGRATION', label: 'argocd-pull-integration', subsystem: 'Overview', type: 'Component', description: 'Overview component: argocd-pull-integration'});
-CREATE (:RHACMComponent:Overview:Operator:Foundation {id: 'GITOPS_OPERATOR', label: 'OpenShift GitOps Operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: OpenShift GitOps Operator'});
-CREATE (:RHACMComponent:Overview:Policy:Management {id: 'GOV_POLICY_PROP', label: 'governance-policy-propagator', subsystem: 'Overview', type: 'Policy', description: 'Overview component: governance-policy-propagator'});
-CREATE (:RHACMComponent:Overview:Controller:Diagnostics {id: 'CONFIG_POLICY_CTRL', label: 'config-policy-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: config-policy-controller'});
-CREATE (:RHACMComponent:Overview:Operator:Gatekeeper {id: 'GATEKEEPER_OP', label: 'gatekeeper-operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: gatekeeper-operator'});
-CREATE (:RHACMComponent:Overview:Policy:Management {id: 'GOV_POLICY_FRAMEWORK', label: 'governance-policy-framework', subsystem: 'Overview', type: 'Policy', description: 'Overview component: governance-policy-framework'});
-CREATE (:RHACMComponent:Overview:Controller:Diagnostics {id: 'CERT_POLICY_CTRL', label: 'cert-policy-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: cert-policy-controller'});
-CREATE (:RHACMComponent:Overview:Controller:Diagnostics {id: 'IAM_POLICY_CTRL', label: 'iam-policy-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: iam-policy-controller'});
-CREATE (:RHACMComponent:Overview:Policy:Cli_Distribution {id: 'POLICY_GEN', label: 'policy-generator-plugin', subsystem: 'Overview', type: 'Policy', description: 'Overview component: policy-generator-plugin'});
-CREATE (:RHACMComponent:Overview:Controller:Management {id: 'GOV_POLICY_ADDON_CTRL', label: 'governance-policy-addon-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: governance-policy-addon-controller'});
-CREATE (:RHACMComponent:Overview:Controller:Hypershift {id: 'CLUSTER_CURATOR_CTRL', label: 'cluster-curator-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: cluster-curator-controller'});
-CREATE (:RHACMComponent:Overview:Cluster:Controller {id: 'CLUSTER_PERMISSION', label: 'cluster-permission', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: cluster-permission'});
-CREATE (:RHACMComponent:Overview:Controller:Controller {id: 'PROVIDER_CREDENTIAL_CTRL', label: 'provider-credential-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: provider-credential-controller'});
-CREATE (:RHACMComponent:Overview:Controller:Hypershift {id: 'CLUSTER_IMAGESET_CTRL', label: 'cluster-image-set-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: cluster-image-set-controller'});
-CREATE (:RHACMComponent:Overview:Controller:Controller {id: 'CLUSTERCLAIMS_CTRL', label: 'clusterclaims-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: clusterclaims-controller'});
-CREATE (:RHACMComponent:Overview:Operator {id: 'HYPERSHIFT_ADDON_OP', label: 'hypershift-addon-operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: hypershift-addon-operator'});
-CREATE (:RHACMComponent:Overview:Operator:Thanos {id: 'MCO_OPERATOR', label: 'multicluster-observability-operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: multicluster-observability-operator'});
-CREATE (:RHACMComponent:Overview:Operator:Controller {id: 'PROMETHEUS_OP', label: 'prometheus-operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: prometheus-operator'});
-CREATE (:RHACMComponent:Overview:Observability:Controller {id: 'GRAFANA', label: 'grafana', subsystem: 'Overview', type: 'Observability', description: 'Overview component: grafana'});
-CREATE (:RHACMComponent:Overview:Operator {id: 'SEARCH_V2_OPERATOR', label: 'search-v2-operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: search-v2-operator'});
-CREATE (:RHACMComponent:Overview:Search:Controller {id: 'SEARCH_INDEXER', label: 'search-indexer', subsystem: 'Overview', type: 'Search', description: 'Overview component: search-indexer'});
-CREATE (:RHACMComponent:Overview:Search:Controller {id: 'SEARCH_COLLECTOR', label: 'search-collector', subsystem: 'Overview', type: 'Search', description: 'Overview component: search-collector'});
-CREATE (:RHACMComponent:Overview:API {id: 'SEARCH_V2_API', label: 'search-v2-api', subsystem: 'Overview', type: 'API', description: 'Overview component: search-v2-api'});
-CREATE (:RHACMComponent:Overview:Component {id: 'CONSOLE_COMPONENT', label: 'console', subsystem: 'Overview', type: 'Component', description: 'Overview component: console'});
-CREATE (:RHACMComponent:Overview:API {id: 'CONSOLE_API', label: 'console-api', subsystem: 'Overview', type: 'API', description: 'Overview component: console-api'});
-CREATE (:RHACMComponent:Overview:Operator:Thanos {id: 'OBSERVATORIUM_OP', label: 'observatorium-operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: observatorium-operator'});
-CREATE (:RHACMComponent:Overview:Component:Thanos {id: 'OBSERVATORIUM', label: 'observatorium', subsystem: 'Overview', type: 'Component', description: 'Overview component: observatorium'});
-CREATE (:RHACMComponent:Overview:Observability:Thanos {id: 'THANOS', label: 'thanos', subsystem: 'Overview', type: 'Observability', description: 'Overview component: thanos'});
-CREATE (:RHACMComponent:Overview:Observability {id: 'KUBE_THANOS', label: 'kube-thanos', subsystem: 'Overview', type: 'Observability', description: 'Overview component: kube-thanos'});
-CREATE (:RHACMComponent:Overview:Operator {id: 'REGISTRATION_OPERATOR', label: 'registration-operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: registration-operator'});
-CREATE (:RHACMComponent:Overview:Component:Controller {id: 'PLACEMENT', label: 'placement', subsystem: 'Overview', type: 'Component', description: 'Overview component: placement'});
-CREATE (:RHACMComponent:Overview:Component:Controller {id: 'WORK_FRAMEWORK', label: 'work', subsystem: 'Overview', type: 'Component', description: 'Overview component: work'});
-CREATE (:RHACMComponent:Overview:Component:Controller {id: 'ADDON_FRAMEWORK', label: 'addon-framework', subsystem: 'Overview', type: 'Component', description: 'Overview component: addon-framework'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'OCP', label: 'OpenShift Container Platform', subsystem: 'Overview', type: 'Component', description: 'Overview component: OpenShift Container Platform', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:API:Foundation {id: 'K8S', label: 'Kubernetes API Server', subsystem: 'Overview', type: 'API', description: 'Overview component: Kubernetes API Server', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster:Foundation {id: 'ETCD', label: 'etcd Cluster', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: etcd Cluster', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster {id: 'ACM', label: 'Red Hat Advanced Cluster Management', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Red Hat Advanced Cluster Management', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster {id: 'OCM', label: 'Open Cluster Management', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Open Cluster Management', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster:Foundation {id: 'HUB', label: 'ACM Hub Cluster', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: ACM Hub Cluster', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster {id: 'SPOKE', label: 'Managed Clusters', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Managed Clusters', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:API:Channels {id: 'OCM_API', label: 'Open Cluster Management API', subsystem: 'Overview', type: 'API', description: 'Overview component: Open Cluster Management API', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:API:Foundation {id: 'CLUSTER_LIFECYCLE_API', label: 'cluster-lifecycle-api', subsystem: 'Overview', type: 'API', description: 'Overview component: cluster-lifecycle-api', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster {id: 'MCE', label: 'Multicluster Engine', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Multicluster Engine', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator:Foundation {id: 'BACKPLANE_OPERATOR', label: 'Backplane Operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: Backplane Operator', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster:Foundation {id: 'CLUSTER_MANAGER', label: 'Cluster Manager', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Cluster Manager', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'KLUSTERLET', label: 'Klusterlet', subsystem: 'Overview', type: 'Component', description: 'Overview component: Klusterlet', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component {id: 'REGISTRATION_WEBHOOK', label: 'Registration Webhook', subsystem: 'Overview', type: 'Component', description: 'Overview component: Registration Webhook', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component {id: 'GRC', label: 'Governance Risk & Compliance', subsystem: 'Overview', type: 'Component', description: 'Overview component: Governance Risk & Compliance', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Application:Foundation {id: 'APP', label: 'Application Lifecycle', subsystem: 'Overview', type: 'Application', description: 'Overview component: Application Lifecycle', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'OBS', label: 'Observability', subsystem: 'Overview', type: 'Component', description: 'Overview component: Observability', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster:Foundation {id: 'CLUSTER', label: 'Cluster Lifecycle', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Cluster Lifecycle', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Search:Foundation {id: 'SEARCH', label: 'Search & Discovery', subsystem: 'Overview', type: 'Search', description: 'Overview component: Search & Discovery', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Advanced {id: 'CONSOLE', label: 'Web Console', subsystem: 'Overview', type: 'Component', description: 'Overview component: Web Console', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component {id: 'SERVER_FOUNDATION', label: 'Server Foundation', subsystem: 'Overview', type: 'Component', description: 'Overview component: Server Foundation', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster {id: 'GLOBAL_HUB', label: 'Multicluster Global Hub', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Multicluster Global Hub', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'SUBMARINER', label: 'Submariner Network Connectivity', subsystem: 'Overview', type: 'Component', description: 'Overview component: Submariner Network Connectivity', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component {id: 'BACKUP_RESTORE', label: 'Backup & Disaster Recovery', subsystem: 'Overview', type: 'Component', description: 'Overview component: Backup & Disaster Recovery', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator {id: 'FOUNDATION', label: 'multicloud-operators-foundation (Foundation)', subsystem: 'Overview', type: 'Operator', description: 'Overview component: multicloud-operators-foundation (Foundation)', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster:Controller {id: 'REGISTRATION', label: 'Cluster Registration', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Cluster Registration', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Controller {id: 'WORK', label: 'Work Management', subsystem: 'Overview', type: 'Component', description: 'Overview component: Work Management', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Controller {id: 'ADDON', label: 'Addon Framework', subsystem: 'Overview', type: 'Component', description: 'Overview component: Addon Framework', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller:Controller {id: 'MANAGEDCLUSTER_IMPORT_CTRL', label: 'managedcluster-import-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: managedcluster-import-controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller {id: 'KLUSTERLET_ADDON_CTRL', label: 'klusterlet-addon-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: klusterlet-addon-controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster {id: 'CLUSTERLIFECYCLE_STATE_METRICS', label: 'clusterlifecycle-state-metrics', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: clusterlifecycle-state-metrics', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Hypershift {id: 'MANAGED_SERVICEACCOUNT', label: 'managed-serviceaccount', subsystem: 'Overview', type: 'Component', description: 'Overview component: managed-serviceaccount', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster:Hypershift {id: 'CLUSTER_PROXY', label: 'cluster-proxy', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: cluster-proxy', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster:Hypershift {id: 'CLUSTER_PROXY_ADDON', label: 'cluster-proxy-addon', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: cluster-proxy-addon', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator {id: 'HIVE', label: 'Hive Operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: Hive Operator', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'ARGO', label: 'ArgoCD', subsystem: 'Overview', type: 'Component', description: 'Overview component: ArgoCD', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Observability:Hub_Infra {id: 'PROMETHEUS', label: 'Prometheus Stack', subsystem: 'Overview', type: 'Observability', description: 'Overview component: Prometheus Stack', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator:Foundation {id: 'AWX_OPERATOR', label: 'AWX Operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: AWX Operator', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator {id: 'AWX_RESOURCE_OPERATOR', label: 'AWX Resource Operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: AWX Resource Operator', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller {id: 'AWX_INSTANCE_CONTROLLER', label: 'AWX Instance Controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: AWX Instance Controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller:Foundation {id: 'AWX_MESHINGRESS_CONTROLLER', label: 'AWXMeshIngress Controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: AWXMeshIngress Controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller:Foundation {id: 'ANSIBLE_JOB_CONTROLLER', label: 'AnsibleJob Controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: AnsibleJob Controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller {id: 'JOB_TEMPLATE_CONTROLLER', label: 'JobTemplate Controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: JobTemplate Controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Hypershift {id: 'ANSIBLE_JOB_CRD', label: 'AnsibleJob CRD', subsystem: 'Overview', type: 'Component', description: 'Overview component: AnsibleJob CRD', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component {id: 'JOB_TEMPLATE_CRD', label: 'JobTemplate CRD', subsystem: 'Overview', type: 'Component', description: 'Overview component: JobTemplate CRD', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator {id: 'GLOBAL_HUB_OPERATOR', label: 'Global Hub Operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: Global Hub Operator', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'GLOBAL_HUB_MANAGER', label: 'Global Hub Manager', subsystem: 'Overview', type: 'Component', description: 'Overview component: Global Hub Manager', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'GLOBAL_HUB_AGENT', label: 'Global Hub Agent', subsystem: 'Overview', type: 'Component', description: 'Overview component: Global Hub Agent', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'TRANSPORT_BRIDGE', label: 'Transport Bridge', subsystem: 'Overview', type: 'Component', description: 'Overview component: Transport Bridge', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'KAFKA_TRANSPORT', label: 'Kafka Transport', subsystem: 'Overview', type: 'Component', description: 'Overview component: Kafka Transport', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'POSTGRES_STORAGE', label: 'PostgreSQL Storage Backend', subsystem: 'Overview', type: 'Component', description: 'Overview component: PostgreSQL Storage Backend', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Observability {id: 'GLOBAL_HUB_GRAFANA', label: 'Global Hub Grafana', subsystem: 'Overview', type: 'Observability', description: 'Overview component: Global Hub Grafana', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator {id: 'SUBMARINER_OPERATOR', label: 'Submariner Operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: Submariner Operator', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'SUBMARINER_GATEWAY', label: 'Submariner Gateway', subsystem: 'Overview', type: 'Component', description: 'Overview component: Submariner Gateway', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'SUBMARINER_ROUTE_AGENT', label: 'Submariner Route Agent', subsystem: 'Overview', type: 'Component', description: 'Overview component: Submariner Route Agent', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'LIGHTHOUSE_AGENT', label: 'Lighthouse Agent', subsystem: 'Overview', type: 'Component', description: 'Overview component: Lighthouse Agent', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'LIGHTHOUSE_COREDNS', label: 'Lighthouse CoreDNS', subsystem: 'Overview', type: 'Component', description: 'Overview component: Lighthouse CoreDNS', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller:Foundation {id: 'GLOBALNET_CONTROLLER', label: 'Globalnet Controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: Globalnet Controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component {id: 'SUBCTL_CLI', label: 'Subctl CLI', subsystem: 'Overview', type: 'Component', description: 'Overview component: Subctl CLI', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator {id: 'OADP_OPERATOR', label: 'OADP Operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: OADP Operator', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller:Foundation {id: 'VELERO_BACKUP_CONTROLLER', label: 'Velero Backup Controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: Velero Backup Controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller:Foundation {id: 'VOLUME_SNAPSHOT_CONTROLLER', label: 'Volume Snapshot Controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: Volume Snapshot Controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster:Foundation {id: 'CLUSTER_BACKUP_SCHEDULE', label: 'Cluster Backup Schedule', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Cluster Backup Schedule', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component {id: 'BACKUP_STORAGE_LOCATION', label: 'Backup Storage Location', subsystem: 'Overview', type: 'Component', description: 'Overview component: Backup Storage Location', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:API {id: 'CAPI_PROVIDER_INTEGRATION', label: 'Cluster API Provider Integration', subsystem: 'Overview', type: 'API', description: 'Overview component: Cluster API Provider Integration', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'INFRASTRUCTURE_PROVIDER_MANAGER', label: 'Infrastructure Provider Manager', subsystem: 'Overview', type: 'Component', description: 'Overview component: Infrastructure Provider Manager', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster:Foundation {id: 'CLUSTER_PROVISIONING_ENGINE', label: 'Cluster Provisioning Engine', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Cluster Provisioning Engine', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'BOOTSTRAP_CONFIG_MANAGER', label: 'Bootstrap Configuration Manager', subsystem: 'Overview', type: 'Component', description: 'Overview component: Bootstrap Configuration Manager', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component {id: 'CONTROL_PLANE_MANAGER', label: 'Control Plane Manager', subsystem: 'Overview', type: 'Component', description: 'Overview component: Control Plane Manager', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator {id: 'INSIGHTS_OPERATOR_INTEGRATION', label: 'Insights Operator Integration', subsystem: 'Overview', type: 'Operator', description: 'Overview component: Insights Operator Integration', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster:Foundation {id: 'CLUSTER_HEALTH_COLLECTOR', label: 'Cluster Health Collector', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Cluster Health Collector', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Foundation {id: 'COMPLIANCE_INSIGHTS_ENGINE', label: 'Compliance Insights Engine', subsystem: 'Overview', type: 'Component', description: 'Overview component: Compliance Insights Engine', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster:Foundation {id: 'CLUSTER_ADVISOR_INTEGRATION', label: 'Cluster Advisor Integration', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: Cluster Advisor Integration', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component {id: 'INSIGHTS_REMEDIATION_ENGINE', label: 'Insights Remediation Engine', subsystem: 'Overview', type: 'Component', description: 'Overview component: Insights Remediation Engine', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator:Controller {id: 'MULTICLOUD_OPS_SUBSCRIPTION', label: 'multicloud-operators-subscription', subsystem: 'Overview', type: 'Operator', description: 'Overview component: multicloud-operators-subscription', deployment_model: 'subscription', deployment_pattern: 'hub_stream_sync', model_role: 'content_consumer'});
+CREATE (:RHACMComponent:Overview:Component:Crd {id: 'MULTICLOUD_INTEGRATIONS', label: 'multicloud-integrations', subsystem: 'Overview', type: 'Component', description: 'Overview component: multicloud-integrations', deployment_model: 'argocd_push', deployment_pattern: 'hub_orchestrated', model_role: 'integration_orchestrator'});
+CREATE (:RHACMComponent:Overview:Component:Controller {id: 'ARGOCD_PULL_INTEGRATION', label: 'argocd-pull-integration', subsystem: 'Overview', type: 'Component', description: 'Overview component: argocd-pull-integration', deployment_model: 'argocd_pull', deployment_pattern: 'spoke_autonomous', model_role: 'pull_orchestrator'});
+CREATE (:RHACMComponent:Overview:Operator:Foundation {id: 'GITOPS_OPERATOR', label: 'OpenShift GitOps Operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: OpenShift GitOps Operator', deployment_model: 'argocd_push,argocd_pull', deployment_pattern: 'gitops_reconciliation', model_role: 'application_deployer'});
+CREATE (:RHACMComponent:Overview:Policy:Management {id: 'GOV_POLICY_PROP', label: 'governance-policy-propagator', subsystem: 'Overview', type: 'Policy', description: 'Overview component: governance-policy-propagator', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller:Diagnostics {id: 'CONFIG_POLICY_CTRL', label: 'config-policy-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: config-policy-controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator:Gatekeeper {id: 'GATEKEEPER_OP', label: 'gatekeeper-operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: gatekeeper-operator', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Policy:Management {id: 'GOV_POLICY_FRAMEWORK', label: 'governance-policy-framework', subsystem: 'Overview', type: 'Policy', description: 'Overview component: governance-policy-framework', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller:Diagnostics {id: 'CERT_POLICY_CTRL', label: 'cert-policy-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: cert-policy-controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller:Diagnostics {id: 'IAM_POLICY_CTRL', label: 'iam-policy-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: iam-policy-controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Policy:Cli_Distribution {id: 'POLICY_GEN', label: 'policy-generator-plugin', subsystem: 'Overview', type: 'Policy', description: 'Overview component: policy-generator-plugin', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller:Management {id: 'GOV_POLICY_ADDON_CTRL', label: 'governance-policy-addon-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: governance-policy-addon-controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller:Hypershift {id: 'CLUSTER_CURATOR_CTRL', label: 'cluster-curator-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: cluster-curator-controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Cluster:Controller {id: 'CLUSTER_PERMISSION', label: 'cluster-permission', subsystem: 'Overview', type: 'Cluster', description: 'Overview component: cluster-permission', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller:Controller {id: 'PROVIDER_CREDENTIAL_CTRL', label: 'provider-credential-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: provider-credential-controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller:Hypershift {id: 'CLUSTER_IMAGESET_CTRL', label: 'cluster-image-set-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: cluster-image-set-controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Controller:Controller {id: 'CLUSTERCLAIMS_CTRL', label: 'clusterclaims-controller', subsystem: 'Overview', type: 'Controller', description: 'Overview component: clusterclaims-controller', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator {id: 'HYPERSHIFT_ADDON_OP', label: 'hypershift-addon-operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: hypershift-addon-operator', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator:Hub_Infra {id: 'MCO_OPERATOR', label: 'multicluster-observability-operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: multicluster-observability-operator', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator:Hub_Infra {id: 'PROMETHEUS_OP', label: 'prometheus-operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: prometheus-operator', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Observability:Controller {id: 'GRAFANA', label: 'grafana', subsystem: 'Overview', type: 'Observability', description: 'Overview component: grafana', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator {id: 'SEARCH_V2_OPERATOR', label: 'search-v2-operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: search-v2-operator', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Search:Controller {id: 'SEARCH_INDEXER', label: 'search-indexer', subsystem: 'Overview', type: 'Search', description: 'Overview component: search-indexer', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Search:Controller {id: 'SEARCH_COLLECTOR', label: 'search-collector', subsystem: 'Overview', type: 'Search', description: 'Overview component: search-collector', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:API {id: 'SEARCH_V2_API', label: 'search-v2-api', subsystem: 'Overview', type: 'API', description: 'Overview component: search-v2-api', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component {id: 'CONSOLE_COMPONENT', label: 'console', subsystem: 'Overview', type: 'Component', description: 'Overview component: console', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:API {id: 'CONSOLE_API', label: 'console-api', subsystem: 'Overview', type: 'API', description: 'Overview component: console-api', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator:Hub_Infra {id: 'OBSERVATORIUM_OP', label: 'observatorium-operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: observatorium-operator', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component {id: 'OBSERVATORIUM', label: 'observatorium', subsystem: 'Overview', type: 'Component', description: 'Overview component: observatorium', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Observability:Controller {id: 'THANOS', label: 'thanos', subsystem: 'Overview', type: 'Observability', description: 'Overview component: thanos', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Observability {id: 'KUBE_THANOS', label: 'kube-thanos', subsystem: 'Overview', type: 'Observability', description: 'Overview component: kube-thanos', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Operator {id: 'REGISTRATION_OPERATOR', label: 'registration-operator', subsystem: 'Overview', type: 'Operator', description: 'Overview component: registration-operator', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Controller {id: 'PLACEMENT', label: 'placement', subsystem: 'Overview', type: 'Component', description: 'Overview component: placement', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Controller {id: 'WORK_FRAMEWORK', label: 'work', subsystem: 'Overview', type: 'Component', description: 'Overview component: work', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Overview:Component:Controller {id: 'ADDON_FRAMEWORK', label: 'addon-framework', subsystem: 'Overview', type: 'Component', description: 'Overview component: addon-framework', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
 CREATE (:RHACMComponent:Governance:Policy:Cli_Distribution {id: 'POLICY_CLI', label: 'policy-cli', subsystem: 'Governance', type: 'Policy', description: 'Governance component: policy-cli'});
 CREATE (:RHACMComponent:Governance:Component:Cli_Distribution {id: 'ACM_CLI', label: 'acm-cli', subsystem: 'Governance', type: 'Component', description: 'Governance component: acm-cli'});
 CREATE (:RHACMComponent:Governance:Policy:Management {id: 'POLICY_COLLECTION', label: 'policy-collection', subsystem: 'Governance', type: 'Policy', description: 'Governance component: policy-collection'});
@@ -153,8 +153,8 @@ CREATE (:RHACMComponent:Governance:Policy:Reconcilers {id: 'ROOT_POLICY_STATUS_R
 CREATE (:RHACMComponent:Governance:Policy:Reconcilers {id: 'POLICY_SET_RECONCILER', label: 'PolicySetReconciler', subsystem: 'Governance', type: 'Policy', description: 'Governance component: PolicySetReconciler'});
 CREATE (:RHACMComponent:Governance:Policy:Reconcilers {id: 'POLICY_AUTOMATION_RECONCILER', label: 'PolicyAutomationReconciler', subsystem: 'Governance', type: 'Policy', description: 'Governance component: PolicyAutomationReconciler'});
 CREATE (:RHACMComponent:Governance:Component:Reconcilers {id: 'ENCRYPTION_KEYS_RECONCILER', label: 'EncryptionKeysReconciler', subsystem: 'Governance', type: 'Component', description: 'Governance component: EncryptionKeysReconciler'});
-CREATE (:RHACMComponent:Governance:Component:Management {id: 'ADDON_FACTORY', label: 'Addon Factory Pattern', subsystem: 'Governance', type: 'Component', description: 'Governance component: Addon Factory Pattern'});
-CREATE (:RHACMComponent:Governance:Component:Management {id: 'ADDON_MANAGER', label: 'Addon Manager', subsystem: 'Governance', type: 'Component', description: 'Governance component: Addon Manager'});
+CREATE (:RHACMComponent:Governance:Component:Management {id: 'ADDON_FACTORY', label: 'Addon Factory Pattern', subsystem: 'Governance', type: 'Component', description: 'Governance component: Addon Factory Pattern', deployment_model: 'addon_framework', deployment_pattern: 'hub_to_spoke_deployment', model_role: 'spoke_service'});
+CREATE (:RHACMComponent:Governance:Component:Management {id: 'ADDON_MANAGER', label: 'Addon Manager', subsystem: 'Governance', type: 'Component', description: 'Governance component: Addon Manager', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
 CREATE (:RHACMComponent:Governance:Component:Addons {id: 'GOV_STANDALONE_HUB_TEMPLATING', label: 'governance-standalone-hub-templating', subsystem: 'Governance', type: 'Component', description: 'Governance component: governance-standalone-hub-templating'});
 CREATE (:RHACMComponent:Governance:Controller:Controllers {id: 'SPEC_SYNC_CTRL', label: 'Spec Sync Controller', subsystem: 'Governance', type: 'Controller', description: 'Governance component: Spec Sync Controller'});
 CREATE (:RHACMComponent:Governance:Controller:Controllers {id: 'STATUS_SYNC_CTRL', label: 'Status Sync Controller', subsystem: 'Governance', type: 'Controller', description: 'Governance component: Status Sync Controller'});
@@ -214,25 +214,25 @@ CREATE (:RHACMComponent:Governance:Component:Diagnostics {id: 'RESOURCE_ORGANIZE
 CREATE (:RHACMComponent:Governance:Component:Diagnostics {id: 'DIAGNOSTIC_AGGREGATOR', label: 'Diagnostic Aggregator', subsystem: 'Governance', type: 'Component', description: 'Governance component: Diagnostic Aggregator'});
 CREATE (:RHACMComponent:Governance:Component {id: 'GATEKEEPER', label: 'gatekeeper', subsystem: 'Governance', type: 'Component', description: 'Governance component: gatekeeper'});
 CREATE (:RHACMComponent:Governance:Operator:Gatekeeper {id: 'GATEKEEPER_FBC', label: 'gatekeeper-operator-fbc', subsystem: 'Governance', type: 'Operator', description: 'Governance component: gatekeeper-operator-fbc'});
-CREATE (:RHACMComponent:Governance:Policy:Addons {id: 'GOV_POLICY_FRAMEWORK_ADDON', label: 'governance-policy-framework-addon', subsystem: 'Governance', type: 'Policy', description: 'Governance component: governance-policy-framework-addon'});
+CREATE (:RHACMComponent:Governance:Policy:Addons {id: 'GOV_POLICY_FRAMEWORK_ADDON', label: 'governance-policy-framework-addon', subsystem: 'Governance', type: 'Policy', description: 'Governance component: governance-policy-framework-addon', deployment_model: 'addon_framework', deployment_pattern: 'hub_to_spoke_deployment', model_role: 'spoke_service'});
 CREATE (:RHACMComponent:Governance:Component {id: 'K8S_DEPENDENCY_WATCHES', label: 'kubernetes-dependency-watches', subsystem: 'Governance', type: 'Component', description: 'Governance component: kubernetes-dependency-watches'});
 CREATE (:RHACMComponent:Governance:Component:Gatekeeper {id: 'MUST_GATHER', label: 'must-gather', subsystem: 'Governance', type: 'Component', description: 'Governance component: must-gather'});
-CREATE (:RHACMComponent:Application:Operator:Channels {id: 'MULTICLOUD_OPS_CHANNEL', label: 'multicloud-operators-channel', subsystem: 'Application', type: 'Operator', description: 'Application component: multicloud-operators-channel'});
-CREATE (:RHACMComponent:Application:Application {id: 'APPLICATION_MANAGER', label: 'Application Manager Addon', subsystem: 'Application', type: 'Application', description: 'Application component: Application Manager Addon'});
-CREATE (:RHACMComponent:Application:Component {id: 'GIT_CHANNEL', label: 'Git Channel', subsystem: 'Application', type: 'Component', description: 'Application component: Git Channel'});
-CREATE (:RHACMComponent:Application:Component:Channels {id: 'HELM_CHANNEL', label: 'Helm Channel', subsystem: 'Application', type: 'Component', description: 'Application component: Helm Channel'});
-CREATE (:RHACMComponent:Application:Component:Channels {id: 'OBJECTSTORAGE_CHANNEL', label: 'Object Storage Channel', subsystem: 'Application', type: 'Component', description: 'Application component: Object Storage Channel'});
-CREATE (:RHACMComponent:Application:Controller:Crd {id: 'GITOPS_CLUSTER_CTRL', label: 'GitOps Cluster Controller', subsystem: 'Application', type: 'Controller', description: 'Application component: GitOps Cluster Controller'});
-CREATE (:RHACMComponent:Application:Controller:Crd {id: 'GITOPS_SYNC_RESOURCE_CTRL', label: 'GitOps Sync Resource Controller', subsystem: 'Application', type: 'Controller', description: 'Application component: GitOps Sync Resource Controller'});
-CREATE (:RHACMComponent:Application:Controller:Crd {id: 'STATUS_AGGREGATION_CTRL', label: 'Status Aggregation Controller', subsystem: 'Application', type: 'Controller', description: 'Application component: Status Aggregation Controller'});
-CREATE (:RHACMComponent:Application:Controller:Crd {id: 'PROPAGATION_CTRL', label: 'Propagation Controller', subsystem: 'Application', type: 'Controller', description: 'Application component: Propagation Controller'});
-CREATE (:RHACMComponent:Application:Controller:Crd {id: 'GITOPS_ADDON_CTRL', label: 'GitOps Addon Controller', subsystem: 'Application', type: 'Controller', description: 'Application component: GitOps Addon Controller'});
+CREATE (:RHACMComponent:Application:Operator:Channels {id: 'MULTICLOUD_OPS_CHANNEL', label: 'multicloud-operators-channel', subsystem: 'Application', type: 'Operator', description: 'Application component: multicloud-operators-channel', deployment_model: 'subscription', deployment_pattern: 'hub_stream_sync', model_role: 'content_router'});
+CREATE (:RHACMComponent:Application:Application {id: 'APPLICATION_MANAGER', label: 'Application Manager Addon', subsystem: 'Application', type: 'Application', description: 'Application component: Application Manager Addon', deployment_model: 'subscription', deployment_pattern: 'hub_stream_sync', model_role: 'deployment_executor'});
+CREATE (:RHACMComponent:Application:Component {id: 'GIT_CHANNEL', label: 'Git Channel', subsystem: 'Application', type: 'Component', description: 'Application component: Git Channel', deployment_model: 'subscription', deployment_pattern: 'content_streaming', model_role: 'content_source'});
+CREATE (:RHACMComponent:Application:Component:Channels {id: 'HELM_CHANNEL', label: 'Helm Channel', subsystem: 'Application', type: 'Component', description: 'Application component: Helm Channel', deployment_model: 'subscription', deployment_pattern: 'content_streaming', model_role: 'content_source'});
+CREATE (:RHACMComponent:Application:Component:Channels {id: 'OBJECTSTORAGE_CHANNEL', label: 'Object Storage Channel', subsystem: 'Application', type: 'Component', description: 'Application component: Object Storage Channel', deployment_model: 'subscription', deployment_pattern: 'content_streaming', model_role: 'content_source'});
+CREATE (:RHACMComponent:Application:Controller:Crd {id: 'GITOPS_CLUSTER_CTRL', label: 'GitOps Cluster Controller', subsystem: 'Application', type: 'Controller', description: 'Application component: GitOps Cluster Controller', deployment_model: 'argocd_push', deployment_pattern: 'hub_orchestrated', model_role: 'cluster_onboarder'});
+CREATE (:RHACMComponent:Application:Controller:Crd {id: 'GITOPS_SYNC_RESOURCE_CTRL', label: 'GitOps Sync Resource Controller', subsystem: 'Application', type: 'Controller', description: 'Application component: GitOps Sync Resource Controller', deployment_model: 'argocd_push', deployment_pattern: 'hub_orchestrated', model_role: 'sync_coordinator'});
+CREATE (:RHACMComponent:Application:Controller:Crd {id: 'STATUS_AGGREGATION_CTRL', label: 'Status Aggregation Controller', subsystem: 'Application', type: 'Controller', description: 'Application component: Status Aggregation Controller', deployment_model: 'argocd_push', deployment_pattern: 'hub_orchestrated', model_role: 'status_collector'});
+CREATE (:RHACMComponent:Application:Controller:Crd {id: 'PROPAGATION_CTRL', label: 'Propagation Controller', subsystem: 'Application', type: 'Controller', description: 'Application component: Propagation Controller', deployment_model: 'argocd_push', deployment_pattern: 'hub_orchestrated', model_role: 'deployment_propagator'});
+CREATE (:RHACMComponent:Application:Controller:Crd {id: 'GITOPS_ADDON_CTRL', label: 'GitOps Addon Controller', subsystem: 'Application', type: 'Controller', description: 'Application component: GitOps Addon Controller', deployment_model: 'argocd_push', deployment_pattern: 'hub_orchestrated', model_role: 'addon_lifecycle_manager'});
 CREATE (:RHACMComponent:Application:Cluster {id: 'GITOPS_CLUSTER_CRD', label: 'GitOpsCluster CRD', subsystem: 'Application', type: 'Cluster', description: 'Application component: GitOpsCluster CRD'});
 CREATE (:RHACMComponent:Application:Cluster:Crd {id: 'MULTICLUSTER_APPSET_REPORT_CRD', label: 'MulticlusterApplicationSetReport CRD', subsystem: 'Application', type: 'Cluster', description: 'Application component: MulticlusterApplicationSetReport CRD'});
 CREATE (:RHACMComponent:Application:Cluster:Crd {id: 'CLUSTER_PERMISSION_CRD', label: 'ClusterPermission CRD', subsystem: 'Application', type: 'Cluster', description: 'Application component: ClusterPermission CRD'});
-CREATE (:RHACMComponent:Application:Controller:Crd {id: 'APPLICATION_CTRL', label: 'Application Controller', subsystem: 'Application', type: 'Controller', description: 'Application component: Application Controller'});
-CREATE (:RHACMComponent:Application:Controller:Crd {id: 'APPLICATION_STATUS_CTRL', label: 'Application Status Controller', subsystem: 'Application', type: 'Controller', description: 'Application component: Application Status Controller'});
-CREATE (:RHACMComponent:Application:Controller {id: 'CLUSTER_CTRL', label: 'Cluster Controller', subsystem: 'Application', type: 'Controller', description: 'Application component: Cluster Controller'});
+CREATE (:RHACMComponent:Application:Controller:Crd {id: 'APPLICATION_CTRL', label: 'Application Controller', subsystem: 'Application', type: 'Controller', description: 'Application component: Application Controller', deployment_model: 'argocd_pull', deployment_pattern: 'spoke_autonomous', model_role: 'application_watcher'});
+CREATE (:RHACMComponent:Application:Controller:Crd {id: 'APPLICATION_STATUS_CTRL', label: 'Application Status Controller', subsystem: 'Application', type: 'Controller', description: 'Application component: Application Status Controller', deployment_model: 'argocd_pull', deployment_pattern: 'spoke_autonomous', model_role: 'status_syncer'});
+CREATE (:RHACMComponent:Application:Controller {id: 'CLUSTER_CTRL', label: 'Cluster Controller', subsystem: 'Application', type: 'Controller', description: 'Application component: Cluster Controller', deployment_model: 'argocd_pull', deployment_pattern: 'spoke_autonomous', model_role: 'cluster_coordinator'});
 CREATE (:RHACMComponent:Application:Application:Crd {id: 'ARGOCD_APPLICATION_CRD', label: 'Application CRD', subsystem: 'Application', type: 'Application', description: 'Application component: Application CRD'});
 CREATE (:RHACMComponent:Application:Application:Crd {id: 'ARGOCD_APPLICATIONSET_CRD', label: 'ApplicationSet CRD', subsystem: 'Application', type: 'Application', description: 'Application component: ApplicationSet CRD'});
 CREATE (:RHACMComponent:Application:Component:Crd {id: 'MANIFESTWORK_CRD', label: 'ManifestWork CRD', subsystem: 'Application', type: 'Component', description: 'Application component: ManifestWork CRD'});
@@ -240,40 +240,75 @@ CREATE (:RHACMComponent:Application:Cluster:Crd {id: 'MANAGEDCLUSTER_CRD', label
 CREATE (:RHACMComponent:Application:Component {id: 'APPLIFECYCLE_BACKEND_E2E', label: 'applifecycle-backend-e2e', subsystem: 'Application', type: 'Component', description: 'Application component: applifecycle-backend-e2e'});
 CREATE (:RHACMComponent:Application:Application {id: 'APP_WEBHOOKS', label: 'Application Webhooks', subsystem: 'Application', type: 'Application', description: 'Application component: Application Webhooks'});
 CREATE (:RHACMComponent:Application:Application {id: 'SUBSCRIPTION_WEBHOOKS', label: 'Subscription Webhooks', subsystem: 'Application', type: 'Application', description: 'Application component: Subscription Webhooks'});
-CREATE (:RHACMComponent:Observability:Controller {id: 'OBSERVABILITY_CONTROLLER', label: 'Observability Controller', subsystem: 'Observability', type: 'Controller', description: 'Observability component: Observability Controller'});
-CREATE (:RHACMComponent:Observability:Component:Thanos {id: 'METRICS_COLLECTION_MANAGER', label: 'Metrics Collection Manager', subsystem: 'Observability', type: 'Component', description: 'Observability component: Metrics Collection Manager'});
-CREATE (:RHACMComponent:Observability:Controller:Thanos {id: 'ADDON_DEPLOYMENT_CONTROLLER', label: 'Addon Deployment Controller', subsystem: 'Observability', type: 'Controller', description: 'Observability component: Addon Deployment Controller'});
-CREATE (:RHACMComponent:Observability:Component {id: 'CONFIGURATION_RECONCILER', label: 'Configuration Reconciler', subsystem: 'Observability', type: 'Component', description: 'Observability component: Configuration Reconciler'});
-CREATE (:RHACMComponent:Observability:Controller {id: 'OBSERVATORIUM_DEPLOYMENT_CTRL', label: 'Observatorium Deployment Controller', subsystem: 'Observability', type: 'Controller', description: 'Observability component: Observatorium Deployment Controller'});
-CREATE (:RHACMComponent:Observability:Observability:Thanos {id: 'THANOS_INTEGRATION_MANAGER', label: 'Thanos Integration Manager', subsystem: 'Observability', type: 'Observability', description: 'Observability component: Thanos Integration Manager'});
-CREATE (:RHACMComponent:Observability:Controller {id: 'STORAGE_CONFIGURATION_CTRL', label: 'Storage Configuration Controller', subsystem: 'Observability', type: 'Controller', description: 'Observability component: Storage Configuration Controller'});
-CREATE (:RHACMComponent:Observability:Component {id: 'QUERY_GATEWAY', label: 'Query Gateway', subsystem: 'Observability', type: 'Component', description: 'Observability component: Query Gateway'});
-CREATE (:RHACMComponent:Observability:Component:Thanos {id: 'RULER_ENGINE', label: 'Ruler Engine', subsystem: 'Observability', type: 'Component', description: 'Observability component: Ruler Engine'});
-CREATE (:RHACMComponent:Observability:Component:Thanos {id: 'COMPACTOR_SERVICE', label: 'Compactor Service', subsystem: 'Observability', type: 'Component', description: 'Observability component: Compactor Service'});
-CREATE (:RHACMComponent:Observability:Component {id: 'STORE_GATEWAY', label: 'Store Gateway', subsystem: 'Observability', type: 'Component', description: 'Observability component: Store Gateway'});
-CREATE (:RHACMComponent:Observability:Observability {id: 'PROMETHEUS_ALERTMANAGER', label: 'prometheus-alertmanager', subsystem: 'Observability', type: 'Observability', description: 'Observability component: prometheus-alertmanager'});
+CREATE (:RHACMComponent:Observability:Component {id: 'MCO_RES', label: 'MCO res', subsystem: 'Observability', type: 'Component', description: 'Observability component: MCO res'});
+CREATE (:RHACMComponent:Observability:Controller {id: 'MCO_CONTROLLER', label: 'mco controller', subsystem: 'Observability', type: 'Controller', description: 'Observability component: mco controller'});
+CREATE (:RHACMComponent:Observability:API:Hub_Infra {id: 'OBSERVATORIUM_API', label: 'Observatorium API', subsystem: 'Observability', type: 'API', description: 'Observability component: Observatorium API'});
+CREATE (:RHACMComponent:Observability:API:Hub_Infra {id: 'OBSERVATORIUM_API_GATEWAY', label: 'Observatorium API Gateway', subsystem: 'Observability', type: 'API', description: 'Observability component: Observatorium API Gateway'});
+CREATE (:RHACMComponent:Observability:Controller {id: 'PLACEMENT_CONTROLLER', label: 'Placement Controller', subsystem: 'Observability', type: 'Controller', description: 'Observability component: Placement Controller'});
+CREATE (:RHACMComponent:Observability:Component:Hub_Infra {id: 'GLOBAL_WORK_RES', label: 'global work res', subsystem: 'Observability', type: 'Component', description: 'Observability component: global work res'});
+CREATE (:RHACMComponent:Observability:Component:Hub_Infra {id: 'OBSERVABILITY_ADDON_HUB', label: 'observability addon res(hub)', subsystem: 'Observability', type: 'Component', description: 'Observability component: observability addon res(hub)', deployment_model: 'addon_framework', deployment_pattern: 'hub_to_spoke_deployment', model_role: 'spoke_service'});
+CREATE (:RHACMComponent:Observability:Cluster:Hub_Infra {id: 'MANIFESTWORK_RES_CLUSTER_NS', label: 'manifestwork res (in cluster ns)', subsystem: 'Observability', type: 'Cluster', description: 'Observability component: manifestwork res (in cluster ns)'});
+CREATE (:RHACMComponent:Observability:Component:Hub_Infra {id: 'MANIFESTWORK_RES_REPLICATED', label: 'manifestwork res (replicated)', subsystem: 'Observability', type: 'Component', description: 'Observability component: manifestwork res (replicated)'});
+CREATE (:RHACMComponent:Observability:Operator:Hub_Infra {id: 'HUB_ENDPOINT_OPERATOR', label: 'Hub endpoint operator', subsystem: 'Observability', type: 'Operator', description: 'Observability component: Hub endpoint operator'});
+CREATE (:RHACMComponent:Observability:Component:Hub_Infra {id: 'HUB_METRICS_COLLECTOR', label: 'Hub metrics-collector', subsystem: 'Observability', type: 'Component', description: 'Observability component: Hub metrics-collector'});
+CREATE (:RHACMComponent:Observability:Component {id: 'METRICS_COLLECTOR_SEPARATE', label: 'Metrics-Collector', subsystem: 'Observability', type: 'Component', description: 'Observability component: Metrics-Collector'});
+CREATE (:RHACMComponent:Observability:Operator {id: 'ENDPOINT_METRICS_OPERATOR', label: 'Endpoint Metrics operator', subsystem: 'Observability', type: 'Operator', description: 'Observability component: Endpoint Metrics operator'});
+CREATE (:RHACMComponent:Observability:Observability:Hub_Infra {id: 'THANOS_RECEIVE', label: 'Thanos Receive', subsystem: 'Observability', type: 'Observability', description: 'Observability component: Thanos Receive'});
+CREATE (:RHACMComponent:Observability:Observability:Hub_Infra {id: 'THANOS_QUERY', label: 'Thanos Query', subsystem: 'Observability', type: 'Observability', description: 'Observability component: Thanos Query'});
+CREATE (:RHACMComponent:Observability:Observability:Hub_Infra {id: 'THANOS_STORE_GATEWAY', label: 'Thanos Store Gateway', subsystem: 'Observability', type: 'Observability', description: 'Observability component: Thanos Store Gateway'});
+CREATE (:RHACMComponent:Observability:Observability:Hub_Infra {id: 'THANOS_COMPACTOR', label: 'Thanos Compactor', subsystem: 'Observability', type: 'Observability', description: 'Observability component: Thanos Compactor'});
+CREATE (:RHACMComponent:Observability:Observability {id: 'THANOS_RULER', label: 'Thanos Ruler', subsystem: 'Observability', type: 'Observability', description: 'Observability component: Thanos Ruler'});
+CREATE (:RHACMComponent:Observability:Component {id: 'OBJECT_STORAGE', label: 'Object Storage', subsystem: 'Observability', type: 'Component', description: 'Observability component: Object Storage'});
+CREATE (:RHACMComponent:Observability:Component {id: 'RBAC_QUERY_PROXY', label: 'RBAC Query Proxy', subsystem: 'Observability', type: 'Component', description: 'Observability component: RBAC Query Proxy'});
+CREATE (:RHACMComponent:Observability:Cluster {id: 'MANAGED_CLUSTER_ADDON', label: 'managed cluster addon res', subsystem: 'Observability', type: 'Cluster', description: 'Observability component: managed cluster addon res', deployment_model: 'addon_framework', deployment_pattern: 'hub_to_spoke_deployment', model_role: 'spoke_service'});
+CREATE (:RHACMComponent:Observability:Component:Hub_Infra {id: 'WORK_AGENT', label: 'work agent', subsystem: 'Observability', type: 'Component', description: 'Observability component: work agent'});
+CREATE (:RHACMComponent:Observability:Operator {id: 'ENDPOINT_OPERATOR', label: 'endpoint operator', subsystem: 'Observability', type: 'Operator', description: 'Observability component: endpoint operator'});
+CREATE (:RHACMComponent:Observability:Component:Hub_Infra {id: 'OBSERVABILITY_ADDON_MANAGED', label: 'observability addon res(managed)', subsystem: 'Observability', type: 'Component', description: 'Observability component: observability addon res(managed)', deployment_model: 'addon_framework', deployment_pattern: 'hub_to_spoke_deployment', model_role: 'spoke_service'});
+CREATE (:RHACMComponent:Observability:Component {id: 'METRICS_COLLECTOR_MANAGED', label: 'metrics collector', subsystem: 'Observability', type: 'Component', description: 'Observability component: metrics collector'});
+CREATE (:RHACMComponent:Observability:Component:Hub_Infra {id: 'UWL_METRICS_COLLECTOR', label: 'uwl metrics collector', subsystem: 'Observability', type: 'Component', description: 'Observability component: uwl metrics collector'});
+CREATE (:RHACMComponent:Observability:Observability:Hub_Infra {id: 'PROMETHEUS_MANAGED', label: 'prometheus', subsystem: 'Observability', type: 'Observability', description: 'Observability component: prometheus'});
+CREATE (:RHACMComponent:Observability:Observability:Hub_Infra {id: 'UWL_PROMETHEUS', label: 'uwl prometheus', subsystem: 'Observability', type: 'Observability', description: 'Observability component: uwl prometheus'});
+CREATE (:RHACMComponent:Observability:Operator:Hub_Infra {id: 'PROMETHEUS_OPERATOR_MANAGED', label: 'prometheus operator', subsystem: 'Observability', type: 'Operator', description: 'Observability component: prometheus operator'});
+CREATE (:RHACMComponent:Observability:Observability:Hub_Infra {id: 'PROMETHEUS_STACK_KS', label: 'prometheus stack(*KS only)', subsystem: 'Observability', type: 'Observability', description: 'Observability component: prometheus stack(*KS only)'});
+CREATE (:RHACMComponent:Observability:Cluster {id: 'CLUSTER_MONITORING_CONFIG', label: 'cluster monitoring config (configmap)', subsystem: 'Observability', type: 'Cluster', description: 'Observability component: cluster monitoring config (configmap)'});
+CREATE (:RHACMComponent:Observability:Operator:Hub_Infra {id: 'CMO_OPERATOR', label: 'cmo operator', subsystem: 'Observability', type: 'Operator', description: 'Observability component: cmo operator'});
+CREATE (:RHACMComponent:Observability:Component {id: 'EXTERNAL_METRICS_ENDPOINT', label: 'external metrics endpoint (optional)', subsystem: 'Observability', type: 'Component', description: 'Observability component: external metrics endpoint (optional)'});
+CREATE (:RHACMComponent:Observability:Component:Hub_Infra {id: 'EXTERNAL_METRICS_ENDPOINT_VICTORIAMETRICS', label: 'external metrics endpoint (e.g., victoriametrics)', subsystem: 'Observability', type: 'Component', description: 'Observability component: external metrics endpoint (e.g., victoriametrics)'});
+CREATE (:RHACMComponent:Observability:Component:Hub_Infra {id: 'VICTORIA_METRICS', label: 'Victoria Metrics', subsystem: 'Observability', type: 'Component', description: 'Observability component: Victoria Metrics'});
+CREATE (:RHACMComponent:Observability:Component:Hub_Infra {id: 'KAFKA', label: 'Kafka', subsystem: 'Observability', type: 'Component', description: 'Observability component: Kafka'});
+CREATE (:RHACMComponent:Observability:Component {id: 'OCP_ROUTE', label: 'OCP Route (General)', subsystem: 'Observability', type: 'Component', description: 'Observability component: OCP Route (General)'});
+CREATE (:RHACMComponent:Observability:Component:Hub_Infra {id: 'OCP_ROUTE_CONFIG', label: 'OCP Route (Config)', subsystem: 'Observability', type: 'Component', description: 'Observability component: OCP Route (Config)'});
+CREATE (:RHACMComponent:Observability:API:Hub_Infra {id: 'API_SERVER', label: 'API Server', subsystem: 'Observability', type: 'API', description: 'Observability component: API Server'});
+CREATE (:RHACMComponent:Observability:Component:Hub_Infra {id: 'REGISTER', label: 'Register', subsystem: 'Observability', type: 'Component', description: 'Observability component: Register'});
+CREATE (:RHACMComponent:Observability:Component {id: 'GET_CHANGES', label: 'Get Changes', subsystem: 'Observability', type: 'Component', description: 'Observability component: Get Changes'});
+CREATE (:RHACMComponent:Observability:Component {id: 'HUB_ALERTMANAGER', label: 'hub alertmanager', subsystem: 'Observability', type: 'Component', description: 'Observability component: hub alertmanager', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Observability:Component:Hub_Infra {id: 'ALERT_MANAGER', label: 'AlertManager', subsystem: 'Observability', type: 'Component', description: 'Observability component: AlertManager', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Observability:Observability {id: 'ALERTMANAGER_UWL_PROMETHEUS', label: 'alertmanager/uwl prometheus', subsystem: 'Observability', type: 'Observability', description: 'Observability component: alertmanager/uwl prometheus', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Observability:Observability:Hub_Infra {id: 'PROMETHEUS_ALERTMANAGER', label: 'prometheus-alertmanager', subsystem: 'Observability', type: 'Observability', description: 'Observability component: prometheus-alertmanager', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Observability:Component:Hub_Infra {id: 'EXPORTERS', label: 'Exporters', subsystem: 'Observability', type: 'Component', description: 'Observability component: Exporters'});
 CREATE (:RHACMComponent:Observability:Component {id: 'METRICS_STORAGE', label: 'Metrics Storage', subsystem: 'Observability', type: 'Component', description: 'Observability component: Metrics Storage'});
 CREATE (:RHACMComponent:Observability:Component {id: 'QUERY_ENGINE', label: 'Query Engine', subsystem: 'Observability', type: 'Component', description: 'Observability component: Query Engine'});
-CREATE (:RHACMComponent:Observability:Controller:Thanos {id: 'DASHBOARD_CONTROLLER', label: 'Dashboard Controller', subsystem: 'Observability', type: 'Controller', description: 'Observability component: Dashboard Controller'});
-CREATE (:RHACMComponent:Observability:Component {id: 'ALERT_MANAGER_INTEGRATION', label: 'Alert Manager Integration', subsystem: 'Observability', type: 'Component', description: 'Observability component: Alert Manager Integration'});
-CREATE (:RHACMComponent:Observability:Component {id: 'NODE_EXPORTER', label: 'node-exporter', subsystem: 'Observability', type: 'Component', description: 'Observability component: node-exporter'});
-CREATE (:RHACMComponent:Observability:Component:Thanos {id: 'KUBE_STATE_METRICS', label: 'kube-state-metrics', subsystem: 'Observability', type: 'Component', description: 'Observability component: kube-state-metrics'});
+CREATE (:RHACMComponent:Observability:Controller {id: 'DASHBOARD_CONTROLLER', label: 'Dashboard Controller', subsystem: 'Observability', type: 'Controller', description: 'Observability component: Dashboard Controller'});
+CREATE (:RHACMComponent:Observability:Component {id: 'ALERT_MANAGER_INTEGRATION', label: 'Alert Manager Integration', subsystem: 'Observability', type: 'Component', description: 'Observability component: Alert Manager Integration', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Observability:Component:Hub_Infra {id: 'NODE_EXPORTER', label: 'node-exporter', subsystem: 'Observability', type: 'Component', description: 'Observability component: node-exporter'});
+CREATE (:RHACMComponent:Observability:Component:Hub_Infra {id: 'KUBE_STATE_METRICS', label: 'kube-state-metrics', subsystem: 'Observability', type: 'Component', description: 'Observability component: kube-state-metrics'});
 CREATE (:RHACMComponent:Observability:Component {id: 'KUBE_RBAC_PROXY', label: 'kube-rbac-proxy', subsystem: 'Observability', type: 'Component', description: 'Observability component: kube-rbac-proxy'});
+CREATE (:RHACMComponent:Observability:Component {id: 'EXTERNAL_SYSTEMS', label: 'External Systems', subsystem: 'Observability', type: 'Component', description: 'Observability component: External Systems'});
 CREATE (:RHACMComponent:Cluster:Component:Hypershift {id: 'MANIFESTWORK', label: 'ManifestWork', subsystem: 'Cluster', type: 'Component', description: 'Cluster component: ManifestWork'});
 CREATE (:RHACMComponent:Cluster:Component {id: 'RBAC_RESOURCES', label: 'RBAC Resources', subsystem: 'Cluster', type: 'Component', description: 'Cluster component: RBAC Resources'});
 CREATE (:RHACMComponent:Cluster:Component {id: 'CURATOR_JOBS', label: 'Curator Jobs', subsystem: 'Cluster', type: 'Component', description: 'Cluster component: Curator Jobs'});
 CREATE (:RHACMComponent:Cluster:Component {id: 'IMAGESET_REPO', label: 'ImageSet Git Repository', subsystem: 'Cluster', type: 'Component', description: 'Cluster component: ImageSet Git Repository'});
 CREATE (:RHACMComponent:Cluster:Component {id: 'CLOUD_CREDENTIALS', label: 'Cloud Provider Secrets', subsystem: 'Cluster', type: 'Component', description: 'Cluster component: Cloud Provider Secrets'});
-CREATE (:RHACMComponent:Cluster:Cluster:Hypershift {id: 'CLUSTER_POOLS', label: 'Cluster Pools', subsystem: 'Cluster', type: 'Cluster', description: 'Cluster component: Cluster Pools'});
-CREATE (:RHACMComponent:Cluster:Cluster {id: 'CLUSTER_CLAIMS', label: 'ClusterClaim Resources', subsystem: 'Cluster', type: 'Cluster', description: 'Cluster component: ClusterClaim Resources'});
-CREATE (:RHACMComponent:Cluster:Component:Hypershift {id: 'HYPERSHIFT_ADDON_MANAGER', label: 'hypershift-addon-manager', subsystem: 'Cluster', type: 'Component', description: 'Cluster component: hypershift-addon-manager'});
-CREATE (:RHACMComponent:Cluster:Component:Hypershift {id: 'HYPERSHIFT_ADDON_AGENT', label: 'hypershift-addon-agent', subsystem: 'Cluster', type: 'Component', description: 'Cluster component: hypershift-addon-agent'});
-CREATE (:RHACMComponent:Cluster:Cluster:Hypershift {id: 'MANAGEDCLUSTER_ADDON', label: 'ManagedClusterAddOn', subsystem: 'Cluster', type: 'Cluster', description: 'Cluster component: ManagedClusterAddOn'});
+CREATE (:RHACMComponent:Cluster:Cluster:Hypershift {id: 'CLUSTER_POOLS', label: 'Cluster Pools', subsystem: 'Cluster', type: 'Cluster', description: 'Cluster component: Cluster Pools', deployment_model: 'multi_model', deployment_pattern: 'cross_cluster', model_role: 'cluster_manager'});
+CREATE (:RHACMComponent:Cluster:Cluster {id: 'CLUSTER_CLAIMS', label: 'ClusterClaim Resources', subsystem: 'Cluster', type: 'Cluster', description: 'Cluster component: ClusterClaim Resources', deployment_model: 'multi_model', deployment_pattern: 'cross_cluster', model_role: 'cluster_manager'});
+CREATE (:RHACMComponent:Cluster:Component:Hypershift {id: 'HYPERSHIFT_ADDON_MANAGER', label: 'hypershift-addon-manager', subsystem: 'Cluster', type: 'Component', description: 'Cluster component: hypershift-addon-manager', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Cluster:Component:Hypershift {id: 'HYPERSHIFT_ADDON_AGENT', label: 'hypershift-addon-agent', subsystem: 'Cluster', type: 'Component', description: 'Cluster component: hypershift-addon-agent', deployment_model: 'addon_framework', deployment_pattern: 'hub_to_spoke_deployment', model_role: 'spoke_service'});
+CREATE (:RHACMComponent:Cluster:Cluster:Hypershift {id: 'MANAGEDCLUSTER_ADDON', label: 'ManagedClusterAddOn', subsystem: 'Cluster', type: 'Cluster', description: 'Cluster component: ManagedClusterAddOn', deployment_model: 'multi_model', deployment_pattern: 'cross_cluster', model_role: 'cluster_manager'});
 CREATE (:RHACMComponent:Cluster:Operator:Hypershift {id: 'HYPERSHIFT_OIDC_CREDENTIALS', label: 'hypershift-operator-oidc-provider-s3-credentials', subsystem: 'Cluster', type: 'Operator', description: 'Cluster component: hypershift-operator-oidc-provider-s3-credentials'});
-CREATE (:RHACMComponent:Cluster:Operator {id: 'MULTICLOUD_OPS_FOUNDATION', label: 'multicloud-operators-foundation', subsystem: 'Cluster', type: 'Operator', description: 'Cluster component: multicloud-operators-foundation'});
+CREATE (:RHACMComponent:Cluster:Operator {id: 'MULTICLOUD_OPS_FOUNDATION', label: 'multicloud-operators-foundation (Cluster)', subsystem: 'Cluster', type: 'Operator', description: 'Cluster component: multicloud-operators-foundation (Cluster)', deployment_model: 'multi_model', deployment_pattern: 'cross_cluster', model_role: 'cluster_manager'});
 CREATE (:RHACMComponent:Search:Operator {id: 'SEARCH_OPERATOR_CTRL', label: 'Search Operator Controller', subsystem: 'Search', type: 'Operator', description: 'Search component: Search Operator Controller'});
-CREATE (:RHACMComponent:Search:Component:Internal {id: 'INDEX_MANAGER', label: 'Index Manager', subsystem: 'Search', type: 'Component', description: 'Search component: Index Manager'});
-CREATE (:RHACMComponent:Search:Component:Internal {id: 'COLLECTOR_MANAGER', label: 'Collector Manager', subsystem: 'Search', type: 'Component', description: 'Search component: Collector Manager'});
+CREATE (:RHACMComponent:Search:Component:Internal {id: 'INDEX_MANAGER', label: 'Index Manager', subsystem: 'Search', type: 'Component', description: 'Search component: Index Manager', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Search:Component:Internal {id: 'COLLECTOR_MANAGER', label: 'Collector Manager', subsystem: 'Search', type: 'Component', description: 'Search component: Collector Manager', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
 CREATE (:RHACMComponent:Search:Controller:Internal {id: 'API_GATEWAY_CTRL', label: 'API Gateway Controller', subsystem: 'Search', type: 'Controller', description: 'Search component: API Gateway Controller'});
 CREATE (:RHACMComponent:Search:Component:Internal {id: 'RESOURCE_INDEXER', label: 'Resource Indexer', subsystem: 'Search', type: 'Component', description: 'Search component: Resource Indexer'});
 CREATE (:RHACMComponent:Search:Component {id: 'SCHEMA_REGISTRY', label: 'Schema Registry', subsystem: 'Search', type: 'Component', description: 'Search component: Schema Registry'});
@@ -287,39 +322,34 @@ CREATE (:RHACMComponent:Search:API:Internal {id: 'GRAPHQL_API_SERVER', label: 'G
 CREATE (:RHACMComponent:Search:API {id: 'REST_API_GATEWAY', label: 'REST API Gateway', subsystem: 'Search', type: 'API', description: 'Search component: REST API Gateway'});
 CREATE (:RHACMComponent:Search:Component:Internal {id: 'QUERY_OPTIMIZER', label: 'Query Optimizer', subsystem: 'Search', type: 'Component', description: 'Search component: Query Optimizer'});
 CREATE (:RHACMComponent:Search:Component {id: 'RBAC_INTEGRATION', label: 'RBAC Integration', subsystem: 'Search', type: 'Component', description: 'Search component: RBAC Integration'});
-CREATE (:RHACMComponent:Console:API {id: 'CONSOLE_BACKEND_API', label: 'Console Backend API', subsystem: 'Console', type: 'API', description: 'Console component: Console Backend API'});
-CREATE (:RHACMComponent:Console:Component:Advanced {id: 'RBAC_MIDDLEWARE', label: 'RBAC Middleware', subsystem: 'Console', type: 'Component', description: 'Console component: RBAC Middleware'});
-CREATE (:RHACMComponent:Console:Cluster {id: 'MULTI_CLUSTER_NAV', label: 'Multi-cluster Navigation', subsystem: 'Console', type: 'Cluster', description: 'Console component: Multi-cluster Navigation'});
-CREATE (:RHACMComponent:Console:Component:Advanced {id: 'RESOURCE_PROXY', label: 'Resource Proxy', subsystem: 'Console', type: 'Component', description: 'Console component: Resource Proxy'});
-CREATE (:RHACMComponent:Console:Controller {id: 'REST_API_CONTROLLERS', label: 'REST API Controllers', subsystem: 'Console', type: 'Controller', description: 'Console component: REST API Controllers'});
-CREATE (:RHACMComponent:Console:Component {id: 'AUTHENTICATION_HANDLER', label: 'Authentication Handler', subsystem: 'Console', type: 'Component', description: 'Console component: Authentication Handler'});
-CREATE (:RHACMComponent:Console:Component {id: 'WEBSOCKET_MANAGER', label: 'WebSocket Manager', subsystem: 'Console', type: 'Component', description: 'Console component: WebSocket Manager'});
-CREATE (:RHACMComponent:Console:Component:Advanced {id: 'SESSION_MANAGER', label: 'Session Manager', subsystem: 'Console', type: 'Component', description: 'Console component: Session Manager'});
-CREATE (:RHACMComponent:Console:Component {id: 'REACT_COMPONENTS', label: 'Frontend React Components', subsystem: 'Console', type: 'Component', description: 'Console component: Frontend React Components'});
-CREATE (:RHACMComponent:Console:Component:Advanced {id: 'DASHBOARD_RENDERER', label: 'Dashboard Renderer', subsystem: 'Console', type: 'Component', description: 'Console component: Dashboard Renderer'});
-CREATE (:RHACMComponent:Console:Cluster:Advanced {id: 'CLUSTER_OVERVIEW', label: 'Cluster Overview', subsystem: 'Console', type: 'Cluster', description: 'Console component: Cluster Overview'});
-CREATE (:RHACMComponent:Console:Component {id: 'RESOURCE_BROWSER', label: 'Resource Browser', subsystem: 'Console', type: 'Component', description: 'Console component: Resource Browser'});
-CREATE (:RHACMComponent:Console:Component {id: 'OAUTH_INTEGRATION', label: 'OAuth Integration', subsystem: 'Console', type: 'Component', description: 'Console component: OAuth Integration'});
-CREATE (:RHACMComponent:Console:Cluster {id: 'CLUSTER_SELECTOR', label: 'Cluster Selector', subsystem: 'Console', type: 'Cluster', description: 'Console component: Cluster Selector'});
-CREATE (:RHACMComponent:Console:Component:Advanced {id: 'PLUGIN_FRAMEWORK', label: 'Plugin Framework', subsystem: 'Console', type: 'Component', description: 'Console component: Plugin Framework'});
-CREATE (:RHACMComponent:Console:Component {id: 'THEME_MANAGER', label: 'Theme Manager', subsystem: 'Console', type: 'Component', description: 'Console component: Theme Manager'});
-CREATE (:RHACMComponent:Console:Component {id: 'MCE_PLUGIN', label: 'MCE Plugin', subsystem: 'Console', type: 'Component', description: 'Console component: MCE Plugin'});
-CREATE (:RHACMComponent:Console:Component:Advanced {id: 'PLUGIN_REGISTRY', label: 'Plugin Registry', subsystem: 'Console', type: 'Component', description: 'Console component: Plugin Registry'});
-CREATE (:RHACMComponent:Console:Component {id: 'PLUGIN_MANAGEMENT', label: 'Plugin Management System', subsystem: 'Console', type: 'Component', description: 'Console component: Plugin Management System'});
-CREATE (:RHACMComponent:Console:Component {id: 'GITHUB_INTEGRATION', label: 'GitHub Integration', subsystem: 'Console', type: 'Component', description: 'Console component: GitHub Integration'});
-CREATE (:RHACMComponent:Console:Component {id: 'INSIGHTS_INTEGRATION', label: 'Red Hat Insights Integration', subsystem: 'Console', type: 'Component', description: 'Console component: Red Hat Insights Integration'});
-CREATE (:RHACMComponent:Console:Component {id: 'CONSOLE_ROUTE_HANDLER', label: 'Console Route Handler', subsystem: 'Console', type: 'Component', description: 'Console component: Console Route Handler'});
-CREATE (:RHACMComponent:Console:Component:Advanced {id: 'OPENSHIFT_CONSOLE_BRIDGE', label: 'OpenShift Console Bridge', subsystem: 'Console', type: 'Component', description: 'Console component: OpenShift Console Bridge'});
-CREATE (:RHACMComponent:Console:Component {id: 'GRC_RESOURCES', label: 'GRC Resources', subsystem: 'Console', type: 'Component', description: 'Console component: GRC Resources'});
-CREATE (:RHACMComponent:Console:Application:Advanced {id: 'APP_RESOURCES', label: 'Application Resources', subsystem: 'Console', type: 'Application', description: 'Console component: Application Resources'});
-CREATE (:RHACMComponent:Console:Component:Advanced {id: 'OBS_DASHBOARDS', label: 'Observability Dashboards', subsystem: 'Console', type: 'Component', description: 'Console component: Observability Dashboards'});
-CREATE (:RHACMComponent:Console:Cluster:Advanced {id: 'CLUSTER_RESOURCES', label: 'Cluster Resources', subsystem: 'Console', type: 'Cluster', description: 'Console component: Cluster Resources'});
-CREATE (:RHACMComponent:Console:Search {id: 'SEARCH_INTERFACE', label: 'Search Interface', subsystem: 'Console', type: 'Search', description: 'Console component: Search Interface'});
-
-// Additional Missing Addon Components
-CREATE (:RHACMComponent:Overview:Component:Addons {id: 'SUBMARINER_ADDON', label: 'Submariner Addon', subsystem: 'Overview', type: 'Component', description: 'Overview component: Submariner Addon'});
-CREATE (:RHACMComponent:Cluster:CRD:Foundation {id: 'MANAGEDCLUSTER_ADDON_CRD', label: 'ManagedClusterAddOn CRD', subsystem: 'Cluster', type: 'CRD', description: 'Cluster component: ManagedClusterAddOn CRD'});
-CREATE (:RHACMComponent:Observability:Component:Addons {id: 'OBSERVABILITY_ADDON', label: 'Observability Addon', subsystem: 'Observability', type: 'Component', description: 'Observability component: Observability Addon'});
+CREATE (:RHACMComponent:Console:API {id: 'CONSOLE_BACKEND_API', label: 'Console Backend API', subsystem: 'Console', type: 'API', description: 'Console component: Console Backend API', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component:Advanced {id: 'RBAC_MIDDLEWARE', label: 'RBAC Middleware', subsystem: 'Console', type: 'Component', description: 'Console component: RBAC Middleware', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Cluster {id: 'MULTI_CLUSTER_NAV', label: 'Multi-cluster Navigation', subsystem: 'Console', type: 'Cluster', description: 'Console component: Multi-cluster Navigation', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component:Advanced {id: 'RESOURCE_PROXY', label: 'Resource Proxy', subsystem: 'Console', type: 'Component', description: 'Console component: Resource Proxy', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Controller {id: 'REST_API_CONTROLLERS', label: 'REST API Controllers', subsystem: 'Console', type: 'Controller', description: 'Console component: REST API Controllers', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component {id: 'AUTHENTICATION_HANDLER', label: 'Authentication Handler', subsystem: 'Console', type: 'Component', description: 'Console component: Authentication Handler', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component {id: 'WEBSOCKET_MANAGER', label: 'WebSocket Manager', subsystem: 'Console', type: 'Component', description: 'Console component: WebSocket Manager', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component:Advanced {id: 'SESSION_MANAGER', label: 'Session Manager', subsystem: 'Console', type: 'Component', description: 'Console component: Session Manager', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component {id: 'REACT_COMPONENTS', label: 'Frontend React Components', subsystem: 'Console', type: 'Component', description: 'Console component: Frontend React Components', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component:Advanced {id: 'DASHBOARD_RENDERER', label: 'Dashboard Renderer', subsystem: 'Console', type: 'Component', description: 'Console component: Dashboard Renderer', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Cluster:Advanced {id: 'CLUSTER_OVERVIEW', label: 'Cluster Overview', subsystem: 'Console', type: 'Cluster', description: 'Console component: Cluster Overview', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component {id: 'RESOURCE_BROWSER', label: 'Resource Browser', subsystem: 'Console', type: 'Component', description: 'Console component: Resource Browser', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component {id: 'OAUTH_INTEGRATION', label: 'OAuth Integration', subsystem: 'Console', type: 'Component', description: 'Console component: OAuth Integration', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Cluster {id: 'CLUSTER_SELECTOR', label: 'Cluster Selector', subsystem: 'Console', type: 'Cluster', description: 'Console component: Cluster Selector', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component:Advanced {id: 'PLUGIN_FRAMEWORK', label: 'Plugin Framework', subsystem: 'Console', type: 'Component', description: 'Console component: Plugin Framework', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component {id: 'THEME_MANAGER', label: 'Theme Manager', subsystem: 'Console', type: 'Component', description: 'Console component: Theme Manager', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component {id: 'MCE_PLUGIN', label: 'MCE Plugin', subsystem: 'Console', type: 'Component', description: 'Console component: MCE Plugin', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component:Advanced {id: 'PLUGIN_REGISTRY', label: 'Plugin Registry', subsystem: 'Console', type: 'Component', description: 'Console component: Plugin Registry', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component {id: 'PLUGIN_MANAGEMENT', label: 'Plugin Management System', subsystem: 'Console', type: 'Component', description: 'Console component: Plugin Management System', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component {id: 'GITHUB_INTEGRATION', label: 'GitHub Integration', subsystem: 'Console', type: 'Component', description: 'Console component: GitHub Integration', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component {id: 'INSIGHTS_INTEGRATION', label: 'Red Hat Insights Integration', subsystem: 'Console', type: 'Component', description: 'Console component: Red Hat Insights Integration', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component {id: 'CONSOLE_ROUTE_HANDLER', label: 'Console Route Handler', subsystem: 'Console', type: 'Component', description: 'Console component: Console Route Handler', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component:Advanced {id: 'OPENSHIFT_CONSOLE_BRIDGE', label: 'OpenShift Console Bridge', subsystem: 'Console', type: 'Component', description: 'Console component: OpenShift Console Bridge', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component {id: 'GRC_RESOURCES', label: 'GRC Resources', subsystem: 'Console', type: 'Component', description: 'Console component: GRC Resources', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Application:Advanced {id: 'APP_RESOURCES', label: 'Application Resources', subsystem: 'Console', type: 'Application', description: 'Console component: Application Resources', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Component:Advanced {id: 'OBS_DASHBOARDS', label: 'Observability Dashboards', subsystem: 'Console', type: 'Component', description: 'Console component: Observability Dashboards', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Cluster:Advanced {id: 'CLUSTER_RESOURCES', label: 'Cluster Resources', subsystem: 'Console', type: 'Cluster', description: 'Console component: Cluster Resources', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
+CREATE (:RHACMComponent:Console:Search {id: 'SEARCH_INTERFACE', label: 'Search Interface', subsystem: 'Console', type: 'Search', description: 'Console component: Search Interface', deployment_model: 'hub_centric', deployment_pattern: 'centralized_management', model_role: 'hub_service'});
 
 // Relationship Creation - Component Dependencies
 
@@ -328,6 +358,26 @@ MATCH (source {id: 'ETCD'}), (target {id: 'K8S'}) CREATE (source)-[:DEPENDS_ON {
 MATCH (source {id: 'K8S'}), (target {id: 'OCP'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
 MATCH (source {id: 'OCP'}), (target {id: 'HUB'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
 MATCH (source {id: 'OCP'}), (target {id: 'SPOKE'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'K8S'}), (target {id: 'FOUNDATION'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'K8S'}), (target {id: 'REGISTRATION'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'K8S'}), (target {id: 'WORK_FRAMEWORK'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'K8S'}), (target {id: 'ADDON_FRAMEWORK'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'K8S'}), (target {id: 'MCE'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'K8S'}), (target {id: 'CLUSTER_MANAGER'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'K8S'}), (target {id: 'REGISTRATION_OPERATOR'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'K8S'}), (target {id: 'PLACEMENT'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'K8S'}), (target {id: 'CONSOLE_API'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'K8S'}), (target {id: 'SEARCH_V2_API'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'ETCD'}), (target {id: 'MCE'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'ETCD'}), (target {id: 'FOUNDATION'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'ETCD'}), (target {id: 'REGISTRATION'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'ETCD'}), (target {id: 'CLUSTER_MANAGER'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'ETCD'}), (target {id: 'GLOBAL_HUB_MANAGER'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'ETCD'}), (target {id: 'GLOBAL_HUB_OPERATOR'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'ETCD'}), (target {id: 'WORK_FRAMEWORK'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'ETCD'}), (target {id: 'ADDON_FRAMEWORK'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'ETCD'}), (target {id: 'PLACEMENT'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
+MATCH (source {id: 'ETCD'}), (target {id: 'GOV_POLICY_PROP'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
 MATCH (source {id: 'HUB'}), (target {id: 'ACM'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
 MATCH (source {id: 'ACM'}), (target {id: 'OCM'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
 MATCH (source {id: 'HUB'}), (target {id: 'MCE'}) CREATE (source)-[:DEPENDS_ON {subsystem: 'Overview', cross_cluster: false}]->(target);
@@ -435,7 +485,6 @@ MATCH (source {id: 'SUBMARINER'}), (target {id: 'SUBMARINER_GATEWAY'}) CREATE (s
 MATCH (source {id: 'SUBMARINER'}), (target {id: 'SUBMARINER_ROUTE_AGENT'}) CREATE (source)-[:CONTAINS {subsystem: 'Overview', cross_cluster: false}]->(target);
 MATCH (source {id: 'SUBMARINER'}), (target {id: 'LIGHTHOUSE_AGENT'}) CREATE (source)-[:CONTAINS {subsystem: 'Overview', cross_cluster: false}]->(target);
 MATCH (source {id: 'SUBMARINER'}), (target {id: 'LIGHTHOUSE_COREDNS'}) CREATE (source)-[:CONTAINS {subsystem: 'Overview', cross_cluster: false}]->(target);
-MATCH (source {id: 'SUBMARINER'}), (target {id: 'SUBMARINER_ADDON'}) CREATE (source)-[:CONTAINS {subsystem: 'Overview', cross_cluster: false}]->(target);
 MATCH (source {id: 'BACKUP_RESTORE'}), (target {id: 'OADP_OPERATOR'}) CREATE (source)-[:CONTAINS {subsystem: 'Overview', cross_cluster: false}]->(target);
 MATCH (source {id: 'BACKUP_RESTORE'}), (target {id: 'VELERO_BACKUP_CONTROLLER'}) CREATE (source)-[:CONTAINS {subsystem: 'Overview', cross_cluster: false}]->(target);
 MATCH (source {id: 'BACKUP_RESTORE'}), (target {id: 'VOLUME_SNAPSHOT_CONTROLLER'}) CREATE (source)-[:CONTAINS {subsystem: 'Overview', cross_cluster: false}]->(target);
@@ -484,22 +533,6 @@ MATCH (source {id: 'MULTICLOUD_INTEGRATIONS'}), (target {id: 'GITOPS_ADDON_CTRL'
 MATCH (source {id: 'ARGOCD_PULL_INTEGRATION'}), (target {id: 'APPLICATION_CTRL'}) CREATE (source)-[:CONTAINS {subsystem: 'Application', cross_cluster: false}]->(target);
 MATCH (source {id: 'ARGOCD_PULL_INTEGRATION'}), (target {id: 'APPLICATION_STATUS_CTRL'}) CREATE (source)-[:CONTAINS {subsystem: 'Application', cross_cluster: false}]->(target);
 MATCH (source {id: 'ARGOCD_PULL_INTEGRATION'}), (target {id: 'CLUSTER_CTRL'}) CREATE (source)-[:CONTAINS {subsystem: 'Application', cross_cluster: false}]->(target);
-MATCH (source {id: 'MCO_OPERATOR'}), (target {id: 'OBSERVABILITY_CONTROLLER'}) CREATE (source)-[:CONTAINS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'MCO_OPERATOR'}), (target {id: 'METRICS_COLLECTION_MANAGER'}) CREATE (source)-[:CONTAINS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'MCO_OPERATOR'}), (target {id: 'ADDON_DEPLOYMENT_CONTROLLER'}) CREATE (source)-[:CONTAINS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'MCO_OPERATOR'}), (target {id: 'CONFIGURATION_RECONCILER'}) CREATE (source)-[:CONTAINS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'MCO_OPERATOR'}), (target {id: 'OBSERVABILITY_ADDON'}) CREATE (source)-[:CONTAINS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'OBSERVATORIUM_OP'}), (target {id: 'OBSERVATORIUM_DEPLOYMENT_CTRL'}) CREATE (source)-[:CONTAINS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'OBSERVATORIUM_OP'}), (target {id: 'THANOS_INTEGRATION_MANAGER'}) CREATE (source)-[:CONTAINS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'OBSERVATORIUM_OP'}), (target {id: 'STORAGE_CONFIGURATION_CTRL'}) CREATE (source)-[:CONTAINS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'OBSERVATORIUM'}), (target {id: 'QUERY_GATEWAY'}) CREATE (source)-[:CONTAINS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'OBSERVATORIUM'}), (target {id: 'RULER_ENGINE'}) CREATE (source)-[:CONTAINS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'OBSERVATORIUM'}), (target {id: 'COMPACTOR_SERVICE'}) CREATE (source)-[:CONTAINS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'OBSERVATORIUM'}), (target {id: 'STORE_GATEWAY'}) CREATE (source)-[:CONTAINS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'THANOS'}), (target {id: 'METRICS_STORAGE'}) CREATE (source)-[:CONTAINS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'THANOS'}), (target {id: 'QUERY_ENGINE'}) CREATE (source)-[:CONTAINS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'GRAFANA'}), (target {id: 'DASHBOARD_CONTROLLER'}) CREATE (source)-[:CONTAINS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'GRAFANA'}), (target {id: 'ALERT_MANAGER_INTEGRATION'}) CREATE (source)-[:CONTAINS {subsystem: 'Observability', cross_cluster: false}]->(target);
 MATCH (source {id: 'SEARCH_V2_OPERATOR'}), (target {id: 'SEARCH_OPERATOR_CTRL'}) CREATE (source)-[:CONTAINS {subsystem: 'Search', cross_cluster: false}]->(target);
 MATCH (source {id: 'SEARCH_V2_OPERATOR'}), (target {id: 'INDEX_MANAGER'}) CREATE (source)-[:CONTAINS {subsystem: 'Search', cross_cluster: false}]->(target);
 MATCH (source {id: 'SEARCH_V2_OPERATOR'}), (target {id: 'COLLECTOR_MANAGER'}) CREATE (source)-[:CONTAINS {subsystem: 'Search', cross_cluster: false}]->(target);
@@ -549,7 +582,6 @@ MATCH (source {id: 'MULTICLOUD_OPS_FOUNDATION'}), (target {id: 'MANAGEDCLUSTER_I
 MATCH (source {id: 'MULTICLOUD_OPS_FOUNDATION'}), (target {id: 'KLUSTERLET_ADDON_CTRL'}) CREATE (source)-[:MANAGES {subsystem: 'Cluster', cross_cluster: false}]->(target);
 MATCH (source {id: 'PROVIDER_CREDENTIAL_CTRL'}), (target {id: 'CLOUD_CREDENTIALS'}) CREATE (source)-[:MANAGES {subsystem: 'Cluster', cross_cluster: false}]->(target);
 MATCH (source {id: 'HYPERSHIFT_ADDON_OP'}), (target {id: 'HYPERSHIFT_ADDON_MANAGER'}) CREATE (source)-[:MANAGES {subsystem: 'Cluster', cross_cluster: false}]->(target);
-MATCH (source {id: 'ADDON_FRAMEWORK'}), (target {id: 'MANAGEDCLUSTER_ADDON_CRD'}) CREATE (source)-[:MANAGES {subsystem: 'Cluster', cross_cluster: false}]->(target);
 MATCH (source {id: 'SEARCH_V2_OPERATOR'}), (target {id: 'SEARCH_V2_API'}) CREATE (source)-[:MANAGES {subsystem: 'Search', cross_cluster: false}]->(target);
 MATCH (source {id: 'SEARCH_V2_OPERATOR'}), (target {id: 'SEARCH_INDEXER'}) CREATE (source)-[:MANAGES {subsystem: 'Search', cross_cluster: false}]->(target);
 MATCH (source {id: 'SEARCH_V2_OPERATOR'}), (target {id: 'SEARCH_COLLECTOR'}) CREATE (source)-[:MANAGES {subsystem: 'Search', cross_cluster: false}]->(target);
@@ -558,9 +590,6 @@ MATCH (source {id: 'PLUGIN_MANAGEMENT'}), (target {id: 'MCE_PLUGIN'}) CREATE (so
 // DEPLOYS relationships
 MATCH (source {id: 'GLOBAL_HUB_OPERATOR'}), (target {id: 'KAFKA_TRANSPORT'}) CREATE (source)-[:DEPLOYS {subsystem: 'Overview', cross_cluster: false}]->(target);
 MATCH (source {id: 'GLOBAL_HUB_OPERATOR'}), (target {id: 'POSTGRES_STORAGE'}) CREATE (source)-[:DEPLOYS {subsystem: 'Overview', cross_cluster: false}]->(target);
-MATCH (source {id: 'OBSERVATORIUM_OP'}), (target {id: 'OBSERVATORIUM'}) CREATE (source)-[:DEPLOYS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'PROMETHEUS_OP'}), (target {id: 'PROMETHEUS'}) CREATE (source)-[:DEPLOYS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'PROMETHEUS_OP'}), (target {id: 'PROMETHEUS_ALERTMANAGER'}) CREATE (source)-[:DEPLOYS {subsystem: 'Observability', cross_cluster: false}]->(target);
 
 // USES relationships
 MATCH (source {id: 'GLOBAL_HUB_MANAGER'}), (target {id: 'KAFKA_TRANSPORT'}) CREATE (source)-[:USES {subsystem: 'Overview', cross_cluster: false}]->(target);
@@ -626,7 +655,6 @@ MATCH (source {id: 'CONSOLE'}), (target {id: 'CONSOLE_CLI_DOWNLOAD'}) CREATE (so
 // CONFIGURES relationships
 MATCH (source {id: 'OADP_OPERATOR'}), (target {id: 'BACKUP_STORAGE_LOCATION'}) CREATE (source)-[:CONFIGURES {subsystem: 'Overview', cross_cluster: false}]->(target);
 MATCH (source {id: 'GATEKEEPER_FBC'}), (target {id: 'GATEKEEPER_OP'}) CREATE (source)-[:CONFIGURES {subsystem: 'Governance', cross_cluster: false}]->(target);
-MATCH (source {id: 'METRICS_COLLECTION_MANAGER'}), (target {id: 'PROMETHEUS'}) CREATE (source)-[:CONFIGURES {subsystem: 'Observability', cross_cluster: false}]->(target);
 MATCH (source {id: 'MANAGEDCLUSTER_ADDON'}), (target {id: 'HYPERSHIFT_ADDON_AGENT'}) CREATE (source)-[:CONFIGURES {subsystem: 'Cluster', cross_cluster: false}]->(target);
 
 // PROVISIONS_CLUSTERS_VIA relationships
@@ -680,8 +708,6 @@ MATCH (source {id: 'GOV_POLICY_FRAMEWORK'}), (target {id: 'GOV_POLICY_ADDON_CTRL
 MATCH (source {id: 'MUST_GATHER_ENGINE'}), (target {id: 'HUB_DATA_COLLECTOR'}) CREATE (source)-[:ORCHESTRATES {subsystem: 'Governance', cross_cluster: false}]->(target);
 MATCH (source {id: 'MUST_GATHER_ENGINE'}), (target {id: 'MANAGED_CLUSTER_COLLECTOR'}) CREATE (source)-[:ORCHESTRATES {subsystem: 'Governance', cross_cluster: false}]->(target);
 MATCH (source {id: 'MUST_GATHER_ENGINE'}), (target {id: 'HOSTED_CLUSTER_COLLECTOR'}) CREATE (source)-[:ORCHESTRATES {subsystem: 'Governance', cross_cluster: false}]->(target);
-MATCH (source {id: 'MCO_OPERATOR'}), (target {id: 'OBSERVATORIUM_OP'}) CREATE (source)-[:ORCHESTRATES {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'MCO_OPERATOR'}), (target {id: 'PROMETHEUS_OP'}) CREATE (source)-[:ORCHESTRATES {subsystem: 'Observability', cross_cluster: false}]->(target);
 
 // CREATES relationships
 MATCH (source {id: 'ADDON_FACTORY'}), (target {id: 'ADDON_MANAGER'}) CREATE (source)-[:CREATES {subsystem: 'Governance', cross_cluster: false}]->(target);
@@ -709,7 +735,6 @@ MATCH (source {id: 'CONTROLLER_RUNTIME_SOURCE'}), (target {id: 'EVENT_CHANNEL_BR
 
 // AGGREGATES_VIA relationships
 MATCH (source {id: 'RESOURCE_ORGANIZER'}), (target {id: 'DIAGNOSTIC_AGGREGATOR'}) CREATE (source)-[:AGGREGATES_VIA {subsystem: 'Governance', cross_cluster: false}]->(target);
-MATCH (source {id: 'OBSERVATORIUM'}), (target {id: 'THANOS'}) CREATE (source)-[:AGGREGATES_VIA {subsystem: 'Observability', cross_cluster: false}]->(target);
 
 // OPERATES relationships
 MATCH (source {id: 'GATEKEEPER_OP'}), (target {id: 'GATEKEEPER'}) CREATE (source)-[:OPERATES {subsystem: 'Governance', cross_cluster: false}]->(target);
@@ -719,8 +744,6 @@ MATCH (source {id: 'GOV_POLICY_ADDON_CTRL'}), (target {id: 'KLUSTERLET_ADDON_CTR
 
 // DEPLOYS_ADDON relationships
 MATCH (source {id: 'GOV_POLICY_FRAMEWORK'}), (target {id: 'GOV_POLICY_FRAMEWORK_ADDON'}) CREATE (source)-[:DEPLOYS_ADDON {subsystem: 'Governance', cross_cluster: true}]->(target);
-MATCH (source {id: 'SUBMARINER_OPERATOR'}), (target {id: 'SUBMARINER_ADDON'}) CREATE (source)-[:DEPLOYS_ADDON {subsystem: 'Overview', cross_cluster: true}]->(target);
-MATCH (source {id: 'MCO_OPERATOR'}), (target {id: 'OBSERVABILITY_ADDON'}) CREATE (source)-[:DEPLOYS_ADDON {subsystem: 'Observability', cross_cluster: true}]->(target);
 
 // ENFORCES_VIA relationships
 MATCH (source {id: 'CONFIG_POLICY_CTRL'}), (target {id: 'GOV_POLICY_FRAMEWORK_ADDON'}) CREATE (source)-[:ENFORCES_VIA {subsystem: 'Governance', cross_cluster: true}]->(target);
@@ -791,37 +814,197 @@ MATCH (source {id: 'MULTICLOUD_OPS_SUBSCRIPTION'}), (target {id: 'SUBSCRIPTION_W
 MATCH (source {id: 'APPLICATION_MANAGER'}), (target {id: 'APP_WEBHOOKS'}) CREATE (source)-[:VALIDATES_VIA {subsystem: 'Application', cross_cluster: false}]->(target);
 MATCH (source {id: 'SESSION_MANAGER'}), (target {id: 'OAUTH_INTEGRATION'}) CREATE (source)-[:VALIDATES_VIA {subsystem: 'Console', cross_cluster: false}]->(target);
 
-// PROVIDES_STORAGE relationships
-MATCH (source {id: 'KUBE_THANOS'}), (target {id: 'THANOS'}) CREATE (source)-[:PROVIDES_STORAGE {subsystem: 'Observability', cross_cluster: false}]->(target);
+// create relationships
+MATCH (source {id: 'MCO_OPERATOR'}), (target {id: 'MCO_RES'}) CREATE (source)-[:create {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'MCO_CONTROLLER'}), (target {id: 'OBSERVATORIUM_OP'}) CREATE (source)-[:create {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'MCO_CONTROLLER'}), (target {id: 'OBSERVATORIUM_API'}) CREATE (source)-[:create {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'MCO_CONTROLLER'}), (target {id: 'THANOS'}) CREATE (source)-[:create {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'PLACEMENT_CONTROLLER'}), (target {id: 'MANIFESTWORK_RES_CLUSTER_NS'}) CREATE (source)-[:create {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'PLACEMENT_CONTROLLER'}), (target {id: 'HUB_ENDPOINT_OPERATOR'}) CREATE (source)-[:create {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'PLACEMENT_CONTROLLER'}), (target {id: 'HUB_METRICS_COLLECTOR'}) CREATE (source)-[:create {subsystem: 'Observability', cross_cluster: false}]->(target);
 
-// SIDECARS_WITH relationships
-MATCH (source {id: 'KUBE_THANOS'}), (target {id: 'PROMETHEUS'}) CREATE (source)-[:SIDECARS_WITH {subsystem: 'Observability', cross_cluster: false}]->(target);
+// watches relationships
+MATCH (source {id: 'MCO_RES'}), (target {id: 'MCO_CONTROLLER'}) CREATE (source)-[:watches {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'HUB_ENDPOINT_OPERATOR'}), (target {id: 'HUB_METRICS_COLLECTOR'}) CREATE (source)-[:watches {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'MANIFESTWORK_RES_REPLICATED'}), (target {id: 'WORK_AGENT'}) CREATE (source)-[:watches {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'CLUSTER_MONITORING_CONFIG'}), (target {id: 'UWL_PROMETHEUS'}) CREATE (source)-[:watches {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'CLUSTER_MONITORING_CONFIG'}), (target {id: 'PROMETHEUS_MANAGED'}) CREATE (source)-[:watches {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'CMO_OPERATOR'}), (target {id: 'UWL_PROMETHEUS'}) CREATE (source)-[:watches {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'CMO_OPERATOR'}), (target {id: 'PROMETHEUS_MANAGED'}) CREATE (source)-[:watches {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'PLACEMENT_CONTROLLER'}), (target {id: 'OBSERVABILITY_ADDON_HUB'}) CREATE (source)-[:watches {subsystem: 'Observability', cross_cluster: false}]->(target);
 
-// FEEDS_METRICS relationships
-MATCH (source {id: 'PROMETHEUS'}), (target {id: 'GRAFANA'}) CREATE (source)-[:FEEDS_METRICS {subsystem: 'Observability', cross_cluster: false}]->(target);
+// start relationships
+MATCH (source {id: 'MCO_CONTROLLER'}), (target {id: 'PLACEMENT_CONTROLLER'}) CREATE (source)-[:start {subsystem: 'Observability', cross_cluster: false}]->(target);
 
-// PROVIDES_LONGTERM_DATA relationships
-MATCH (source {id: 'THANOS'}), (target {id: 'GRAFANA'}) CREATE (source)-[:PROVIDES_LONGTERM_DATA {subsystem: 'Observability', cross_cluster: false}]->(target);
+// reconcile relationships
+MATCH (source {id: 'PLACEMENT_CONTROLLER'}), (target {id: 'GLOBAL_WORK_RES'}) CREATE (source)-[:reconcile {subsystem: 'Observability', cross_cluster: false}]->(target);
 
-// SCRAPES_METRICS relationships
-MATCH (source {id: 'PROMETHEUS'}), (target {id: 'NODE_EXPORTER'}) CREATE (source)-[:SCRAPES_METRICS {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'PROMETHEUS'}), (target {id: 'KUBE_STATE_METRICS'}) CREATE (source)-[:SCRAPES_METRICS {subsystem: 'Observability', cross_cluster: false}]->(target);
+// create_for_managed_clusters relationships
+MATCH (source {id: 'PLACEMENT_CONTROLLER'}), (target {id: 'OBSERVABILITY_ADDON_HUB'}) CREATE (source)-[:create_for_managed_clusters {subsystem: 'Observability', cross_cluster: false}]->(target);
 
-// PROXIES_VIA relationships
-MATCH (source {id: 'PROMETHEUS'}), (target {id: 'KUBE_RBAC_PROXY'}) CREATE (source)-[:PROXIES_VIA {subsystem: 'Observability', cross_cluster: false}]->(target);
-MATCH (source {id: 'RESOURCE_BROWSER'}), (target {id: 'RESOURCE_PROXY'}) CREATE (source)-[:PROXIES_VIA {subsystem: 'Console', cross_cluster: false}]->(target);
+// creates relationships
+MATCH (source {id: 'WORK_AGENT'}), (target {id: 'ENDPOINT_OPERATOR'}) CREATE (source)-[:creates {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'ENDPOINT_OPERATOR'}), (target {id: 'OBSERVABILITY_ADDON_MANAGED'}) CREATE (source)-[:creates {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'OBSERVABILITY_ADDON_MANAGED'}), (target {id: 'METRICS_COLLECTOR_MANAGED'}) CREATE (source)-[:creates {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'OBSERVABILITY_ADDON_MANAGED'}), (target {id: 'UWL_METRICS_COLLECTOR'}) CREATE (source)-[:creates {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'METRICS_COLLECTOR_MANAGED'}), (target {id: 'PROMETHEUS_MANAGED'}) CREATE (source)-[:creates {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'UWL_METRICS_COLLECTOR'}), (target {id: 'UWL_PROMETHEUS'}) CREATE (source)-[:creates {subsystem: 'Observability', cross_cluster: false}]->(target);
 
-// TRIGGERS_ALERTS relationships
-MATCH (source {id: 'PROMETHEUS'}), (target {id: 'PROMETHEUS_ALERTMANAGER'}) CREATE (source)-[:TRIGGERS_ALERTS {subsystem: 'Observability', cross_cluster: false}]->(target);
+// creates_for_KS_only relationships
+MATCH (source {id: 'PROMETHEUS_MANAGED'}), (target {id: 'PROMETHEUS_OPERATOR_MANAGED'}) CREATE (source)-[:creates_for_KS_only {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'UWL_PROMETHEUS'}), (target {id: 'PROMETHEUS_STACK_KS'}) CREATE (source)-[:creates_for_KS_only {subsystem: 'Observability', cross_cluster: false}]->(target);
 
-// QUERIES relationships
-MATCH (source {id: 'QUERY_GATEWAY'}), (target {id: 'QUERY_ENGINE'}) CREATE (source)-[:QUERIES {subsystem: 'Observability', cross_cluster: false}]->(target);
+// deploys relationships
+MATCH (source {id: 'OBSERVATORIUM_OP'}), (target {id: 'OBSERVATORIUM'}) CREATE (source)-[:deploys {subsystem: 'Observability', cross_cluster: false}]->(target);
 
-// TRIGGERS relationships
-MATCH (source {id: 'RULER_ENGINE'}), (target {id: 'ALERT_MANAGER_INTEGRATION'}) CREATE (source)-[:TRIGGERS {subsystem: 'Observability', cross_cluster: false}]->(target);
+// contains relationships
+MATCH (source {id: 'OBSERVATORIUM_API'}), (target {id: 'OBSERVATORIUM_API_GATEWAY'}) CREATE (source)-[:contains {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'OBSERVATORIUM'}), (target {id: 'RBAC_QUERY_PROXY'}) CREATE (source)-[:contains {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'THANOS'}), (target {id: 'THANOS_RECEIVE'}) CREATE (source)-[:contains {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'THANOS'}), (target {id: 'THANOS_QUERY'}) CREATE (source)-[:contains {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'THANOS'}), (target {id: 'THANOS_STORE_GATEWAY'}) CREATE (source)-[:contains {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'THANOS'}), (target {id: 'THANOS_COMPACTOR'}) CREATE (source)-[:contains {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'THANOS'}), (target {id: 'THANOS_RULER'}) CREATE (source)-[:contains {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'MANAGED_CLUSTER_ADDON'}), (target {id: 'ENDPOINT_OPERATOR'}) CREATE (source)-[:contains {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'UWL_PROMETHEUS'}), (target {id: 'ALERTMANAGER_UWL_PROMETHEUS'}) CREATE (source)-[:contains {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'PROMETHEUS'}), (target {id: 'PROMETHEUS_ALERTMANAGER'}) CREATE (source)-[:contains {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'THANOS'}), (target {id: 'METRICS_STORAGE'}) CREATE (source)-[:contains {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'THANOS'}), (target {id: 'QUERY_ENGINE'}) CREATE (source)-[:contains {subsystem: 'Observability', cross_cluster: false}]->(target);
 
-// COMPACTS relationships
-MATCH (source {id: 'COMPACTOR_SERVICE'}), (target {id: 'METRICS_STORAGE'}) CREATE (source)-[:COMPACTS {subsystem: 'Observability', cross_cluster: false}]->(target);
+// integrates_with relationships
+MATCH (source {id: 'OBSERVATORIUM_API'}), (target {id: 'THANOS'}) CREATE (source)-[:integrates_with {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'ALERT_MANAGER'}), (target {id: 'ALERT_MANAGER_INTEGRATION'}) CREATE (source)-[:integrates_with {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// stores_to relationships
+MATCH (source {id: 'THANOS_RECEIVE'}), (target {id: 'OBJECT_STORAGE'}) CREATE (source)-[:stores_to {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// reads_from relationships
+MATCH (source {id: 'THANOS_STORE_GATEWAY'}), (target {id: 'OBJECT_STORAGE'}) CREATE (source)-[:reads_from {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// compacts_data_in relationships
+MATCH (source {id: 'THANOS_COMPACTOR'}), (target {id: 'OBJECT_STORAGE'}) CREATE (source)-[:compacts_data_in {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// queries relationships
+MATCH (source {id: 'THANOS_QUERY'}), (target {id: 'THANOS_STORE_GATEWAY'}) CREATE (source)-[:queries {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'THANOS_QUERY'}), (target {id: 'THANOS_RECEIVE'}) CREATE (source)-[:queries {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'OBSERVATORIUM_API_GATEWAY'}), (target {id: 'THANOS_QUERY'}) CREATE (source)-[:queries {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// scrape_metrics relationships
+MATCH (source {id: 'EXPORTERS'}), (target {id: 'PROMETHEUS'}) CREATE (source)-[:scrape_metrics {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'EXPORTERS'}), (target {id: 'UWL_PROMETHEUS'}) CREATE (source)-[:scrape_metrics {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'EXPORTERS'}), (target {id: 'PROMETHEUS_MANAGED'}) CREATE (source)-[:scrape_metrics {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// feeds relationships
+MATCH (source {id: 'PROMETHEUS'}), (target {id: 'METRICS_COLLECTOR_SEPARATE'}) CREATE (source)-[:feeds {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// config relationships
+MATCH (source {id: 'METRICS_COLLECTOR_SEPARATE'}), (target {id: 'ENDPOINT_METRICS_OPERATOR'}) CREATE (source)-[:config {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// send_metrics_remote_write relationships
+MATCH (source {id: 'ENDPOINT_METRICS_OPERATOR'}), (target {id: 'OBSERVATORIUM_API_GATEWAY'}) CREATE (source)-[:send_metrics_remote_write {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'UWL_METRICS_COLLECTOR'}), (target {id: 'OBSERVATORIUM_API_GATEWAY'}) CREATE (source)-[:send_metrics_remote_write {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'METRICS_COLLECTOR_MANAGED'}), (target {id: 'OBSERVATORIUM_API_GATEWAY'}) CREATE (source)-[:send_metrics_remote_write {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// forward_metrics relationships
+MATCH (source {id: 'OBSERVATORIUM_API_GATEWAY'}), (target {id: 'THANOS_RECEIVE'}) CREATE (source)-[:forward_metrics {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// scrapes_metrics relationships
+MATCH (source {id: 'UWL_PROMETHEUS'}), (target {id: 'UWL_METRICS_COLLECTOR'}) CREATE (source)-[:scrapes_metrics {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'PROMETHEUS_MANAGED'}), (target {id: 'METRICS_COLLECTOR_MANAGED'}) CREATE (source)-[:scrapes_metrics {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'PROMETHEUS'}), (target {id: 'NODE_EXPORTER'}) CREATE (source)-[:scrapes_metrics {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'PROMETHEUS'}), (target {id: 'KUBE_STATE_METRICS'}) CREATE (source)-[:scrapes_metrics {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// forward_metrics_if_configured relationships
+MATCH (source {id: 'EXTERNAL_METRICS_ENDPOINT'}), (target {id: 'THANOS_RECEIVE'}) CREATE (source)-[:forward_metrics_if_configured {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'THANOS_RECEIVE'}), (target {id: 'EXTERNAL_METRICS_ENDPOINT'}) CREATE (source)-[:forward_metrics_if_configured {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'HUB_ALERTMANAGER'}), (target {id: 'EXTERNAL_METRICS_ENDPOINT'}) CREATE (source)-[:forward_metrics_if_configured {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// export_metrics_to_3rd_party_tools relationships
+MATCH (source {id: 'VICTORIA_METRICS'}), (target {id: 'EXTERNAL_METRICS_ENDPOINT'}) CREATE (source)-[:export_metrics_to_3rd_party_tools {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'OBSERVATORIUM_API_GATEWAY'}), (target {id: 'VICTORIA_METRICS'}) CREATE (source)-[:export_metrics_to_3rd_party_tools {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'OBSERVATORIUM_API_GATEWAY'}), (target {id: 'KAFKA'}) CREATE (source)-[:export_metrics_to_3rd_party_tools {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// inject_alertmanager_config relationships
+MATCH (source {id: 'ENDPOINT_OPERATOR'}), (target {id: 'CLUSTER_MONITORING_CONFIG'}) CREATE (source)-[:inject_alertmanager_config {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// updates relationships
+MATCH (source {id: 'UWL_PROMETHEUS'}), (target {id: 'CMO_OPERATOR'}) CREATE (source)-[:updates {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'PROMETHEUS_MANAGED'}), (target {id: 'CMO_OPERATOR'}) CREATE (source)-[:updates {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'OBSERVATORIUM_API_GATEWAY'}), (target {id: 'OBSERVABILITY_ADDON_HUB'}) CREATE (source)-[:updates {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// forward_alerts relationships
+MATCH (source {id: 'THANOS_RULER'}), (target {id: 'OBSERVATORIUM_API_GATEWAY'}) CREATE (source)-[:forward_alerts {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'OBSERVATORIUM_API_GATEWAY'}), (target {id: 'HUB_ALERTMANAGER'}) CREATE (source)-[:forward_alerts {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// sends_alerts_to relationships
+MATCH (source {id: 'ALERT_MANAGER'}), (target {id: 'EXTERNAL_SYSTEMS'}) CREATE (source)-[:sends_alerts_to {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// exposes_via relationships
+MATCH (source {id: 'OBSERVATORIUM_API_GATEWAY'}), (target {id: 'OCP_ROUTE'}) CREATE (source)-[:exposes_via {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// register relationships
+MATCH (source {id: 'API_SERVER'}), (target {id: 'REGISTER'}) CREATE (source)-[:register {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// get_changes relationships
+MATCH (source {id: 'API_SERVER'}), (target {id: 'GET_CHANGES'}) CREATE (source)-[:get_changes {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// configures relationships
+MATCH (source {id: 'ENDPOINT_OPERATOR'}), (target {id: 'API_SERVER'}) CREATE (source)-[:configures {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// update_status relationships
+MATCH (source {id: 'ENDPOINT_OPERATOR'}), (target {id: 'OBSERVABILITY_ADDON_MANAGED'}) CREATE (source)-[:update_status {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'UWL_METRICS_COLLECTOR'}), (target {id: 'OBSERVABILITY_ADDON_MANAGED'}) CREATE (source)-[:update_status {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'METRICS_COLLECTOR_MANAGED'}), (target {id: 'OBSERVABILITY_ADDON_MANAGED'}) CREATE (source)-[:update_status {subsystem: 'Observability', cross_cluster: false}]->(target);
+MATCH (source {id: 'OBSERVABILITY_ADDON_MANAGED'}), (target {id: 'OBSERVATORIUM_API_GATEWAY'}) CREATE (source)-[:update_status {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// queries_via relationships
+MATCH (source {id: 'GRAFANA'}), (target {id: 'RBAC_QUERY_PROXY'}) CREATE (source)-[:queries_via {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// proxies_to relationships
+MATCH (source {id: 'RBAC_QUERY_PROXY'}), (target {id: 'OBSERVATORIUM_API_GATEWAY'}) CREATE (source)-[:proxies_to {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// provides_long_term_data relationships
+MATCH (source {id: 'THANOS_QUERY'}), (target {id: 'GRAFANA'}) CREATE (source)-[:provides_long_term_data {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// feeds_metrics relationships
+MATCH (source {id: 'PROMETHEUS'}), (target {id: 'GRAFANA'}) CREATE (source)-[:feeds_metrics {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// proxies_via relationships
+MATCH (source {id: 'PROMETHEUS'}), (target {id: 'KUBE_RBAC_PROXY'}) CREATE (source)-[:proxies_via {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// feeds_raw_data relationships
+MATCH (source {id: 'UWL_METRICS_COLLECTOR'}), (target {id: 'OBSERVATORIUM_API_GATEWAY'}) CREATE (source)-[:feeds_raw_data {subsystem: 'Observability', cross_cluster: true}]->(target);
+MATCH (source {id: 'METRICS_COLLECTOR_MANAGED'}), (target {id: 'OBSERVATORIUM_API_GATEWAY'}) CREATE (source)-[:feeds_raw_data {subsystem: 'Observability', cross_cluster: true}]->(target);
+
+// status_updates relationships
+MATCH (source {id: 'OBSERVABILITY_ADDON_MANAGED'}), (target {id: 'OBSERVABILITY_ADDON_HUB'}) CREATE (source)-[:status_updates {subsystem: 'Observability', cross_cluster: true}]->(target);
+
+// data_export relationships
+MATCH (source {id: 'KAFKA'}), (target {id: 'EXTERNAL_SYSTEMS'}) CREATE (source)-[:data_export {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// manages relationships
+MATCH (source {id: 'ALERT_MANAGER_INTEGRATION'}), (target {id: 'HUB_ALERTMANAGER'}) CREATE (source)-[:manages {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// deploys_to relationships
+MATCH (source {id: 'OBSERVABILITY_ADDON_MANAGED'}), (target {id: 'MANAGED_CLUSTER_ADDON'}) CREATE (source)-[:deploys_to {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// provides relationships
+MATCH (source {id: 'VICTORIA_METRICS'}), (target {id: 'EXTERNAL_METRICS_ENDPOINT_VICTORIAMETRICS'}) CREATE (source)-[:provides {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// feeds_to relationships
+MATCH (source {id: 'EXTERNAL_METRICS_ENDPOINT_VICTORIAMETRICS'}), (target {id: 'EXTERNAL_METRICS_ENDPOINT'}) CREATE (source)-[:feeds_to {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// configures_via relationships
+MATCH (source {id: 'OCP_ROUTE'}), (target {id: 'OCP_ROUTE_CONFIG'}) CREATE (source)-[:configures_via {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// uses relationships
+MATCH (source {id: 'GRAFANA'}), (target {id: 'DASHBOARD_CONTROLLER'}) CREATE (source)-[:uses {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// provides_data_to relationships
+MATCH (source {id: 'QUERY_ENGINE'}), (target {id: 'DASHBOARD_CONTROLLER'}) CREATE (source)-[:provides_data_to {subsystem: 'Observability', cross_cluster: false}]->(target);
+
+// enables relationships
+MATCH (source {id: 'OCM'}), (target {id: 'MCO_OPERATOR'}) CREATE (source)-[:enables {subsystem: 'Observability', cross_cluster: false}]->(target);
 
 // PROVISIONS_CLUSTERS relationships
 MATCH (source {id: 'HIVE'}), (target {id: 'CLUSTER_CURATOR_CTRL'}) CREATE (source)-[:PROVISIONS_CLUSTERS {subsystem: 'Cluster', cross_cluster: false}]->(target);
@@ -897,6 +1080,9 @@ MATCH (source {id: 'RBAC_MIDDLEWARE'}), (target {id: 'REST_API_CONTROLLERS'}) CR
 
 // STREAMS_VIA relationships
 MATCH (source {id: 'DASHBOARD_RENDERER'}), (target {id: 'WEBSOCKET_MANAGER'}) CREATE (source)-[:STREAMS_VIA {subsystem: 'Console', cross_cluster: false}]->(target);
+
+// PROXIES_VIA relationships
+MATCH (source {id: 'RESOURCE_BROWSER'}), (target {id: 'RESOURCE_PROXY'}) CREATE (source)-[:PROXIES_VIA {subsystem: 'Console', cross_cluster: false}]->(target);
 
 // MANAGES_SESSIONS relationships
 MATCH (source {id: 'AUTHENTICATION_HANDLER'}), (target {id: 'SESSION_MANAGER'}) CREATE (source)-[:MANAGES_SESSIONS {subsystem: 'Console', cross_cluster: false}]->(target);
@@ -977,14 +1163,14 @@ MATCH (source {id: 'THEME_MANAGER'}), (target {id: 'DASHBOARD_RENDERER'}) CREATE
 // ORDER BY Subsystem, RootComponent;
 
 // Script Summary
-// Total Components: 291
-// Total Dependencies: 419
+// Total Components: 323
+// Total Dependencies: 499
 // Subsystems: Application, Cluster, Console, Governance, Observability, Overview, Search
 // 
 // Generated from Mermaid files:
-// - rhacm-overview.mmd (High-level architecture)
-// - rhacm-governance.mmd (GRC policies and compliance)
-// - rhacm-application.mmd (Application lifecycle)
-// - rhacm-observability.mmd (Monitoring and metrics)
-// - rhacm-cluster.mmd (Cluster management)
-// - rhacm-search.mmd (Resource discovery)
+// - mermaid/rhacm-overview.mmd (High-level architecture)
+// - mermaid/rhacm-governance.mmd (GRC policies and compliance)
+// - mermaid/rhacm-application.mmd (Application lifecycle)
+// - mermaid/rhacm-observability.mmd (Monitoring and metrics)
+// - mermaid/rhacm-cluster.mmd (Cluster management)
+// - mermaid/rhacm-search.mmd (Resource discovery)

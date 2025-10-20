@@ -331,3 +331,279 @@ RETURN count(n) as ComponentsWithMissingProperties,
 //
 // For best performance with large result sets, consider adding LIMIT clauses
 // to queries that might return many results.
+// =============================================================================
+// APPLICATION LIFECYCLE MODEL ANALYSIS
+// =============================================================================
+
+
+// =============================================================================
+// APPLICATION LIFECYCLE MODEL DISCOVERY
+// =============================================================================
+
+// 1. Overview of All Three Application Models
+// Shows the complete breakdown of deployment models
+MATCH (n:RHACMComponent)
+WHERE n.deployment_model IS NOT NULL AND n.deployment_model <> ''
+RETURN n.deployment_model as DeploymentModel, 
+       collect(DISTINCT n.model_role) as Roles,
+       collect(DISTINCT n.deployment_pattern) as Patterns,
+       count(n) as ComponentCount
+ORDER BY ComponentCount DESC;
+
+// 2. Subscription Model Complete Architecture
+// Shows the stream-based content delivery pattern
+MATCH (n:RHACMComponent)
+WHERE n.deployment_model = 'subscription'
+RETURN n.label as Component,
+       n.model_role as Role,
+       n.deployment_pattern as Pattern,
+       n.subsystem as Subsystem
+ORDER BY n.model_role, n.label;
+
+// 3. Subscription Model Data Flow
+// Traces the complete content streaming flow
+MATCH path = (channel)-[:FEEDS_CONTENT]->(subscription)-[:DEPLOYS_VIA]->(manager)
+WHERE channel.deployment_model = 'subscription' 
+  AND subscription.deployment_model = 'subscription'
+  AND manager.deployment_model = 'subscription'
+RETURN [node in nodes(path) | node.label] as SubscriptionFlow,
+       [node in nodes(path) | node.model_role] as ComponentRoles,
+       [rel in relationships(path) | type(rel)] as RelationshipTypes;
+
+// =============================================================================
+// ARGOCD PUSH MODEL ANALYSIS
+// =============================================================================
+
+// 4. ArgoCD Push Model Architecture
+// Shows hub-orchestrated deployment pattern
+MATCH (n:RHACMComponent)
+WHERE n.deployment_model = 'argocd_push'
+RETURN n.label as Component,
+       n.model_role as Role,
+       n.deployment_pattern as Pattern,
+       n.subsystem as Subsystem
+ORDER BY n.model_role, n.label;
+
+// 5. ArgoCD Push Model Integration Flow
+// Shows how hub controllers orchestrate deployments
+MATCH (integrations)-[:CONTAINS]->(controller)
+WHERE integrations.deployment_model = 'argocd_push' 
+  AND controller.deployment_model = 'argocd_push'
+RETURN integrations.label as Orchestrator,
+       collect(controller.label) as Controllers,
+       collect(controller.model_role) as ControllerRoles;
+
+// 6. Push Model to GitOps Operator Flow
+// Shows how push model connects to deployment execution
+MATCH (push_component)-[r]->(gitops)
+WHERE push_component.deployment_model = 'argocd_push'
+  AND gitops.label CONTAINS 'GitOps'
+RETURN push_component.label as PushComponent,
+       push_component.model_role as PushRole,
+       type(r) as Relationship,
+       gitops.label as GitOpsComponent,
+       gitops.deployment_model as GitOpsModels;
+
+// =============================================================================
+// ARGOCD PULL MODEL ANALYSIS
+// =============================================================================
+
+// 7. ArgoCD Pull Model Architecture  
+// Shows spoke-autonomous deployment pattern
+MATCH (n:RHACMComponent)
+WHERE n.deployment_model = 'argocd_pull'
+RETURN n.label as Component,
+       n.model_role as Role,
+       n.deployment_pattern as Pattern,
+       n.subsystem as Subsystem
+ORDER BY n.model_role, n.label;
+
+// 8. Pull Model ManifestWork Distribution
+// Shows how applications are distributed to managed clusters
+MATCH (pull_component)-[:CREATES]->(manifestwork)
+WHERE pull_component.deployment_model = 'argocd_pull'
+  AND manifestwork.label CONTAINS 'ManifestWork'
+RETURN pull_component.label as PullController,
+       pull_component.model_role as Role,
+       manifestwork.label as DistributionMechanism;
+
+// 9. Pull Model Status Synchronization
+// Shows how status flows back from managed clusters
+MATCH (status_controller)-[r]->(target)
+WHERE status_controller.model_role = 'status_syncer'
+  AND status_controller.deployment_model = 'argocd_pull'
+RETURN status_controller.label as StatusController,
+       type(r) as SyncMechanism,
+       target.label as SyncTarget;
+
+// =============================================================================
+// GITOPS OPERATOR DUAL MODEL SUPPORT
+// =============================================================================
+
+// 10. GitOps Operator Multi-Model Analysis
+// Shows how GitOps Operator supports both ArgoCD models
+MATCH (component)-[r]->(gitops)
+WHERE gitops.deployment_model CONTAINS 'argocd_push'
+  AND gitops.deployment_model CONTAINS 'argocd_pull'
+  AND gitops.model_role = 'application_deployer'
+RETURN component.deployment_model as SourceModel,
+       component.model_role as SourceRole,
+       type(r) as ConnectionType,
+       gitops.label as UnifiedDeployer,
+       gitops.deployment_pattern as DeploymentPattern;
+
+// 11. Cross-Model GitOps Integration
+// Compares how different models connect to GitOps
+MATCH (source)-[r]->(gitops)
+WHERE source.deployment_model IN ['argocd_push', 'argocd_pull']
+  AND gitops.label CONTAINS 'GitOps'
+RETURN source.deployment_model as Model,
+       count(source) as ComponentsConnected,
+       collect(DISTINCT type(r)) as ConnectionTypes,
+       collect(DISTINCT source.model_role) as SourceRoles;
+
+// =============================================================================
+// MODEL COMPARISON QUERIES  
+// =============================================================================
+
+// 12. Deployment Pattern Comparison
+// Shows the fundamental differences between models
+MATCH (n:RHACMComponent)
+WHERE n.deployment_model IN ['subscription', 'argocd_push', 'argocd_pull']
+RETURN n.deployment_model as Model,
+       n.deployment_pattern as Pattern,
+       collect(DISTINCT n.model_role) as Roles,
+       count(n) as Components
+ORDER BY Model;
+
+// 13. Hub vs Spoke Component Distribution by Model
+// Shows which models operate primarily on hub vs spoke
+MATCH (n:RHACMComponent)
+WHERE n.deployment_model IN ['subscription', 'argocd_push', 'argocd_pull']
+RETURN n.deployment_model as Model,
+       CASE 
+         WHEN n.deployment_pattern CONTAINS 'hub' THEN 'Hub-Centric'
+         WHEN n.deployment_pattern CONTAINS 'spoke' THEN 'Spoke-Centric'
+         WHEN n.deployment_pattern CONTAINS 'cross' THEN 'Cross-Cluster'
+         ELSE 'Other'
+       END as Location,
+       count(n) as ComponentCount;
+
+// 14. Model Role Distribution
+// Shows the variety of roles within each deployment model
+MATCH (n:RHACMComponent)
+WHERE n.deployment_model IN ['subscription', 'argocd_push', 'argocd_pull']
+  AND n.model_role IS NOT NULL AND n.model_role <> ''
+RETURN n.deployment_model as Model,
+       n.model_role as Role,
+       count(n) as ComponentCount
+ORDER BY Model, ComponentCount DESC;
+
+// =============================================================================
+// TROUBLESHOOTING BY MODEL
+// =============================================================================
+
+// 15. Subscription Model Failure Impact
+// Shows what breaks if subscription components fail
+MATCH (sub_component)-[r*1..3]-(affected)
+WHERE sub_component.deployment_model = 'subscription'
+  AND sub_component.model_role IN ['content_consumer', 'content_router', 'deployment_executor']
+RETURN sub_component.label as CriticalComponent,
+       sub_component.model_role as Role,
+       count(DISTINCT affected) as PotentiallyAffectedComponents,
+       collect(DISTINCT affected.subsystem) as AffectedSubsystems;
+
+// 16. ArgoCD Push Model Dependencies
+// Shows the dependency chain for push model components
+MATCH path = (start)-[:DEPENDS_ON|CONTAINS*1..3]->(end)
+WHERE start.deployment_model = 'argocd_push'
+  AND start.model_role = 'integration_orchestrator'
+RETURN [node in nodes(path) | node.label] as DependencyChain,
+       [node in nodes(path) | node.model_role] as RoleChain,
+       length(path) as ChainLength
+ORDER BY ChainLength DESC;
+
+// 17. Pull Model Managed Cluster Components
+// Shows what gets deployed to managed clusters in pull model
+MATCH (pull_component)-[:CREATES|DISTRIBUTES*1..2]->(spoke_component)
+WHERE pull_component.deployment_model = 'argocd_pull'
+RETURN pull_component.label as HubController,
+       pull_component.model_role as HubRole,
+       collect(spoke_component.label) as SpokeComponents,
+       count(spoke_component) as SpokeComponentCount;
+
+// =============================================================================
+// MODEL EVOLUTION AND ARCHITECTURE INSIGHTS
+// =============================================================================
+
+// 18. Model Transition Compatibility
+// Shows which components bridge different models
+MATCH (bridge)-[r]-(target)
+WHERE bridge.deployment_model CONTAINS ','  // Multi-model components
+   OR target.deployment_model <> bridge.deployment_model
+RETURN bridge.label as BridgeComponent,
+       bridge.deployment_model as BridgeModels,
+       collect(DISTINCT target.deployment_model) as ConnectedModels,
+       count(DISTINCT target) as Connections;
+
+// 19. Content Flow Patterns by Model
+// Shows how content/applications flow through each model
+MATCH path = (source)-[:FEEDS_CONTENT|DEPLOYS_VIA|CREATES*1..3]->(target)
+WHERE source.deployment_model IN ['subscription', 'argocd_push', 'argocd_pull']
+RETURN source.deployment_model as Model,
+       [node in nodes(path) | node.model_role] as FlowRoles,
+       [rel in relationships(path) | type(rel)] as FlowTypes,
+       target.label as FinalTarget
+ORDER BY Model, length(path);
+
+// 20. Model-Specific Relationship Patterns
+// Shows the different relationship patterns each model uses
+MATCH (source)-[r]->(target)
+WHERE source.deployment_model IN ['subscription', 'argocd_push', 'argocd_pull']
+  AND target.deployment_model IN ['subscription', 'argocd_push', 'argocd_pull']
+RETURN source.deployment_model as SourceModel,
+       target.deployment_model as TargetModel,
+       type(r) as RelationshipType,
+       count(r) as Frequency
+ORDER BY SourceModel, Frequency DESC;
+
+// =============================================================================
+// DEMONSTRATION QUERIES FOR AI/MCP
+// =============================================================================
+
+// 21. Complete Model Comparison Summary
+// Perfect for AI to explain the three models
+MATCH (n:RHACMComponent)
+WHERE n.deployment_model IN ['subscription', 'argocd_push', 'argocd_pull']
+WITH n.deployment_model as Model,
+     collect(DISTINCT n.deployment_pattern)[0] as PrimaryPattern,
+     collect(DISTINCT n.model_role) as Roles,
+     count(n) as ComponentCount
+RETURN Model,
+       PrimaryPattern,
+       ComponentCount,
+       Roles,
+       CASE Model
+         WHEN 'subscription' THEN 'Stream-based content delivery from channels to managed clusters'
+         WHEN 'argocd_push' THEN 'Hub-orchestrated GitOps deployment pushed to managed clusters'  
+         WHEN 'argocd_pull' THEN 'Spoke-autonomous GitOps with managed clusters pulling applications'
+       END as Description;
+
+// 22. Model Decision Matrix
+// Helps AI recommend which model to use when
+MATCH (n:RHACMComponent)
+WHERE n.deployment_model IN ['subscription', 'argocd_push', 'argocd_pull']
+RETURN n.deployment_model as Model,
+       CASE 
+         WHEN n.deployment_pattern CONTAINS 'hub' THEN 'Centralized Control'
+         WHEN n.deployment_pattern CONTAINS 'spoke' THEN 'Distributed Control'
+         ELSE 'Hybrid Control'
+       END as ControlPattern,
+       CASE
+         WHEN n.deployment_model = 'subscription' THEN 'Simple, streaming, legacy'
+         WHEN n.deployment_model = 'argocd_push' THEN 'GitOps, hub-managed, orchestrated'
+         WHEN n.deployment_model = 'argocd_pull' THEN 'GitOps, autonomous, resilient'
+       END as Characteristics,
+       count(n) as ComponentComplexity
+GROUP BY n.deployment_model, ControlPattern, Characteristics
+ORDER BY Model;

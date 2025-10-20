@@ -18,6 +18,9 @@ class GraphNode:
     subsystem: str
     node_type: str = "Component"
     description: str = ""
+    deployment_model: str = ""
+    deployment_pattern: str = ""
+    model_role: str = ""
 
 @dataclass
 class GraphRelationship:
@@ -60,12 +63,16 @@ class MermaidParser:
             
             # Skip if already exists (avoid duplicates across files)
             if node_id not in self.nodes:
+                model_info = self._classify_deployment_model(node_id, node_label, subsystem)
                 self.nodes[node_id] = GraphNode(
                     id=node_id,
                     label=node_label,
                     subsystem=subsystem,
                     node_type=self._determine_node_type(node_label),
-                    description=self._generate_description(node_label, subsystem)
+                    description=self._generate_description(node_label, subsystem),
+                    deployment_model=model_info['model'],
+                    deployment_pattern=model_info['pattern'],
+                    model_role=model_info['role']
                 )
     
     def _extract_relationships(self, content: str, subsystem: str) -> None:
@@ -199,6 +206,114 @@ class MermaidParser:
     def _generate_description(self, label: str, subsystem: str) -> str:
         """Generate description based on label and subsystem"""
         return f"{subsystem} component: {label}"
+    
+    def _classify_deployment_model(self, node_id: str, label: str, subsystem: str) -> dict:
+        """Classify component's deployment model and patterns"""
+        label_lower = label.lower()
+        node_id_lower = node_id.lower()
+        
+        # Subscription Model Components
+        if node_id in ['MULTICLOUD_OPS_SUBSCRIPTION', 'MULTICLOUD_OPS_CHANNEL', 'APPLICATION_MANAGER']:
+            return {
+                'model': 'subscription',
+                'pattern': 'hub_stream_sync',
+                'role': self._get_subscription_role(node_id)
+            }
+        
+        # Channel Types (part of Subscription Model)
+        if node_id in ['GIT_CHANNEL', 'HELM_CHANNEL', 'OBJECTSTORAGE_CHANNEL']:
+            return {
+                'model': 'subscription',
+                'pattern': 'content_streaming',
+                'role': 'content_source'
+            }
+        
+        # ArgoCD Push Model Components
+        if node_id in ['MULTICLOUD_INTEGRATIONS', 'GITOPS_CLUSTER_CTRL', 'GITOPS_SYNC_RESOURCE_CTRL', 
+                       'STATUS_AGGREGATION_CTRL', 'PROPAGATION_CTRL', 'GITOPS_ADDON_CTRL']:
+            return {
+                'model': 'argocd_push',
+                'pattern': 'hub_orchestrated',
+                'role': self._get_push_role(node_id)
+            }
+        
+        # ArgoCD Pull Model Components  
+        if node_id in ['ARGOCD_PULL_INTEGRATION', 'APPLICATION_CTRL', 'APPLICATION_STATUS_CTRL', 'CLUSTER_CTRL']:
+            return {
+                'model': 'argocd_pull',
+                'pattern': 'spoke_autonomous',
+                'role': self._get_pull_role(node_id)
+            }
+        
+        # GitOps Operator (serves both ArgoCD models)
+        if node_id == 'GITOPS_OPERATOR':
+            return {
+                'model': 'argocd_push,argocd_pull',
+                'pattern': 'gitops_reconciliation',
+                'role': 'application_deployer'
+            }
+        
+        # Cross-cluster components
+        if 'cluster' in label_lower and subsystem == 'Cluster':
+            return {
+                'model': 'multi_model',
+                'pattern': 'cross_cluster',
+                'role': 'cluster_manager'
+            }
+        
+        # Hub-centric components
+        if subsystem in ['Overview', 'Console'] or 'manager' in label_lower:
+            return {
+                'model': 'hub_centric',
+                'pattern': 'centralized_management',
+                'role': 'hub_service'
+            }
+        
+        # Addon components (deployed to spokes)
+        if 'addon' in label_lower or node_id.endswith('_ADDON'):
+            return {
+                'model': 'addon_framework',
+                'pattern': 'hub_to_spoke_deployment',
+                'role': 'spoke_service'
+            }
+        
+        # Default classification
+        return {
+            'model': '',
+            'pattern': '',
+            'role': ''
+        }
+    
+    def _get_subscription_role(self, node_id: str) -> str:
+        """Get role for subscription model components"""
+        role_map = {
+            'MULTICLOUD_OPS_SUBSCRIPTION': 'content_consumer',
+            'MULTICLOUD_OPS_CHANNEL': 'content_router',
+            'APPLICATION_MANAGER': 'deployment_executor'
+        }
+        return role_map.get(node_id, 'subscription_component')
+    
+    def _get_push_role(self, node_id: str) -> str:
+        """Get role for ArgoCD push model components"""
+        role_map = {
+            'MULTICLOUD_INTEGRATIONS': 'integration_orchestrator',
+            'GITOPS_CLUSTER_CTRL': 'cluster_onboarder',
+            'GITOPS_SYNC_RESOURCE_CTRL': 'sync_coordinator',
+            'STATUS_AGGREGATION_CTRL': 'status_collector',
+            'PROPAGATION_CTRL': 'deployment_propagator',
+            'GITOPS_ADDON_CTRL': 'addon_lifecycle_manager'
+        }
+        return role_map.get(node_id, 'push_component')
+    
+    def _get_pull_role(self, node_id: str) -> str:
+        """Get role for ArgoCD pull model components"""
+        role_map = {
+            'ARGOCD_PULL_INTEGRATION': 'pull_orchestrator',
+            'APPLICATION_CTRL': 'application_watcher',
+            'APPLICATION_STATUS_CTRL': 'status_syncer',
+            'CLUSTER_CTRL': 'cluster_coordinator'
+        }
+        return role_map.get(node_id, 'pull_component')
 
 class CypherGenerator:
     def __init__(self, nodes: Dict[str, GraphNode], relationships: List[GraphRelationship], class_definitions: Dict[str, str]):
@@ -257,13 +372,26 @@ FOR (n:RHACMComponent) ON (n.label);"""
         
         for node in self.nodes.values():
             node_labels = self._get_node_labels(node)
+            # Build properties dynamically
+            properties = [
+                f"id: '{node.id}'",
+                f"label: {self._escape_string(node.label)}",
+                f"subsystem: '{node.subsystem}'",
+                f"type: '{node.node_type}'",
+                f"description: {self._escape_string(node.description)}"
+            ]
+            
+            # Add deployment model properties if they exist
+            if node.deployment_model:
+                properties.append(f"deployment_model: '{node.deployment_model}'")
+            if node.deployment_pattern:
+                properties.append(f"deployment_pattern: '{node.deployment_pattern}'")
+            if node.model_role:
+                properties.append(f"model_role: '{node.model_role}'")
+            
             cypher_nodes.append(
                 f"CREATE (:{':'.join(node_labels)} {{"
-                f"id: '{node.id}', "
-                f"label: {self._escape_string(node.label)}, "
-                f"subsystem: '{node.subsystem}', "
-                f"type: '{node.node_type}', "
-                f"description: {self._escape_string(node.description)}"
+                f"{', '.join(properties)}"
                 f"}});"
             )
         
@@ -382,7 +510,7 @@ FOR (n:RHACMComponent) ON (n.label);"""
 def main():
     parser = argparse.ArgumentParser(description='Convert RHACM Mermaid graphs to Neo4j Cypher')
     parser.add_argument('--input-dir', default='.', help='Directory containing Mermaid files')
-    parser.add_argument('--output', default='knowledge-graph/rhacm_architecture_enhanced.cypher', help='Output Cypher file')
+    parser.add_argument('--output', default='knowledge-graph/rhacm_architecture_comprehensive_final.cypher', help='Output Cypher file')
     parser.add_argument('--verbose', '-v', action='store_true', help='Verbose output')
     
     args = parser.parse_args()

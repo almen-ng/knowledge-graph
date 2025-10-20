@@ -172,10 +172,53 @@ This file contains sample questions to demonstrate the capabilities of the RHACM
 - "How is encryption handled across the architecture?"
 - "What are the trust relationships between components?"
 
-## Comparison Questions
+## Application Lifecycle Model Questions
 
-### Technology Stack
-- "Compare the ArgoCD Push vs Pull models in Application Lifecycle"
+### Model Discovery and Comparison
+- "What are the three Application Lifecycle deployment models in RHACM and how do they differ?"
+- "Show me all components that belong to the Subscription Model and explain their roles"
+- "Compare the ArgoCD Push vs Pull models - which components are unique to each?"
+- "How does the GitOps Operator serve both ArgoCD Push and Pull models differently?"
+- "Which deployment model should I use for centralized control vs autonomous clusters?"
+
+### Subscription Model Deep Dive
+- "Trace the complete data flow in the Subscription Model from content sources to deployment"
+- "What are the different channel types in the Subscription Model and how do they work?"
+- "Show me how content streaming works from Git repositories to managed clusters"
+- "What components handle Helm-based deployments in the Subscription Model?"
+- "How does the Application Manager Addon execute deployments in the Subscription Model?"
+
+### ArgoCD Push Model Analysis
+- "Explain the hub-orchestrated deployment pattern in the ArgoCD Push Model"
+- "What role does multicloud-integrations play in the Push Model architecture?"
+- "How do GitOps Cluster Controllers onboard clusters in the Push Model?"
+- "Show me the status aggregation flow in the ArgoCD Push Model"
+- "How does the Propagation Controller distribute applications to managed clusters?"
+
+### ArgoCD Pull Model Analysis  
+- "Explain the spoke-autonomous deployment pattern in the ArgoCD Pull Model"
+- "How does argocd-pull-integration coordinate with managed cluster GitOps operators?"
+- "What is the role of ManifestWork in the Pull Model distribution mechanism?"
+- "How do Application Status Controllers sync status back to the hub in Pull Model?"
+- "Show me how managed clusters autonomously pull and reconcile applications"
+
+### Model Troubleshooting
+- "If the multicloud-operators-subscription fails, what Subscription Model functionality breaks?"
+- "What's the impact if GitOps Cluster Controller fails in the Push Model?"
+- "How would a ManifestWork distribution failure affect the Pull Model?"
+- "Which model is most resilient to hub-spoke connectivity issues and why?"
+- "Show me the dependency chains for each deployment model"
+
+### Model Migration and Evolution
+- "How can I migrate from Subscription Model to ArgoCD models?"
+- "Which components bridge different deployment models?"
+- "What are the architectural advantages of Pull Model over Push Model?"
+- "How does the GitOps Operator maintain compatibility across models?"
+- "Show me the relationship patterns unique to each deployment model"
+
+## Technology Stack Comparison
+
+### Platform Integration
 - "What's the difference between Hive and CAPI for cluster provisioning?"
 - "How do Prometheus and Thanos work together in Observability?"
 - "Compare the different channel types in Application Lifecycle"

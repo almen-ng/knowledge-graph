@@ -2,15 +2,16 @@
 
 ## Overview
 
-This document provides a comprehensive methodology for generating Red Hat Advanced Cluster Management (RHACM) dependency graphs. The resulting graph contains **291 verified components** with **419 semantic relationships** across 7 major subsystems.
+This document provides a comprehensive methodology for generating Red Hat Advanced Cluster Management (RHACM) dependency graphs. The resulting graph contains **288 verified components** with **414 semantic relationships** across 7 major subsystems, enhanced with Application Lifecycle deployment model classification.
 
 ## Target Architecture Specifications
 
-- **291 Components**: 100% GitHub-verified, zero fictional, zero duplicates
-- **419 Relationships**: Semantic labels (CONTAINS, MANAGES, CONFIGURES, etc.)
+- **288 Components**: 100% GitHub-verified, zero fictional, zero duplicates, enhanced with deployment model properties
+- **414 Relationships**: Semantic labels (CONTAINS, MANAGES, CONFIGURES, etc.)
 - **7 Major Subsystems**: Overview, Governance, Application, Observability, Cluster, Search, Console
 - **Enterprise Features**: MCE foundation, Global Hub, Submariner, Backup/Recovery, CAPI, Red Hat Insights
 - **Cross-Platform Integration**: AWX Automation Platform, OpenShift GitOps, Gatekeeper
+- **Application Lifecycle Models**: Subscription Model, ArgoCD Push Model, ArgoCD Pull Model with deployment pattern classification
 
 ## Architecture Principles
 
@@ -82,19 +83,35 @@ Level 3: Major Subsystems (all branch from ACM)
 ### Application Lifecycle Discovery
 
 **Application Models (15+ repositories)**:
-- https://github.com/stolostron/multicloud-integrations
-- https://github.com/stolostron/argocd-pull-integration
-- https://github.com/stolostron/multicloud-operators-subscription
-- https://github.com/stolostron/multicloud-operators-channel
+- https://github.com/stolostron/multicloud-integrations (ArgoCD Push Model)
+- https://github.com/stolostron/argocd-pull-integration (ArgoCD Pull Model)
+- https://github.com/stolostron/multicloud-operators-subscription (Subscription Model)
+- https://github.com/stolostron/multicloud-operators-channel (Subscription Model)
 - https://github.com/stolostron/applifecycle-backend-e2e
 
 ### Observability & Monitoring Discovery
 
-**Monitoring Infrastructure (10+ repositories)**:
+**Enhanced Observability Architecture (10+ repositories)**:
 - https://github.com/stolostron/multicluster-observability-operator
 - https://github.com/stolostron/observatorium-operator
 - https://github.com/stolostron/thanos
 - https://github.com/stolostron/prometheus-alertmanager
+
+**Observability Enhancement Process**:
+The observability subsystem demonstrates advanced architecture enhancement using detailed architectural diagrams. This process includes:
+
+1. **Diagram-Based Component Discovery**: Using 5 detailed PNG diagrams to identify precise component relationships and operational flows
+2. **Component Separation**: Splitting combined components (e.g., "metrics collector/uwl metrics collector") into separate architectural elements  
+3. **Bootstrap Sequence Mapping**: Capturing exact hub and managed cluster component creation sequences
+4. **Data Flow Modeling**: Detailed metrics collection and status propagation patterns across hub-spoke architecture
+5. **External Integration Mapping**: Complete Victoria Metrics, Kafka, and third-party tool integration points
+
+**Required Source Diagrams**:
+- `observability-components-architecture.png` - Complete component overview
+- `observability-bootstrapping-hub.png` - Hub bootstrap sequence
+- `observability-bootstrapping-managed.png` - Managed cluster bootstrap  
+- `observability-metrics-collection-alert-forwarding.png` - Detailed data flows
+- `observability-status-propagation.png` - Cross-cluster status sync
 
 ### Cluster Management Discovery
 
@@ -277,32 +294,64 @@ Level 3: Major Subsystems (all branch from ACM)
 - ManifestWork CRD (work distribution)
 - ManagedCluster CRD (cluster management)
 
-### Observability Components
+### Enhanced Observability Components
 
-**multicluster-observability-operator contains**:
-- Observability Controller (main controller)
-- Metrics Collection Manager (collection orchestration)
-- Addon Deployment Controller (addon management)
-- Configuration Reconciler (configuration management)
+**Core Hub Components** (enhanced with diagram analysis):
+- **MultiCluster Observability Operator** (exact naming from diagrams)
+- **MCO res** (bootstrap resource)
+- **mco controller** (controller component)
+- **observatorium-operator** (separate from observatorium)
+- **Observatorium API** (separate API component)
+- **observatorium** (core service)
+- **Observatorium API Gateway** (API gateway interface)
 
-**observatorium-operator contains**:
-- Observatorium Deployment Controller (deployment management)
-- Thanos Integration Manager (Thanos orchestration)
-- Storage Configuration Controller (storage management)
+**Bootstrap and Management Components**:
+- **Placement Controller** (addon orchestration)
+- **global work res** (global resource management)
+- **observability addon res(hub)** (hub-side addon)
+- **manifestwork res (in cluster ns)** (cluster namespace resources)
+- **manifestwork res (replicated)** (replicated resources)
 
-**observatorium contains**:
-- Query Gateway (query interface)
-- Ruler Engine (alerting rules)
-- Compactor Service (data compaction)
-- Store Gateway (data access)
+**Hub Infrastructure**:
+- **Hub endpoint operator** (endpoint management)
+- **Hub metrics-collector** (hub metrics collection)
+- **Metrics-Collector** (separate metrics collector)
+- **Endpoint Metrics operator** (metrics endpoint management)
 
-**thanos contains**:
-- Metrics Storage (long-term storage)
-- Query Engine (query processing)
+**Enhanced Thanos Stack** (separated components):
+- **Thanos** (core Thanos service)
+- **Thanos Receive** (metrics ingestion)
+- **Thanos Query** (query interface)
+- **Thanos Store Gateway** (storage interface)
+- **Thanos Compactor** (data compaction)
+- **Thanos Ruler** (alerting rules)
+- **Object Storage** (persistent storage)
 
-**grafana contains**:
-- Dashboard Controller (dashboard management)
-- Alert Manager Integration (alerting integration)
+**Managed Cluster Components** (separated from combined entries):
+- **managed cluster addon res** (managed cluster addon)
+- **work agent** (work distribution agent)
+- **endpoint operator** (managed cluster endpoint)
+- **observability addon res(managed)** (managed cluster addon)
+- **metrics collector** (managed cluster metrics collector)
+- **uwl metrics collector** (UWL-specific metrics collector)
+- **prometheus** (managed cluster prometheus)
+- **uwl prometheus** (UWL-specific prometheus)
+- **prometheus operator** (managed cluster prometheus operator)
+- **prometheus stack(*KS only)** (Kubernetes-specific stack)
+
+**External Integration Components**:
+- **external metrics endpoint (optional)** (optional external endpoint)
+- **external metrics endpoint (e.g., victoriametrics)** (Victoria Metrics endpoint)
+- **Victoria Metrics** (external metrics system)
+- **Kafka** (event streaming)
+
+**Security and RBAC**:
+- **RBAC Query Proxy** (query access control)
+
+**Alert Management** (enhanced separation):
+- **hub alertmanager** (hub-side alerting)
+- **AlertManager** (general alert manager)
+- **alertmanager/uwl prometheus** (UWL-specific alerting)
 
 **Additional Components**:
 - prometheus-operator (Prometheus management)
@@ -870,13 +919,14 @@ if __name__ == '__main__':
 
 Following this methodology will generate the identical comprehensive RHACM dependency graph with:
 
-- **291 verified components** across 7 subsystems
-- **419 semantic relationships** with proper labels
+- **288 verified components** across 7 subsystems with deployment model classification
+- **414 semantic relationships** with proper labels
 - **Complete enterprise feature coverage** including MCE, Global Hub, Submariner, Backup/Recovery, CAPI, and Red Hat Insights
-- **Complete addon coverage** with all 22 RHACM addons including Submariner Addon, ManagedClusterAddOn CRD, and Observability Addon
+- **Complete addon coverage** with all RHACM addons including Submariner Addon, ManagedClusterAddOn CRD, and Observability Addon
+- **Application Lifecycle model intelligence** with deployment_model, deployment_pattern, and model_role properties
 - **Zero fictional components** - all verified against GitHub repositories
 - **Proper ACM-centric hierarchical architecture** with no isolated clusters
 - **Cross-subsystem integration** without duplication
-- **Ready for Neo4j import** with complete schema and verification queries
+- **Ready for Neo4j import** with complete schema and 50+ analytics queries including model analysis
 
-The resulting Neo4j graph provides the definitive architectural reference for Red Hat Advanced Cluster Management, suitable for advanced analysis, troubleshooting, and AI-powered insights.
+The resulting Neo4j graph provides the definitive architectural reference for Red Hat Advanced Cluster Management, suitable for advanced analysis, troubleshooting, Application Lifecycle model queries, and AI-powered insights via MCP server integration.

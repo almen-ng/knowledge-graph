@@ -7,10 +7,11 @@ A comprehensive Neo4j dependency graph of Red Hat Advanced Cluster Management (R
 This repository contains the most complete dependency graph of RHACM architecture, verified against official GitHub repositories and enhanced with internal component analysis.
 
 ### Key Features
-- **Complete Component Coverage** across 7 subsystems (Overview, Governance, Application, Observability, Cluster, Search, Console)
+- **Complete Component Coverage** across 7 subsystems with 323 components and 499 relationships (Overview, Governance, Application, Observability, Cluster, Search, Console)
 - **Semantic Relationships** (DEPENDS_ON, CONTAINS, MANAGES, etc.)
 - **Full Addon Coverage** - All RHACM addons included
 - **Hub-Spoke Architecture** with cross-cluster deployment patterns
+- **Kubernetes Core Integration** - Full API Server and etcd connectivity to RHACM components
 - **Enterprise Components** - MCE, Global Hub, Submariner, Backup/Recovery, CAPI, Red Hat Insights
 
 ## 🚀 Quick Start
@@ -44,11 +45,11 @@ ORDER BY ComponentCount DESC;
 
 ```
 ├── knowledge-graph/
-│   ├── rhacm_architecture_comprehensive_final.cypher    # 🎯 Main Neo4j import script
-│   └── sample_queries.cypher                            # 📊 Analytics queries
+│   ├── rhacm_architecture_comprehensive_final.cypher    # 🎯 Main Neo4j import script (enhanced with model classification)
+│   └── sample_queries.cypher                            # 📊 50+ analytics queries including deployment model analysis
 ├── mermaid/
-│   └── rhacm-*.mmd                                      # 📊 Source Mermaid diagrams (7 files)
-├── diagrams/                                           # 🖼️ Architectural reference images
+│   └── rhacm-*.mmd                                      # 📊 Source Mermaid diagrams (7 files, enhanced observability with detailed diagrams)
+├── diagrams/                                           # 🖼️ Architectural reference images including observability workflow diagrams
 ├── rhacm_architecture_implementation_guide.md          # 📖 Step-by-step implementation
 ├── rhacm_architecture_research_methodology.md          # 🔬 Research-based discovery approach
 ├── rhacm_architecture_comprehensive_reference.md       # 📚 Complete unformatted reference
@@ -59,8 +60,8 @@ ORDER BY ComponentCount DESC;
 ## 🎯 Core Files
 
 ### Production Ready
-- **`knowledge-graph/rhacm_architecture_comprehensive_final.cypher`** - Complete Neo4j import script with all components
-- **`knowledge-graph/sample_queries.cypher`** - 30+ ready-to-use analytics queries for graph exploration
+- **`knowledge-graph/rhacm_architecture_comprehensive_final.cypher`** - **PRIMARY PRODUCTION FILE** - Complete Neo4j import script with 323 components, 499 relationships, and full Kubernetes core integration
+- **`knowledge-graph/sample_queries.cypher`** - 50+ ready-to-use analytics queries including Application Lifecycle model analysis
 
 ### Documentation
 - **`rhacm_architecture_implementation_guide.md`** - Ready-to-use Mermaid code with step-by-step instructions
@@ -99,9 +100,10 @@ Red Hat Advanced Cluster Management (ACM)
 - Multi-cluster application management
 
 ### Observability
-- Thanos/Prometheus metrics pipeline
-- Multi-cluster monitoring and alerting
-- Grafana dashboards and visualization
+- Enhanced with detailed observability diagrams including bootstrap sequences, metrics collection flows, and status propagation
+- Thanos/Prometheus metrics pipeline with complete component separation (metrics collector vs uwl metrics collector)
+- Multi-cluster monitoring and alerting with hub-spoke data flows
+- Grafana dashboards and visualization with RBAC query proxy integration
 
 ### Cluster Management
 - Cluster provisioning via Hive and CAPI
@@ -110,7 +112,7 @@ Red Hat Advanced Cluster Management (ACM)
 
 ## 📊 Sample Analytics Queries
 
-The repository includes 30+ ready-to-use queries in `knowledge-graph/sample_queries.cypher` for comprehensive graph analysis:
+The repository includes 50+ ready-to-use queries in `knowledge-graph/sample_queries.cypher` for comprehensive graph analysis including Application Lifecycle model intelligence:
 
 ### Key Query Categories
 - **Basic Analysis**: Component distribution, graph statistics, connectivity patterns
@@ -120,6 +122,7 @@ The repository includes 30+ ready-to-use queries in `knowledge-graph/sample_quer
 - **Enterprise Features**: Addons, Global Hub, Submariner networking
 - **Operational Queries**: Operators, controllers, APIs
 - **Troubleshooting**: Component search, neighborhood analysis
+- **Application Lifecycle Models**: Subscription, ArgoCD Push, and ArgoCD Pull deployment patterns
 
 ### Example Queries
 ```cypher
@@ -176,6 +179,44 @@ cat knowledge-graph/sample_queries.cypher | cypher-shell
 1. Update relevant `mermaid/rhacm-*.mmd` file with semantic relationships
 2. Run conversion tool to generate updated Cypher
 3. Update documentation with new metrics
+
+### Enhanced Observability Implementation
+For reproducing the enhanced observability architecture:
+
+#### 1. Source Diagrams Required
+Ensure you have these observability diagrams in `diagrams/` folder:
+- `rhacm_observability_components_architecture.png`
+- `rhacm_observability_bootstrapping_hub.png` 
+- `rhacm_observability_bootstrapping_managed.png`
+- `rhacm_observability_metrics_collection_alert_forwarding.png`
+- `rhacm_observability_status_propagation.png`
+
+#### 2. Key Enhancement Areas
+- **Component Separation**: Separate combined components (e.g., "metrics collector/uwl metrics collector" → separate components)
+- **Bootstrap Sequences**: Map exact hub and managed cluster bootstrap flows from diagrams
+- **Metrics Collection**: Detailed data flows from exporters through Prometheus to Thanos
+- **Status Propagation**: Cross-cluster status synchronization patterns
+- **External Integrations**: Victoria Metrics, Kafka, and third-party tool export paths
+
+#### 3. Critical Implementation Notes
+- **No Combined Components**: Each component from diagrams must be separate (avoid "component1/component2" naming)
+- **Exact Component Names**: Match casing and spacing from PNG diagrams exactly (e.g., "MultiCluster Observability Operator")
+- **Bootstrap Flow Accuracy**: Follow precise creation sequences shown in bootstrap diagrams
+- **Duplicate Removal**: Ensure no duplicate components (e.g., multiple THANOS entries)
+
+#### 4. Validation Process
+1. Cross-reference each PNG diagram component-by-component against mermaid file
+2. Verify all relationship flows match diagram arrows
+3. Confirm no missing components from any diagram
+4. Test that component names match exactly (including casing)
+5. **Resolve duplicate labels** by adding disambiguating suffixes (e.g., "Component (Context)")
+6. **Validate Neo4j syntax** by ensuring relationship labels don't contain parentheses or problematic spaces
+   - Transform `create (loop for all...)` → `create_for_managed_clusters`
+   - Transform `send metrics (remote write API)` → `send_metrics_remote_write`
+   - Transform `forward metrics (if configured)` → `forward_metrics_if_configured`
+   - Transform `scrape metrics` → `scrape_metrics`
+   - Transform `forward alerts` → `forward_alerts`
+   - Transform `update status` → `update_status`
 
 ## 📈 Coverage
 
